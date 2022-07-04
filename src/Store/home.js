@@ -79,7 +79,7 @@ const homeSlice = createSlice({
         },
 
         [HomeTodosApi.rejected]: (state, action) => {
-            Alert.alert("rejected")
+            // Alert.alert("rejected")
         },
 
         [HomeTodosApi1.fulfilled]: (state, action) => {
@@ -91,7 +91,7 @@ const homeSlice = createSlice({
         },
 
         [HomeTodosApi1.rejected]: (state, action) => {
-            Alert.alert("rejected")
+            // Alert.alert("rejected")
         },
         [commentsApi.fulfilled]: (state, action) => {
 
@@ -104,7 +104,7 @@ const homeSlice = createSlice({
         },
 
         [commentsApi.rejected]: (state, action) => {
-            Alert.alert("rejected")
+            // Alert.alert("rejected")
         },
         [Api2.fulfilled]: (state, action) => {
 
@@ -117,7 +117,7 @@ const homeSlice = createSlice({
         },
 
         [Api2.rejected]: (state, action) => {
-            Alert.alert("rejected")
+            // Alert.alert("rejected")
         },
     },
 });

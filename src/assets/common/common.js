@@ -6,7 +6,8 @@ export const Colors = {
     bule : "#224585",
     primaryColor :"#9370DB",
     red : 'red',
-    mainblue:'#4785ff'
+    mainblue:'#4785ff',
+    green : 'green'
 };
 
 

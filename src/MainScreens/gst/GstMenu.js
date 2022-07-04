@@ -2,15 +2,18 @@ import React, { useEffect } from "react";
 import {
     View,SafeAreaView, FlatList,StyleSheet, TouchableOpacity,Image, Dimensions
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Colors } from "../../assets/common/common";
 import { Rtext } from "../../CommonComponents/common/Rtext";
+import { messagePopUpActions } from "../../Store/popup";
 
 
 
 const {width , height } = Dimensions.get('window')
 
 const GstMenu =()=>{
+
+    const dispatch = useDispatch();
     const comments = useSelector((state) => state.home.comments);
         const Data=[
             
@@ -40,8 +43,14 @@ const GstMenu =()=>{
 
     const renderItem = ({item})=>{
         return(
-            <TouchableOpacity style={styles.flatlistMainView} onPress = {()=>{
-            }}>
+            <TouchableOpacity style={styles.flatlistMainView} onPress={() => {
+                dispatch(messagePopUpActions({
+                    headerText : "jay shah",
+                    desc : `pjkskjadgjhasghjdgasjhdgjahsgdhjgasd.
+                    You may also install the standalone version of React Developer Tools to inspect the React component hierarchy, their props, and state.
+                    Status: Debugger session` ,
+                    butnTxt : "masbdkjashjkdh ",
+                }))}}>
                 <View style={styles.rowWiseChild}>
                     <Image source={item.image} style={styles.flatListIconStyle} />
                     <View>

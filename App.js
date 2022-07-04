@@ -8,7 +8,7 @@
 
 import React, { useEffect, useState } from 'react';
 import {
-  View, SafeAreaView, FlatList, StyleSheet, TouchableOpacity, Image, Dimensions, Alert , Linking
+  View, SafeAreaView, FlatList, StyleSheet, TouchableOpacity, Image, Dimensions, Alert, Linking
 } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -17,13 +17,17 @@ import { CusButtom } from "./src/CommonComponents/common/CusButtom";
 import AuthStack from './src/Navigations/AuthStack'
 import MyStack from './src/Navigations/MainStack';
 import { Colors, Fonts } from './src/assets/common/common';
-import {useNetInfo} from "@react-native-community/netinfo";
+import { useNetInfo } from "@react-native-community/netinfo";
 import { Rtext } from './src/CommonComponents/common/Rtext';
 import Modal from "react-native-modal";
 import { Provider, useSelector } from 'react-redux';
 import store from './src/Store';
+// popup/MessagePopUp
 
-const {width } = Dimensions.get('window')
+import MessagePopUp from './src/MainScreens/popup/MessagePopUp';
+import TextInputPopUp from './src/MainScreens/popup/TextInputPopUp';
+import SucessOrFailure from './src/MainScreens/popup/SucessOrFailure'
+const { width } = Dimensions.get('window')
 // import RootDrawerNav from './src/Navigations/RootDrawerNav';
 const App = () => {
 
@@ -34,21 +38,21 @@ const App = () => {
       setSplash(false)
     }, 3000);
   }, [])
-  if (Splash) {
-    return (
-      <AuthFrame>
-        <Rtext style={{ fontSize: 30, color: "#fff", textAlign: 'center', fontFamily: Fonts.latoBlack }}>GST COMMAN</Rtext>
-      </AuthFrame>
-    )
-  }
+  // if (Splash) {
+  //   return (
+  //     <AuthFrame>
+  //       <Rtext style={{ fontSize: 30, color: "#fff", textAlign: 'center', fontFamily: Fonts.latoBlack }}>GST COMMAN</Rtext>
+  //     </AuthFrame>
+  //   )
+  // }
   return (
     <>
 
       <NavigationContainer>
-      <Provider store={store}>
-      <StackNav />
-      </Provider>
-      
+        <Provider store={store}>
+          <StackNav />
+        </Provider>
+
 
         {/* <RootDrawerNav/> */}
       </NavigationContainer>
@@ -60,42 +64,49 @@ const App = () => {
 
 
 
-const StackNav = () => {
+  const StackNav = () => {
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
-const NetInfo = useNetInfo();
+  const messagePop = useSelector((state) => state.popup.messagePop);
+   const textInput = useSelector((state)=>state.popup.textInput);
+  const NetInfo = useNetInfo();
 
 
 
 
-  useEffect(()=>{
-    console.log("useNetInfo?.isConnected", NetInfo.isConnected);
-  },[ NetInfo.isConnected])
+  useEffect(() => {
+    console.log("state");
+  }, [NetInfo.isConnected])
   return (
-    <View style = {{flex : 1}}>
+    <View style={{ flex: 1 }}>
 
 
       {
-       isUserLoggedIn ?   <MyStack />  : <AuthStack/>
+        isUserLoggedIn ? <MyStack /> : <AuthStack />
       }
-     
+      {
+        messagePop &&  <MessagePopUp />
+      } 
+    {
+    textInput &&   <TextInputPopUp/> 
+    }
+      
 
-{
-  !NetInfo?.isConnected &&  <Modal isVisible={!NetInfo?.isConnected} backdropColor={Colors.tranparentBlack} >
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }}>
-    <View style={{ paddingVertical: 30, width: "100%", backgroundColor: Colors.white, paddingHorizontal: 20, alignItems: 'center', borderRadius: 10 }}>
-      <Rtext style={{ color: Colors.red, fontSize: 18, textAlign :'center', borderBottomWidth: 1, borderBottomColor: Colors.red, marginBottom: 10 }}> conformation</Rtext>
+      {/* <SucessOrFailure isflag={true} /> */}
+      {
+        !NetInfo?.isConnected && <Modal isVisible={!NetInfo?.isConnected} backdropColor={Colors.tranparentBlack} >
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }}>
+            <View style={{ paddingVertical: 30, width: "100%", backgroundColor: Colors.white, paddingHorizontal: 20, alignItems: 'center', borderRadius: 10 }}>
+              <Rtext style={{ color: Colors.red, fontSize: 18, textAlign: 'center', borderBottomWidth: 1, borderBottomColor: Colors.red, marginBottom: 10 }}> No Internet Connection</Rtext>
 
-      <Rtext style = {{textAlign :'center'}}> {`Please remember to add a link to us wherever you use this icon`}</Rtext>
-      <TouchableOpacity onPress={() => Linking.openSettings()} style={{  marginTop : 20 , alignItems :'center', backgroundColor: Colors.primaryColor, paddingVertical: 7, paddingHorizontal: 8, borderRadius: 10 }}>
-                        <Rtext style={{ color: Colors.white , width : width - 100 , textAlign :'center' }} >Go to the app Setting </Rtext>
-                    </TouchableOpacity>
-          
+              <Rtext style={{ textAlign: 'center' }}> {`Please enable your internet connect to accessing the features of GSTCOMMAN.`}</Rtext>
+              <TouchableOpacity onPress={() => Linking.openSettings()} style={{ marginTop: 20, alignItems: 'center', backgroundColor: Colors.primaryColor, paddingVertical: 7, paddingHorizontal: 8, borderRadius: 10 }}>
+                <Rtext style={{ color: Colors.white, width: width - 100, textAlign: 'center' }} >Go to the app Setting </Rtext>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      }
 
-    </View>
-  </View>
-</Modal>
-}
-     
     </View>
   )
 }

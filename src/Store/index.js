@@ -3,6 +3,7 @@ import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/
 import { persistReducer, persistStore } from 'redux-persist';
 import authReducer from './auth';
 import homeReducer from './home';
+import popupReducer from './popup';
 
 const middlewareState = [
   ...getDefaultMiddleware({
@@ -12,7 +13,8 @@ const middlewareState = [
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  home : homeReducer
+  home: homeReducer,
+  popup: popupReducer,
 });
 
 const persistConfig = {

@@ -11,11 +11,12 @@ import { request } from "../utility/common";
 import { useDispatch, useSelector } from "react-redux";
 import { commentsApi, emptyAllData, HomeTodosApi, HomeTodosApi1, Api2 } from "../Store/home";
 import { userLogoutSuccess } from "../Store/auth";
-const { width, height } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window');
 import { Ainput } from "../CommonComponents/common/Ainput";
 import { TextInputPopUp } from "./popup/TextInputPopUp";
-import { MessgePopUp } from "./popup/MessagePopUp";
+// import { MessgePopUp } from "./popup/MessagePopUp";
 import { SucessOrFailure } from "./popup/SucessOrFailure";
+import { inputPopupAction, messagePopUpActions } from "../Store/popup";
 const Home = (props) => {
     const todos = useSelector((state) => state.home.todos);
     const newData = useSelector((state) => state.home.newData);
@@ -120,16 +121,27 @@ const Home = (props) => {
                 data={homeData}
                 renderItem={renderItem}
             />
+            <TouchableOpacity onPress={() => {
+                dispatch(messagePopUpActions({
+                    headerText : "jhghgjhgjhgjhgjhg",
+                    desc : `for a better debugging experience.
+                    You may also install the standalone version of React Developer Tools to inspect the React component hierarchy, their props, and state.
+                    Status: Debugger session` ,
+                    butnTxt : "jhgjhghjgjhg ",
+                }))
+            }} style={{ position: 'absolute', top: 40, right: 40, backgroundColor: Colors.primaryColor, paddingVertical: 7, paddingHorizontal: 8, borderRadius: 10 }}>
+                <Rtext style={{ color: Colors.white }} >open pop up </Rtext>
+            </TouchableOpacity>
 
-            {
-                messagePopUp && <TextInputPopUp setMessagePopup={setMessagePopup} headerTxt={"Wow its changing"} />
-            }
-            <SucessOrFailure/>
 
-            {/* <MessgePopUp headerColor={Colors.bule} btnBackgroundColor={Colors.mainblue} /> */}
-            {/* setPopUp(true) */}
-            {/* dispatch(userLogoutSuccess())  */}
-            <TouchableOpacity onPress={() => setMessagePopup(true)} style={{ position: 'absolute', bottom: 40, right: 40, backgroundColor: Colors.primaryColor, paddingVertical: 7, paddingHorizontal: 8, borderRadius: 10 }}>
+            <TouchableOpacity onPress={() => {
+            dispatch(inputPopupAction({
+                headerText :"welcomr to Aot",
+                cancelButtonText :"Ok" ,
+                continueButtonText :"Continue",
+                textInputFuctionType :"type2",
+            }))
+            }} style={{ position: 'absolute', top: 120, right: 40, backgroundColor: Colors.primaryColor, paddingVertical: 7, paddingHorizontal: 8, borderRadius: 10 }}>
                 <Rtext style={{ color: Colors.white }} >open pop up </Rtext>
             </TouchableOpacity>
         </SafeAreaView>
