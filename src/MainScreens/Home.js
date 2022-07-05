@@ -101,7 +101,6 @@ const Home = (props) => {
                 if (item?.navigation) {
                     props.navigation.navigate(item?.pageName)
                 }
-                // dispatch(emptyAllData("jay"))
             }}>
                 <View style={styles.rowWiseChild}>
                     <Image source={item.image} style={styles.flatListIconStyle} />
