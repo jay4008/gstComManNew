@@ -11,6 +11,7 @@ import Home from '../MainScreens/Home';
 import MyBottomTabs from './MyBottomTabs';
 import GstMenu from '../MainScreens/gst/GstMenu';
 import Help from '../MainScreens/Help/Help';
+import Notifications from '../MainScreens/notification/Notification';
 enableScreens();
 function MyStack(props) {
 
@@ -30,9 +31,9 @@ const HeaderShown = () =>{
         </View>
     )
 }
-const HeaderRightShown = () =>{
+const HeaderRightShown = ({navigation}) =>{
     return(
-        <TouchableOpacity >
+        <TouchableOpacity onPress = {() => navigation.navigate('Notification')} >
            <Image style = {styles.HeaderIcon}  source = {require('../assets/icons8-notification-100.png')}></Image>
         </TouchableOpacity>
     )
@@ -52,44 +53,70 @@ const HeaderLeftShown = () =>{
       <Stack.Screen
         name="Home"
         component={MyBottomTabs}
-        options={{
-          headerTintColor: '#224585',
-          headerTitleStyle: {color: '#000', fontSize: 14},
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-          headerLeft:() => <HeaderLeftShown/>,
-         headerCenter:() => <HeaderShown/>,
-         headerRight :() =>  <HeaderRightShown/>,
-        }}
+        options={ ({navigation}) =>(
+
+          {
+            headerTintColor: '#224585',
+            headerTitleStyle: {color: '#000', fontSize: 14},
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerLeft:() => <HeaderLeftShown/>,
+           headerCenter:() => <HeaderShown/>,
+           headerRight :() =>  <HeaderRightShown navigation = {navigation}/>,
+          }
+        )}
       />
         <Stack.Screen
         name="GstMenu"
         component={GstMenu}
-        options={{
-          headerTintColor: '#224585',
-          headerTitleStyle: {color: '#000', fontSize: 14},
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-          headerLeft:() => <HeaderLeftShown/>,
-         headerCenter:() => <HeaderShown/>,
-         headerRight :() =>  <HeaderRightShown/>,
-        }}
+        options={ ({navigation}) =>(
+          {
+            headerTintColor: '#224585',
+            headerTitleStyle: {color: '#000', fontSize: 14},
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerLeft:() => <HeaderLeftShown/>,
+           headerCenter:() => <HeaderShown/>,
+           headerRight :() =>  <HeaderRightShown navigation = {navigation}/>,
+          }
+        )}
       />
               <Stack.Screen
         name="Help"
         component={Help}
-        options={{
-          headerTintColor: '#224585',
-          headerTitleStyle: {color: '#000', fontSize: 14},
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-          headerLeft:() => <HeaderLeftShown/>,
-         headerCenter:() => <HeaderShown/>,
-         headerRight :() =>  <HeaderRightShown/>,
-        }}
+        options={ ({navigation}) =>(
+
+          {
+            headerTintColor: '#224585',
+            headerTitleStyle: {color: '#000', fontSize: 14},
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerLeft:() => <HeaderLeftShown/>,
+           headerCenter:() => <HeaderShown/>,
+           headerRight :() =>  <HeaderRightShown navigation = {navigation}/>,
+          }
+
+        )}
+      />
+
+<Stack.Screen
+        name="Notification"
+        component={Notifications}
+        options={ ({navigation }) =>(
+          { 
+            headerTintColor: '#224585',
+            headerTitleStyle: {color: '#000', fontSize: 14},
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerLeft:() => <HeaderLeftShown/>,
+           headerCenter:() => <HeaderShown />,
+          }
+
+        )}
       />
       
     </Stack.Navigator>
