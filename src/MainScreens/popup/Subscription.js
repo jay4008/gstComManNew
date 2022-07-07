@@ -36,7 +36,7 @@ const Subscription = ({setShowModal , selectedData}) => {
                     <View style={{ flexDirection: 'row', paddingHorizontal: 30 }}>
                         <Image source={require('../../assets/icons/tick.png')} style={{ height: 25, width: 25, resizeMode: 'contain'  }} />
 
-                        <Rtext style={{}}>All Feture in Basic   <Rtext style={{}}>All Feture in Basic</Rtext></Rtext>
+                        <Rtext style={{}}>All Feture in Basic   </Rtext>
 
                     </View>
                     <View style={{ flexDirection: 'row', paddingHorizontal: 30 }}>
