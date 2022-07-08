@@ -121,15 +121,16 @@ const Home = (props) => {
                 renderItem={renderItem}
             />
             <TouchableOpacity onPress={() => {
-                dispatch(messagePopUpActions({
-                    headerText : "jhghgjhgjhgjhgjhg",
-                    desc : `for a better debugging experience.
-                    You may also install the standalone version of React Developer Tools to inspect the React component hierarchy, their props, and state.
-                    Status: Debugger session` ,
-                    butnTxt : "jhgjhghjgjhg ",
-                }))
+                dispatch(userLogoutSuccess())
+                // dispatch(messagePopUpActions({
+                //     headerText : "jhghgjhgjhgjhgjhg",
+                //     desc : `for a better debugging experience.
+                //     You may also install the standalone version of React Developer Tools to inspect the React component hierarchy, their props, and state.
+                //     Status: Debugger session` ,
+                //     butnTxt : "jhgjhghjgjhg ",
+                // }))
             }} style={{ position: 'absolute', top: 40, right: 40, backgroundColor: Colors.primaryColor, paddingVertical: 7, paddingHorizontal: 8, borderRadius: 10 }}>
-                <Rtext style={{ color: Colors.white }} >open pop up </Rtext>
+                <Rtext style={{ color: Colors.white }} >Log out </Rtext>
             </TouchableOpacity>
 
 
