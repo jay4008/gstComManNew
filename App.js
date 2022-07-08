@@ -34,19 +34,19 @@ const { width } = Dimensions.get('window')
 const App = () => {
 
 
-  const [Splash, setSplash] = useState(false);
+  const [Splash, setSplash] = useState(true);
   useEffect(() => {
     setTimeout(() => {
       setSplash(false)
     }, 3000);
   }, [])
-  // if (Splash) {
-  //   return (
-  //     <AuthFrame>
-  //       <Rtext style={{ fontSize: 30, color: "#fff", textAlign: 'center', fontFamily: Fonts.latoBlack }}>GST COMMAN</Rtext>
-  //     </AuthFrame>
-  //   )
-  // }
+  if (Splash) {
+    return (
+      <AuthFrame>
+        <Rtext style={{ fontSize: 30, color: "#fff", textAlign: 'center', fontFamily: Fonts.latoBlack }}>GST COMMAN</Rtext>
+      </AuthFrame>
+    )
+  }
   return (
     <>
 
