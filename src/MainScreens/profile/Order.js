@@ -1,29 +1,23 @@
 import React, { useEffect } from 'react'
 import { View, Text, SafeAreaView, Image, TouchableOpacity } from 'react-native'
 import { setData } from '../utility/auth';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+
 
 const Order = () => {
 
-    // const dispatch = useDispatch();
-    // const newdata = useSelector((state) => state.auth.set)
-    // console.log("Diapatch data", newdata)
-
-    // useEffect(()=>{
-    //     dispatch(setData())
-    // },[])
+   
     return (
 
         <SafeAreaView style={{ flex: 1, paddingHorizontal: 15 }}>
             <View>
                 <TouchableOpacity>
                     <View>
-                        <Image source={require('../image/less.png')} style={{ height: 50, width: 50, resizeMode: 'contain' }} />
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 50, width: 50, resizeMode: 'contain' }} />
 
                     </View>
                 </TouchableOpacity>
                 <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
-                    <Image source={require('../image/camera.png')} style={{ height: 100, width: 100, resizeMode: 'contain', marginTop: 20 }} />
+                    <Image source={require('../../assets/images/less.png')} style={{ height: 100, width: 100, resizeMode: 'contain', marginTop: 20 }} />
                 </View>
                 <View>
                     <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 15 }}>
@@ -43,32 +37,32 @@ const Order = () => {
 
                 <TouchableOpacity>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '100%', borderRadius: 10, backgroundColor: "silver", marginTop: 10, paddingVertical: 10, paddingHorizontal: 12, marginTop: 50,shadowColor:'orange',shadowOpacity:1,shadowRadius:5,elevation:10 }}>
-                        <Image source={require('../image/clock.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('.../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
                         <Text style={{ marginRight: 150 }}>
                             My Order
                         </Text>
-                        <Image source={require('../image/grater.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
 
                     </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '100%', borderRadius: 10, backgroundColor: "silver", marginTop: 10, paddingVertical: 10, paddingHorizontal: 12, }}>
-                        <Image source={require('../image/clock.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
                         <Text style={{ marginRight: 150 }}>
                             Address
                         </Text>
-                        <Image source={require('../image/grater.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
 
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '100%', borderRadius: 10, backgroundColor: "silver", marginTop: 10, paddingVertical: 10, paddingHorizontal: 12, }}>
-                        <Image source={require('../image/clock.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
                         <Text style={{ marginRight: 100 }}>
                             Payment Method
                         </Text>
-                        <Image source={require('../image/grater.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
 
                     </View>
 
@@ -76,11 +70,11 @@ const Order = () => {
 
                 <TouchableOpacity>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '100%', borderRadius: 10, backgroundColor: "silver", marginTop: 10, paddingVertical: 10, paddingHorizontal: 12, }}>
-                        <Image source={require('../image/clock.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
                         <Text style={{ marginRight: 100 }}>
                             Purchase History
                         </Text>
-                        <Image source={require('../image/grater.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
 
                     </View>
 
@@ -89,11 +83,11 @@ const Order = () => {
 
                 <TouchableOpacity>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '100%', borderRadius: 10, backgroundColor: "silver", marginTop: 10, paddingVertical: 10, paddingHorizontal: 12, }}>
-                        <Image source={require('../image/clock.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
                         <Text style={{ marginRight: 150 }}>
                             Setting
                         </Text>
-                        <Image source={require('../image/grater.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
 
                     </View>
                 </TouchableOpacity>
@@ -101,23 +95,22 @@ const Order = () => {
 
                 <TouchableOpacity>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '100%', borderRadius: 10, backgroundColor: "silver", marginTop: 10, paddingVertical: 10, paddingHorizontal: 12, }}>
-                        <Image source={require('../image/clock.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
                         <Text style={{ marginRight: 150 }}>
                             Share
                         </Text>
-                        <Image source={require('../image/grater.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
 
                     </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '100%', borderRadius: 10, backgroundColor: "silver", marginTop: 10, paddingVertical: 10, paddingHorizontal: 12, }}>
-                        <Image source={require('../image/clock.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
+                        <Image source={require('.../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
                         <Text style={{ marginRight: 150 }}>
                             Log Out
                         </Text>
-                        <Image source={require('../image/grater.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />
-
+                        <Image source={require('../../assets/images/less.png')} style={{ height: 20, width: 20, resizemode: 'contain' }} />//
                     </View>
 
                 </TouchableOpacity>
