@@ -6,6 +6,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Order from '../MainScreens/profile/Order';
+import ProductDetails from '../MainScreens/ProductDetails/ProductDetails';
 
 
 const Tab = createBottomTabNavigator();
@@ -34,8 +35,8 @@ function MyBottomTabs() {
         }}
 />
 
-<Tab.Screen name="scan1" component={Home}     options={{
-          tabBarLabel: 'scan1',
+<Tab.Screen name="ProductDetails" component={ProductDetails}     options={{
+          tabBarLabel: 'ProductDetails',
           tabBarIcon: ({ color }) => (
             <AntDesign name="scan1" color={color} size={26} />
           ),
