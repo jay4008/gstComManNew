@@ -48,6 +48,7 @@ hint: invocation.`}</Rtext>
           backgroundColor: Colors.white,
           marginHorizontal: 15,
         }}>
+            
         <CommonButton text1={'Quantity'} text2={'5'} arrHide={true} />
         <CommonButton text1={'jay shsh'} text2={'dsfsd'} />
         <CommonButton text1={'jay shsh'} text2={'dsfsd'} />
