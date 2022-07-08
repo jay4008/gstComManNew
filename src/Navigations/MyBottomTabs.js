@@ -5,6 +5,9 @@ import { normalizeSize } from '../utility/MyUtility';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Order from '../MainScreens/profile/Order';
+
+
 const Tab = createBottomTabNavigator();
 const tabBarOptions = {
   activeTintColor: '#9370DB',
@@ -39,8 +42,8 @@ function MyBottomTabs() {
         }}
 />
 
-<Tab.Screen name="contacts" component={Home}     options={{
-          tabBarLabel: 'contact us',
+<Tab.Screen name="Order" component={Order}     options={{
+          tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="contacts" color={color} size={26} />
           ),
