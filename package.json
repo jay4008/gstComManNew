@@ -26,6 +26,7 @@
     "react-native-confirmation-code-field": "^7.1.0",
     "react-native-flash-message": "^0.1.23",
     "react-native-gesture-handler": "^1.7.0",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-modal": "^13.0.1",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^3.4.0",

@@ -12,7 +12,7 @@ import Subscription from "../popup/Subscription";
 
 const { width, height } = Dimensions.get('window')
 
-const GstMenu = () => {
+const GstMenu = (props) => {
     const [showModal, setShowModal] = useState(false);
     const [selectedData, setSelecetedData] = useState({})
     const dispatch = useDispatch();
@@ -180,8 +180,11 @@ const GstMenu = () => {
                 //     butnTxt : "masbdkjashjkdh ",
                 // }))
 
-                setShowModal(true);
-                setSelecetedData(item);
+
+                props.navigation.navigate("ProductDetailsGst");
+                // ProductDetailsGst
+                // setShowModal(true);
+                // setSelecetedData(item);
             }
 
             }>

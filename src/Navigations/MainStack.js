@@ -12,6 +12,8 @@ import MyBottomTabs from './MyBottomTabs';
 import GstMenu from '../MainScreens/gst/GstMenu';
 import Help from '../MainScreens/Help/Help';
 import Notifications from '../MainScreens/notification/Notification';
+import ProductDetailsGst from '../MainScreens/ProductDetails/ProductDetailsGst';
+import { Colors } from '../assets/common/common';
 enableScreens();
 function MyStack(props) {
 
@@ -114,6 +116,25 @@ const HeaderLeftShown = () =>{
             },
             headerLeft:() => <HeaderLeftShown/>,
            headerCenter:() => <HeaderShown />,
+          }
+
+        )}
+      />
+
+
+<Stack.Screen
+        name="ProductDetailsGst"
+        component={ProductDetailsGst}
+        options={ ({navigation }) =>(
+          { 
+            title : "Details Page",
+            headerTintColor: '#224585',
+            headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+           headerRight :() =>   <HeaderShown />,
+
           }
 
         )}
