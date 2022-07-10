@@ -17,6 +17,7 @@ import { TextInputPopUp } from "./popup/TextInputPopUp";
 // import { MessgePopUp } from "./popup/MessagePopUp";
 import { SucessOrFailure } from "./popup/SucessOrFailure";
 import { inputPopupAction, messagePopUpActions } from "../Store/popup";
+import DocSelection from "./popup/DocModal";
 const Home = (props) => {
     const todos = useSelector((state) => state.home.todos);
     const newData = useSelector((state) => state.home.newData);
@@ -115,7 +116,7 @@ const Home = (props) => {
     }
     return (
         <SafeAreaView style={{ flex: 1, paddingHorizontal: 15 }}>
-            <FlatList
+            {/* <FlatList
 
                 data={homeData}
                 renderItem={renderItem}
@@ -143,7 +144,9 @@ const Home = (props) => {
             }))
             }} style={{ position: 'absolute', top: 120, right: 40, backgroundColor: Colors.primaryColor, paddingVertical: 7, paddingHorizontal: 8, borderRadius: 10 }}>
                 <Rtext style={{ color: Colors.white }} >open pop up </Rtext>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+
+            <DocSelection isVisible = {true}/>
         </SafeAreaView>
     )
 }
