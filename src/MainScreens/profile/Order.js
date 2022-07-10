@@ -3,8 +3,10 @@ import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
 import { Colors } from '../../assets/common/common';
 import { Rtext } from '../../CommonComponents/common/Rtext';
 import {setData} from '../utility/auth';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-const Order = () => {
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+
+const Order = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, paddingHorizontal: 15}}>
         <KeyboardAwareScrollView style = {{flex : 1}}> 
@@ -47,7 +49,9 @@ const Order = () => {
       
 
      
-        <CommonButton text = {'Edit Profile'} /> 
+        <CommonButton text = {'Edit Profile'} 
+            onPress = {()=> navigation.navigate.UpdateProfile}
+        /> 
         <CommonButton text = {'My Order'} /> 
         <CommonButton text = {'Address'} /> 
         <CommonButton text = {'Payment Method'} /> 

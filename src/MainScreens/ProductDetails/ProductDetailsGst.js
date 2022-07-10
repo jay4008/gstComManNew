@@ -48,7 +48,18 @@ hint: invocation.`}</Rtext>
           backgroundColor: Colors.white,
           marginHorizontal: 15,
         }}>
-            
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <Rtext style={{paddingHorizontal:10}}>Koushik</Rtext>
+              <Rtext style={{color:'red',marginHorizontal:10}}>Date: 16-10-2022</Rtext>
+            </View>
+            <View style={styles.mainview3}>
+              <Image source={require('../../assets/icons/profile.png')} style={{height:50,width:50}}/>
+              <View style={{flexDirection:'column',paddingRight:50}}>
+                <Rtext>Koushik Sham</Rtext>
+                <Rtext style={{paddingTop:10}}>sham@gmail.com</Rtext>
+              </View>
+              <Rtext style={{paddingTop:30}}>Total:1000</Rtext>
+            </View>
         <CommonButton text1={'Quantity'} text2={'5'} arrHide={true} />
         <CommonButton text1={'jay shsh'} text2={'dsfsd'} />
         <CommonButton text1={'jay shsh'} text2={'dsfsd'} />
@@ -72,12 +83,11 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 10,
   },
-  mainview: {
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // height: 300,
-    // backgroundColor: 'red',
-    // borderRadius: 20,
+  mainview3: {
+    flexDirection:'row',
+    justifyContent:'space-between',
+    paddingHorizontal:10,
+    paddingTop:10
   },
   mainview2: {
     backgroundColor: 'green',

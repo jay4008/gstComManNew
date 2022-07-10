@@ -10,6 +10,7 @@ import { enableScreens } from 'react-native-screens';
 import Home from '../MainScreens/Home';
 import MyBottomTabs from './MyBottomTabs';
 import GstMenu from '../MainScreens/gst/GstMenu';
+import UpdateProfile from '../MainScreens/profile/UpdateProfile';
 import Help from '../MainScreens/Help/Help';
 import Notifications from '../MainScreens/notification/Notification';
 import ProductDetailsGst from '../MainScreens/ProductDetails/ProductDetailsGst';
@@ -85,7 +86,7 @@ const HeaderLeftShown = () =>{
           }
         )}
       />
-              <Stack.Screen
+        <Stack.Screen
         name="Help"
         component={Help}
         options={ ({navigation}) =>(
@@ -140,8 +141,27 @@ const HeaderLeftShown = () =>{
         )}
       />
       
+
+      <Stack.Screen
+        name="UpdateProfile"
+        component={UpdateProfile}
+        options={ ({navigation }) =>(
+          { 
+            title : "Edit Profile",
+            headerTintColor: '#224585',
+            headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+           headerRight :() =>   <HeaderShown />,
+
+          }
+
+        )}
+      />
     </Stack.Navigator>
   );
+  
 }
 export default MyStack;
 
