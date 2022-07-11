@@ -60,6 +60,7 @@
 		E2522118D5354E748D0179DB /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC61DB7AFDDA401391C330E0 /* Lato-Bold.ttf */; };
 		E7CF9B880D50496BBEB7FB23 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F295978CB7914C2C8B205EBA /* MaterialCommunityIcons.ttf */; };
 		EB21EC9402924777A2956C07 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DA56865EC074F3D9AAD5146 /* FontAwesome5_Solid.ttf */; };
+		2C7708DAE8D24D1D94FFD8B9 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BAB5AD0B5264036A41DE153 /* profile.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,7 @@
 		F83E2152C1F8D7201536856B /* Pods-GSTCOMMAN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GSTCOMMAN.debug.xcconfig"; path = "Target Support Files/Pods-GSTCOMMAN/Pods-GSTCOMMAN.debug.xcconfig"; sourceTree = "<group>"; };
 		FAA4DD74ABF248F4B702C044 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-BoldItalic.ttf"; path = "../src/assets/fonts/Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
 		FF478EC465A34823A4DD5D2A /* quater.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = quater.png; path = ../src/assets/icons/quater.png; sourceTree = "<group>"; };
+		9BAB5AD0B5264036A41DE153 /* profile.png */ = {isa = PBXFileReference; name = "profile.png"; path = "../src/assets/icons/profile.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +241,7 @@
 				734420BF2C874D69B5D7DB5F /* subscription.png */,
 				716F906050264D1E886242F8 /* success.png */,
 				D0D26AF8530E40BAA3BC09EB /* tick.png */,
+				9BAB5AD0B5264036A41DE153 /* profile.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				D38E238239974322902A1796 /* subscription.png in Resources */,
 				A1059906B48B4E1A8F6DA671 /* success.png in Resources */,
 				DF34E011C7D14A5EA818CEE5 /* tick.png in Resources */,
+				2C7708DAE8D24D1D94FFD8B9 /* profile.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
