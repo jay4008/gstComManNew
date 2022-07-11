@@ -116,7 +116,7 @@ const Home = (props) => {
     }
     return (
         <SafeAreaView style={{ flex: 1, paddingHorizontal: 15 }}>
-            {/* <FlatList
+            <FlatList
 
                 data={homeData}
                 renderItem={renderItem}
@@ -144,9 +144,9 @@ const Home = (props) => {
             }))
             }} style={{ position: 'absolute', top: 120, right: 40, backgroundColor: Colors.primaryColor, paddingVertical: 7, paddingHorizontal: 8, borderRadius: 10 }}>
                 <Rtext style={{ color: Colors.white }} >open pop up </Rtext>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
 
-            <DocSelection isVisible = {true}/>
+            {/* <DocSelection isVisible = {true}/> */}
         </SafeAreaView>
     )
 }
