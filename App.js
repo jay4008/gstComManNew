@@ -28,6 +28,7 @@ import Subscription from './src/MainScreens/popup/Subscription';
 
 import MessagePopUp from './src/MainScreens/popup/MessagePopUp';
 import TextInputPopUp from './src/MainScreens/popup/TextInputPopUp';
+import CustomToast from './src/MainScreens/popup/CustomToast';
 import SucessOrFailure from './src/MainScreens/popup/SucessOrFailure'
 const { width } = Dimensions.get('window')
 // import RootDrawerNav from './src/Navigations/RootDrawerNav';
@@ -109,6 +110,7 @@ const App = () => {
         </Modal>
       }
 
+<CustomToast/>
     </View>
   )
 }

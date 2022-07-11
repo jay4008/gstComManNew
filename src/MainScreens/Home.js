@@ -16,7 +16,7 @@ import { Ainput } from "../CommonComponents/common/Ainput";
 import { TextInputPopUp } from "./popup/TextInputPopUp";
 // import { MessgePopUp } from "./popup/MessagePopUp";
 import { SucessOrFailure } from "./popup/SucessOrFailure";
-import { inputPopupAction, messagePopUpActions } from "../Store/popup";
+import { inputPopupAction, messagePopUpActions, setToastMsg } from "../Store/popup";
 import DocSelection from "./popup/DocModal";
 const Home = (props) => {
     const todos = useSelector((state) => state.home.todos);
@@ -117,12 +117,15 @@ const Home = (props) => {
     return (
         <SafeAreaView style={{ flex: 1, paddingHorizontal: 15 }}>
             <FlatList
+            showsVerticalScrollIndicator = {false}
 
                 data={homeData}
                 renderItem={renderItem}
             />
-            <TouchableOpacity onPress={() => {
-                dispatch(userLogoutSuccess())
+            {/* <TouchableOpacity onPress={() => {
+                // dispatch(userLogoutSuccess())
+
+                dispatch(setToastMsg("Hi Koushik Sham  \n how are you today , \n seems things are fantastic"));
                 // dispatch(messagePopUpActions({
                 //     headerText : "jhghgjhgjhgjhgjhg",
                 //     desc : `for a better debugging experience.
@@ -132,10 +135,10 @@ const Home = (props) => {
                 // }))
             }} style={{ position: 'absolute', top: 40, right: 40, backgroundColor: Colors.primaryColor, paddingVertical: 7, paddingHorizontal: 8, borderRadius: 10 }}>
                 <Rtext style={{ color: Colors.white }} >Log out </Rtext>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
 
-            <TouchableOpacity onPress={() => {
+            {/* <TouchableOpacity onPress={() => {
             dispatch(inputPopupAction({
                 headerText :"welcomr to Aot",
                 cancelButtonText :"Ok" ,
@@ -144,7 +147,7 @@ const Home = (props) => {
             }))
             }} style={{ position: 'absolute', top: 120, right: 40, backgroundColor: Colors.primaryColor, paddingVertical: 7, paddingHorizontal: 8, borderRadius: 10 }}>
                 <Rtext style={{ color: Colors.white }} >open pop up </Rtext>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             {/* <DocSelection isVisible = {true}/> */}
         </SafeAreaView>

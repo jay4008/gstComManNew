@@ -19,6 +19,10 @@ const Slice = createSlice({
         butnTxt: "",
         btnBackgroundColor: "",
 
+        //ToastWork
+
+        message : "",
+
 
 
         //textInputActions 
@@ -42,6 +46,13 @@ const Slice = createSlice({
 
             state.butnTxt = action.payload.butnTxt,
                 state.btnBackgroundColor = action?.payload?.btnBackgroundColor ? action.payload.btnBackgroundColor : Colors.primaryColor;
+        },
+        setToastMsgToNUll:(state, action) =>{
+            state.message = "";
+        },
+
+        setToastMsg:(state, action) =>{
+            state.message = action.payload;
         },
         inputPopupAction: (state, action) => {
             state.textInput = true;
@@ -76,5 +87,5 @@ const Slice = createSlice({
     },
 });
 
-export const { messagePopUpActions, messagePopUpClose,inputPopupAction  , inputPopupClose} = Slice.actions;
+export const { setToastMsgToNUll ,setToastMsg ,  messagePopUpActions, messagePopUpClose,inputPopupAction  , inputPopupClose} = Slice.actions;
 export default Slice.reducer;

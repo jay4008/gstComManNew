@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
     View, SafeAreaView, FlatList, StyleSheet, TouchableOpacity, Image, Dimensions
 } from "react-native";
-import { Colors } from "../../assets/common/common";
+import { Colors, Fonts } from "../../assets/common/common";
 import { Rtext } from "../../CommonComponents/common/Rtext";
 
 
@@ -145,31 +145,31 @@ const RenderItem = ({ item, index }) => {
     const [read, setRead] = useState(false)
     return (
         <View>
-            <TouchableOpacity style={ {...styles.flatlistMainView , backgroundColor : read ? Colors.white : Colors.silver}} onPress={() => {
+            <TouchableOpacity style={{ ...styles.flatlistMainView, backgroundColor: read ? Colors.white : Colors.lightSilver }} onPress={() => {
                 setRead(true);
             }}>
                 <View style={{ ...styles.rowWiseChild, justifyContent: 'space-between' }}>
                     <View style={styles.rowWiseChild}>
                         <Image source={require('../../assets/icons/query.png')} style={styles.flatListIconStyle} />
                         <View>
-                            <Rtext style={{ width: width - 130 , fontSize : 13 }} >{item?.name}</Rtext>
+                            <Rtext style={{ width: width - 130, fontSize: 14 , fontFamily : Fonts.latoBoldItalic }} >{item?.name}</Rtext>
 
                         </View>
 
                     </View>
 
                 </View>
-                <Rtext style={{ width: width - 90, marginLeft : 50, fontSize: 12, color: !read ? Colors.white : Colors.silver, marginBottom: 15 }}>{item?.description.substr(0, 119)}</Rtext>
+                <Rtext style={{ width: width - 90, marginLeft: 50,marginTop : 10, fontSize: 12, color: !read ? Colors.white : Colors.silver, marginBottom: 15 }}>{item?.description.substr(0, 119)}</Rtext>
 
             </TouchableOpacity>
-          
+
         </View>
     )
 }
 const styles = StyleSheet.create({
 
     flatlistMainView: {
-        paddingVertical: 15,
+        paddingVertical: 10,
         backgroundColor: Colors.silver,
         marginBottom: 5,
         borderRadius: 10

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   TextInput,
@@ -12,10 +12,10 @@ import { Fonts } from '../../../assets/common/common';
 const winHeight = Dimensions.get('window').height
 const Ainput = ({
   value,
-  onChangeText = () => {},
+  onChangeText = () => { },
   multiline = false,
-  onBlur = () => {},
-  containerStyle ,
+  onBlur = () => { },
+  containerStyle,
   placeholder = '',
   onPressDate,
   numberOfLines = 1,
@@ -29,13 +29,13 @@ const Ainput = ({
 }) => {
   const [lcSecureTextEntry, setLcSecureTextEntry] = useState(secureTextEntry);
   return (
-    <View style={{...styles.containerStyle , ...containerStyle}}>
+    <View style={{ ...styles.containerStyle, ...containerStyle }}>
       <TextInput
 
-      onFocus = {onFocus}
+        onFocus={onFocus}
         value={value}
         onChangeText={onChangeText}
-        style={editable ? {...styles.inputStyle ,...style } : styles.inputEditableFalseStyle}
+        style={editable ? { ...styles.inputStyle, ...style } : styles.inputEditableFalseStyle}
         editable={editable}
         // style={[styles.inputStyle,style, {borderColor:border, paddingRight: view ? 20 : 15}] }
         autoCorrect={false}
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     elevation: 5,
     shadowRadius: 15,
-    shadowOffset: {width: 4, height: 4},
+    shadowOffset: { width: 4, height: 4 },
   },
   inputStyle: {
     padding: 10,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     color: 'black',
     borderColor: '#C4C4C4',
     borderWidth: 0.5,
-fontFamily : Fonts.latoRegular,
+    fontFamily: Fonts.latoRegular,
     height: 45,
     borderRadius: 10,
   },
@@ -131,4 +131,4 @@ fontFamily : Fonts.latoRegular,
   },
 });
 
-export {Ainput};
+export { Ainput };
