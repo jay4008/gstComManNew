@@ -15,6 +15,7 @@ const Ainput = ({
   onChangeText = () => {},
   multiline = false,
   onBlur = () => {},
+  containerStyle ,
   placeholder = '',
   onPressDate,
   numberOfLines = 1,
@@ -28,7 +29,7 @@ const Ainput = ({
 }) => {
   const [lcSecureTextEntry, setLcSecureTextEntry] = useState(secureTextEntry);
   return (
-    <View style={[styles.containerStyle]}>
+    <View style={{...styles.containerStyle , ...containerStyle}}>
       <TextInput
 
       onFocus = {onFocus}
