@@ -1,32 +1,81 @@
-import React, {useEffect} from 'react';
-import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
-import {Colors} from '../../assets/common/common';
-import {Rtext} from '../../CommonComponents/common/Rtext';
-import {setData} from '../utility/auth';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import React, { useEffect } from 'react';
+import { View, Text, SafeAreaView, Image, TouchableOpacity, Alert , TouchableHighlight } from 'react-native';
+import { Colors } from '../../assets/common/common';
+import { Rtext } from '../../CommonComponents/common/Rtext';
+import { setData } from '../utility/auth';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { userLogoutSuccess } from '../../Store/auth';
+import DocSelection from '../popup/DocModal';
+import { useDispatch } from 'react-redux';
+import ImagePicker from 'react-native-image-crop-picker';
+import { useState } from 'react';
+const Order = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const [docPicker, setDocPicker] = useState(false);
 
-const Order = ({navigation}) => {
+  const openCamera = () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      console.log(image);
+    });
+  };
+
+  const openGallery = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      console.log(image);
+    });
+  };
+
+
   return (
-    <SafeAreaView style={{flex: 1, paddingHorizontal: 15}}>
-      <KeyboardAwareScrollView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1, paddingHorizontal: 15 }}>
+      <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
         <View>
-          <View style={{justifyContent: 'center', alignSelf: 'center'}}>
-            <Image
-              source={require('../../assets/icons/less.png')}
-              style={{
-                height: 100,
-                width: 100,
-                resizeMode: 'contain',
-                marginTop: 20,
-              }}
-            />
-          </View>
+     
+          <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
+        
+              <Image
+                source={require('../../assets/icons/prof.png')}
+                style={{
+                  height: 100,
+                  width: 100,
+                  tintColor: Colors.primaryColor,
+                  resizeMode: 'contain',
+                  marginTop: 20,
+                }}
+              />
+              <TouchableOpacity onPress={() => {
+
+                setDocPicker(true)
+              }} style={{ position: 'absolute', top: 70, right: 5, height: 30, width: 30 }}>
+                <Image
+                  source={require('../../assets/icons/cameraa.png')}
+                  style={{
+                    height: 30,
+                    width: 30,
+                    resizeMode: 'contain',
+                    marginTop: 20,
+
+                    tintColor: Colors.mainblue,
+                    borderRadius: 10
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+       
           <View>
             <Text
-              style={{textAlign: 'center', fontWeight: 'bold', fontSize: 15}}>
+              style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 15 }}>
               Koushik Sham
             </Text>
-            <Text style={{textAlign: 'center', color: 'silver' , marginBottom : 10}}>
+            <Text style={{ textAlign: 'center', color: 'silver', marginBottom: 10 }}>
               koushik.sham@mail.com
             </Text>
             <TouchableOpacity
@@ -36,7 +85,7 @@ const Order = ({navigation}) => {
               <View
                 style={{
                   width: '40%',
-                  backgroundColor: 'orange',
+                  backgroundColor: Colors.primaryColor,
                   borderRadius: 10,
                   paddingVertical: 10,
                   paddingHorizontal: 12,
@@ -46,37 +95,44 @@ const Order = ({navigation}) => {
                   shadowColor: 'red',
                   shadowOpacity: 0.8,
                   shadowRadius: 10,
-                  shadowOffset: {height: 10, width: 10},
+                  shadowOffset: { height: 10, width: 10 },
                   elevation: 17,
                   marginBottom: 40,
                 }}>
-                <Rtext style={{textAlign: 'center', color: 'white'}}>
+                <Rtext style={{ textAlign: 'center', color: 'white' }}>
                   Edit Profile
                 </Rtext>
               </View>
             </TouchableOpacity>
           </View>
-
-          <CommonButton
-            text={'Edit Profile'}
-            onPress={() => navigation.navigate.UpdateProfile}
-          />
           <CommonButton text={'My Order'} />
           <CommonButton text={'Address'} />
           <CommonButton text={'Payment Method'} />
           <CommonButton text={'Purchase History'} />
           <CommonButton text={'Setting'} />
           <CommonButton text={'Share'} />
-          <CommonButton text={'Log Out'} />
+          <CommonButton onPress={() => dispatch(userLogoutSuccess())} text={'Log Out'} />
         </View>
       </KeyboardAwareScrollView>
+
+      {docPicker && (
+        <DocSelection
+          onPressDoc={() => uploadDoc()}
+          onPressCamera={() => openCamera()}
+          onPressGallery={() => openGallery()}
+          setIsVisible={setDocPicker}
+          isVisible={true}
+          doc={false}
+        />
+      )}
+
     </SafeAreaView>
   );
 };
 
 export default Order;
 
-const CommonButton = ({onPress, text = ''}) => {
+const CommonButton = ({ onPress, text = '' }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View
@@ -85,19 +141,24 @@ const CommonButton = ({onPress, text = ''}) => {
           justifyContent: 'space-around',
           width: '100%',
           borderRadius: 10,
-          backgroundColor: 'silver',
+          backgroundColor: Colors.primaryColor,
           marginTop: 10,
           paddingVertical: 10,
           paddingHorizontal: 12,
+          shadowColor: Colors.primaryColor,
+          shadowOpacity: 0.8,
+          shadowRadius: 10,
+          shadowOffset: { height: 10, width: 10 },
+          elevation: 17,
         }}>
         <Image
           source={require('../../assets/icons/clock.png')}
-          style={{height: 20, width: 20, resizemode: 'contain'}}
+          style={{ height: 20, width: 20, resizemode: 'contain', tintColor: Colors.white }}
         />
-        <Text style={{width: 200}}>{text}</Text>
+        <Rtext style={{ width: 200, color: Colors.white }}>{text}</Rtext>
         <Image
           source={require('../../assets/icons/grater.png')}
-          style={{height: 20, width: 20, resizemode: 'contain'}}
+          style={{ height: 20, width: 20, resizemode: 'contain', tintColor: Colors.white }}
         />
       </View>
     </TouchableOpacity>

@@ -9,6 +9,7 @@ export const Colors = {
     mainblue:'#4785ff',
     green : 'green',
     silver : "silver",
+    lightSilver :'#d8d8d8',
 };
 
 
