@@ -34,7 +34,7 @@ const DatePickerr = ({ modalVisble, onDateChange, selectedDate, BtnTxt, onSubmit
                 <CusButtom onpress={() => {
 
                     modalVisble(false)
-                }} BTNstyle={{ width: width - 60, backgroundColor: Colors.mainblue, paddingHorizontal: 10, alignSelf: "center", paddingVertical: 15 }} text={"Submit"}></CusButtom>
+                }} BTNstyle={{ width: width - 60, backgroundColor: Colors.primaryColor, paddingHorizontal: 10, alignSelf: "center", paddingVertical: 15 }} text={"Submit"}></CusButtom>
             </View>
         </Modal>
     )
