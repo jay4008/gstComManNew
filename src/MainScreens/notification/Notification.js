@@ -152,7 +152,7 @@ const RenderItem = ({ item, index }) => {
                     <View style={styles.rowWiseChild}>
                         <Image source={require('../../assets/icons/query.png')} style={styles.flatListIconStyle} />
                         <View>
-                            <Rtext style={{ width: width - 130, fontSize: 14 , fontFamily : Fonts.latoBoldItalic }} >{item?.name}</Rtext>
+                            <Rtext style={{ width: width - 130, fontSize: 14 , fontFamily : Fonts.latoBold }} >{item?.name}</Rtext>
 
                         </View>
 
