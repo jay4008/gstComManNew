@@ -16,7 +16,7 @@ import { Ainput } from "../CommonComponents/common/Ainput";
 import { TextInputPopUp } from "./popup/TextInputPopUp";
 // import { MessgePopUp } from "./popup/MessagePopUp";
 import { SucessOrFailure } from "./popup/SucessOrFailure";
-import { inputPopupAction, messagePopUpActions, setToastMsg } from "../Store/popup";
+import { inputPopupAction, messagePopUpActions, setSucessFailerMsg, setToastMsg } from "../Store/popup";
 import DocSelection from "./popup/DocModal";
 const Home = (props) => {
     const todos = useSelector((state) => state.home.todos);
@@ -122,32 +122,40 @@ const Home = (props) => {
                 data={homeData}
                 renderItem={renderItem}
             />
-            {/* <TouchableOpacity onPress={() => {
+            <TouchableOpacity onPress={() => {
                 // dispatch(userLogoutSuccess())
 
-                dispatch(setToastMsg("Hi Koushik Sham  \n how are you today , \n seems things are fantastic"));
-                // dispatch(messagePopUpActions({
-                //     headerText : "jhghgjhgjhgjhgjhg",
-                //     desc : `for a better debugging experience.
-                //     You may also install the standalone version of React Developer Tools to inspect the React component hierarchy, their props, and state.
-                //     Status: Debugger session` ,
-                //     butnTxt : "jhgjhghjgjhg ",
-                // }))
+                // dispatch(setToastMsg("Hi Koushik Sham   how are you today "));
+                dispatch(messagePopUpActions({
+                    headerText : "jhghgjhgjhgjhgjhg",
+                    desc : `for a better debugging experience.
+                    You may also install the standalone version of React Developer Tools to inspect the React component hierarchy, their props, and state.
+                    Status: Debugger session` ,
+                    butnTxt : "jhgjhghjgjhg ",
+                }))
             }} style={{ position: 'absolute', top: 40, right: 40, backgroundColor: Colors.primaryColor, paddingVertical: 7, paddingHorizontal: 8, borderRadius: 10 }}>
                 <Rtext style={{ color: Colors.white }} >Log out </Rtext>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
 
 
-            {/* <TouchableOpacity onPress={() => {
-            dispatch(inputPopupAction({
-                headerText :"welcomr to Aot",
-                cancelButtonText :"Ok" ,
-                continueButtonText :"Continue",
-                textInputFuctionType :"type2",
+            <TouchableOpacity onPress={() => {
+            // dispatch(inputPopupAction({
+            //     headerText :"welcomr to Aot",
+            //     cancelButtonText :"Ok" ,
+            //     continueButtonText :"Continue",
+            //     textInputFuctionType :"type2",
+            // }))
+
+
+
+            dispatch(setSucessFailerMsg({
+                successFailureheaderTxt :"hii Jay",
+                successFailureContent:`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+               , successFailureType : false,
             }))
             }} style={{ position: 'absolute', top: 120, right: 40, backgroundColor: Colors.primaryColor, paddingVertical: 7, paddingHorizontal: 8, borderRadius: 10 }}>
                 <Rtext style={{ color: Colors.white }} >open pop up </Rtext>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
 
             {/* <DocSelection isVisible = {true}/> */}
         </SafeAreaView>

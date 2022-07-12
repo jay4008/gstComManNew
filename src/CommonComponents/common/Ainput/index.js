@@ -6,8 +6,9 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  Platform,
 } from 'react-native';
-import { Fonts } from '../../../assets/common/common';
+import { Colors, Fonts } from '../../../assets/common/common';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 const winHeight = Dimensions.get('window').height
 const Ainput = ({
@@ -40,6 +41,7 @@ const Ainput = ({
         // style={[styles.inputStyle,style, {borderColor:border, paddingRight: view ? 20 : 15}] }
         autoCorrect={false}
         placeholder={placeholder}
+        placeholderTextColor = {Platform.OS === 'ios' ? Colors.silver : Colors.silver}
         onBlur={onBlur}
         multiline={multiline}
         numberOfLines={numberOfLines}

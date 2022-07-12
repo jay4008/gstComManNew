@@ -12,7 +12,7 @@ const ContactUs = () => {
         <SafeAreaView style={{ flex: 1, marginHorizontal: 10 }}>
             <KeyboardAwareScrollView showsVerticalScrollIndicator = {false} style={{ flex: 1 }}>
                 <View style={{ paddingVertical: 10, paddingHorizontal: 10 }}>
-                    <Rtext style={{ fontFamily: Fonts.latoBold }}>Get In Touch</Rtext>
+                    <Rtext style={{ fontFamily: Fonts.latoBold , fontSize : 20 }}>Get In Touch</Rtext>
                 </View>
                 <Ainput placeholder={'Name'}></Ainput>
                 <Ainput placeholder={'Email'}></Ainput>
@@ -31,7 +31,6 @@ const ContactUs = () => {
                     <MainButton source={require('../../assets/icons/schedule.png')} text={'10.30 am to 7.30 pm'} />
                     <MainButton source={require('../../assets/icons/location.png')} text={'Biswakarma comparment,Dum Dum  Cant. kolkata 700156'} />
                 </View>
-
             </KeyboardAwareScrollView>
         </SafeAreaView>
     )

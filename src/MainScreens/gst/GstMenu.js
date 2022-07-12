@@ -13,7 +13,7 @@ import Subscription from "../popup/Subscription";
 const { width, height } = Dimensions.get('window')
 
 const GstMenu = (props) => {
-    const [showModal, setShowModal] = useState(false);
+
     const [selectedData, setSelecetedData] = useState({})
     const dispatch = useDispatch();
     const comments = useSelector((state) => state.home.comments);
@@ -181,7 +181,7 @@ const GstMenu = (props) => {
                 // }))
 
 
-                props.navigation.navigate("ProductDetailsGst");
+                props.navigation.navigate("ProductDetailsGst" , {item: item});
                 // ProductDetailsGst
                 // setShowModal(true);
                 // setSelecetedData(item);
@@ -192,7 +192,7 @@ const GstMenu = (props) => {
                     <Image source={item.image} style={styles.flatListIconStyle} />
                     <View>
                         <Rtext>{item?.name}</Rtext>
-                        <Rtext style={{ width: width - 140, fontSize: 12, color: 'silver', marginTop: 5 }}>{item?.description}</Rtext>
+                        <Rtext style={{ width: width - 140, fontSize: 12, color: 'silver', marginTop: 5 }}>{item?.description?.substr(0,119)}</Rtext>
                     </View>
                 </View>
 
@@ -209,11 +209,7 @@ const GstMenu = (props) => {
 
             />
 
-            <View>
-                {
-                    showModal && <Subscription setShowModal={setShowModal} selectedData={selectedData} />
-                }
-            </View>
+           
 
 
 

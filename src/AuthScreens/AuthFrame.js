@@ -14,7 +14,7 @@ const AuthFrame = ({ children, FrameStyle = {} }) => {
 
             <View style={AuthFrameStyle.ContainViewStyle}>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <Image source={{ uri: "http://www.atlcgroup.com/images/logo.png" }} style={{ height: 100, width: 180, resizeMode: 'contain', alignSelf: 'center', marginBottom: 50 }} />
+                    <Image source={require('../../src/assets/icons/logo.png')} style={{ height: 100, width: 180, resizeMode: 'contain', alignSelf: 'center', marginBottom: 50 }} />
                     <Animatable.View
                         iterationCount={1}
                         animation={'fadeInRightBig'}

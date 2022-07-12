@@ -27,6 +27,7 @@ const UpdateProfile = () => {
       height: 400,
       cropping: true,
     }).then(image => {
+      setDocPicker(false);
       console.log(image);
     });
   };
@@ -37,24 +38,23 @@ const UpdateProfile = () => {
       height: 400,
       cropping: true,
     }).then(image => {
+      setDocPicker(false);
       console.log(image);
     });
   };
 
   const uploadDoc = async () => {
+
+
     try {
       const results = await DocumentPicker.pickMultiple({
-        type: [
-          DocumentPicker.types.docx,
-          DocumentPicker.types.pdf,
-          DocumentPicker.types.doc,
-          DocumentPicker.types.ppt,
-          DocumentPicker.types.pptx,
-          DocumentPicker.types.xls,
-          DocumentPicker.types.xlsx,
-        ],
+        type: [DocumentPicker.types.allFiles],
       });
-    } catch (err) {}
+      setDocPicker(false);
+    } catch (err) {
+
+      console.log("err", err);
+    }
   };
 
   return (
@@ -80,6 +80,7 @@ const UpdateProfile = () => {
                   paddingVertical: 20,
                   fontFamily: Fonts.latoBold,
                   color: Colors.white,
+                  fontSize: 18,
                 }}>
                 Update Profile
               </Rtext>
@@ -129,7 +130,7 @@ const UpdateProfile = () => {
               onPress={() => {
                 setDocPicker(true);
               }}
-              text={ 'Gst Document'}
+              text={'Gst Document'}
             />
             <CommonButton
               onPress={() => {

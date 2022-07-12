@@ -1,4 +1,6 @@
+import moment from 'moment';
 import React from 'react';
+import { useState } from 'react';
 import {
   View,
   Text,
@@ -8,11 +10,16 @@ import {
   ImageBackground,
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {Colors, Fonts} from '../../assets/common/common';
 import {CusButtom} from '../../CommonComponents/common/CusButtom';
 import {Rtext} from '../../CommonComponents/common/Rtext';
+import Subscription from '../popup/Subscription';
 
-const ProductDetailsGst = () => {
+const ProductDetailsGst = (props) => {
+
+  const [showModal, setShowModal] = useState(false);
+  console.log("props", props.route.params );
   return (
     <ImageBackground
       style={{
@@ -22,28 +29,26 @@ const ProductDetailsGst = () => {
         backgroundColor: '#D3D3D3',
       }}
       imageStyle={{
-        height: '50%',
+        height: '100%',
         width: '100%',
         backgroundColor: Colors.primaryColor,
       }}>
-      <View style={{paddingHorizontal: 20, marginVertical: 20}}>
+        <KeyboardAwareScrollView>
+      <View style={{paddingHorizontal: 20, marginVertical: 20 }}>
         <Rtext
           style={{
             color: Colors.white,
             fontSize: 18,
             fontFamily: Fonts.latoBold,
           }}>
-          Order Details{' '}
+         { props.route.params.item.name}
         </Rtext>
         <Rtext
           style={{
             fontSize: 12,
             marginVertical: 10,
             color: Colors.white,
-          }}>{`hint: You can replace "git config" with "git config --global" to set a default
-hint: preference for all repositories. You can also pass --rebase, --no-rebase,
-hint: or --ff-only on the command line to override the configured default per
-hint: invocation.`}</Rtext>
+          }}>{props.route.params.item.description}</Rtext>
       </View>
 
       <View
@@ -52,16 +57,17 @@ hint: invocation.`}</Rtext>
           borderRadius: 10,
           backgroundColor: Colors.white,
           marginHorizontal: 15,
+           marginBottom :200
         }}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Rtext style={{paddingHorizontal: 10}}>Koushik</Rtext>
+          <Rtext style={{paddingHorizontal: 10}}>{props.route.params.item.name}</Rtext>
           <Rtext style={{color: 'red', marginHorizontal: 10}}>
-            Date: 16-10-2022
+           {moment().format('DD MMM YYYY')}
           </Rtext>
         </View>
         <View style={styles.mainview3}>
           <Image
-            source={require('../../assets/icons/profile.png')}
+            source={props.route.params.item.image}
             style={{height: 50, width: 50}}
           />
           <View style={{flexDirection: 'column', paddingRight: 50}}>
@@ -75,6 +81,9 @@ hint: invocation.`}</Rtext>
         <CommonButton text1={'jay shsh'} text2={'dsfsd'} />
         <CommonButton text1={'jay shsh'} text2={'dsfsd'} />
       </View>
+
+    
+      </KeyboardAwareScrollView>
 
       <View
         style={{
@@ -93,6 +102,7 @@ hint: invocation.`}</Rtext>
           text={'Cancel'}
         />
         <CusButtom
+        onpress = {() => setShowModal(true)}
           BTNstyle={{
             width: '50%',
             borderRadius: 0,
@@ -102,6 +112,12 @@ hint: invocation.`}</Rtext>
           text={'Add to cart'}
         />
       </View>
+
+      <View>
+                {
+                    showModal && <Subscription setShowModal={setShowModal} selectedData={selectedData} />
+                }
+            </View>
     </ImageBackground>
   );
 };

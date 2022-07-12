@@ -30,7 +30,7 @@ function MyStack(props) {
 const HeaderShown = () =>{
     return(
         <View>
-           <Image style = {styles.headerlog}  source = {{uri : "http://www.atlcgroup.com/images/logo.png"}}></Image>
+           <Image style = {styles.headerlog}  source = {require('../assets/icons/logo.png')}></Image>
         </View>
     )
 }
