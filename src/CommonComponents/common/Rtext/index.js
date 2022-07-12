@@ -13,7 +13,7 @@ const Rtext = ({style={},normalizeFontSize=0,fontSize=14.5,lgFontSize=0,smFontSi
         fontWeight,
     }
     return(
-        <Text onPress = {onPress} style={[styles.default,cusStyle,style]}  numberOfLines={numberOfLines} >
+        <Text onPress = {onPress} style={{...styles.default,...cusStyle,...style}}  numberOfLines={numberOfLines} >
             {children}
         </Text>
     )

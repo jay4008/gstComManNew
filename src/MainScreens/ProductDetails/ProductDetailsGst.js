@@ -115,7 +115,7 @@ const ProductDetailsGst = (props) => {
 
       <View>
                 {
-                    showModal && <Subscription setShowModal={setShowModal} selectedData={selectedData} />
+                    showModal && <Subscription setShowModal={setShowModal} selectedData={props.route.params.item} />
                 }
             </View>
     </ImageBackground>

@@ -9,6 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import { Colors, Fonts } from '../../../assets/common/common';
+import { Rtext } from '../Rtext';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 const winHeight = Dimensions.get('window').height
 const Ainput = ({
@@ -27,21 +28,40 @@ const Ainput = ({
   view = false,
   onFocus,
   calender,
+  image = false,
+  source
 }) => {
   const [lcSecureTextEntry, setLcSecureTextEntry] = useState(secureTextEntry);
   return (
     <View style={{ ...styles.containerStyle, ...containerStyle }}>
+
+
+      {image && (
+        <TouchableOpacity
+          style={styles.searchIcon}
+          onPress={() => {
+            setLcSecureTextEntry(!lcSecureTextEntry);
+          }}>
+
+          <Image
+            style={{ height: 20, width: 20, resizeMode: 'stretch' }}
+            source={source}
+          />
+
+
+        </TouchableOpacity>
+      )}
       <TextInput
 
         onFocus={onFocus}
         value={value}
         onChangeText={onChangeText}
-        style={editable ? { ...styles.inputStyle, ...style } : styles.inputEditableFalseStyle}
+        style={editable ? (image ? { ...styles.inputStyle, paddingLeft: 35, ...style } : { ...styles.inputStyle, ...style }) : styles.inputEditableFalseStyle}
         editable={editable}
         // style={[styles.inputStyle,style, {borderColor:border, paddingRight: view ? 20 : 15}] }
         autoCorrect={false}
         placeholder={placeholder}
-        placeholderTextColor = {Platform.OS === 'ios' ? Colors.silver : Colors.silver}
+        placeholderTextColor={Platform.OS === 'ios' ? Colors.silver : Colors.silver}
         onBlur={onBlur}
         multiline={multiline}
         numberOfLines={numberOfLines}
@@ -128,7 +148,7 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     position: 'absolute',
-    right: 15,
+    left: 15,
     top: 12,
   },
 });
