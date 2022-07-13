@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, SafeAreaView, Image, TouchableOpacity, Alert , TouchableHighlight } from 'react-native';
+import { View, Text, SafeAreaView, Image, TouchableOpacity, Alert, TouchableHighlight } from 'react-native';
 import { Colors } from '../../assets/common/common';
 import { Rtext } from '../../CommonComponents/common/Rtext';
 import { setData } from '../utility/auth';
@@ -32,44 +32,42 @@ const Order = ({ navigation }) => {
       console.log(image);
     });
   };
-
-
   return (
     <SafeAreaView style={{ flex: 1, paddingHorizontal: 15 }}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
         <View>
-     
+
           <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
-        
+
+            <Image
+              source={require('../../assets/icons/prof.png')}
+              style={{
+                height: 100,
+                width: 100,
+                tintColor: Colors.primaryColor,
+                resizeMode: 'contain',
+                marginTop: 20,
+              }}
+            />
+            <TouchableOpacity onPress={() => {
+
+              setDocPicker(true)
+            }} style={{ position: 'absolute', top: 70, right: 5, height: 30, width: 30 }}>
               <Image
-                source={require('../../assets/icons/prof.png')}
+                source={require('../../assets/icons/cameraa.png')}
                 style={{
-                  height: 100,
-                  width: 100,
-                  tintColor: Colors.primaryColor,
+                  height: 30,
+                  width: 30,
                   resizeMode: 'contain',
                   marginTop: 20,
+
+                  tintColor: Colors.mainblue,
+                  borderRadius: 10
                 }}
               />
-              <TouchableOpacity onPress={() => {
+            </TouchableOpacity>
+          </View>
 
-                setDocPicker(true)
-              }} style={{ position: 'absolute', top: 70, right: 5, height: 30, width: 30 }}>
-                <Image
-                  source={require('../../assets/icons/cameraa.png')}
-                  style={{
-                    height: 30,
-                    width: 30,
-                    resizeMode: 'contain',
-                    marginTop: 20,
-
-                    tintColor: Colors.mainblue,
-                    borderRadius: 10
-                  }}
-                />
-              </TouchableOpacity>
-            </View>
-       
           <View>
             <Text
               style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 15 }}>
@@ -105,10 +103,18 @@ const Order = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           </View>
-          <CommonButton text={'My Order'} />
-          <CommonButton text={'Address'} />
+          <CommonButton text={'My Order'}
+            onPress={() =>
+              navigation.navigate('MyOrder')
+            }
+          />
+          <CommonButton text={'Address'}
+            onPress={() =>
+              navigation.navigate('Address')
+            }
+          />
           <CommonButton text={'Payment Method'} />
-          <CommonButton text={'Purchase History'} />
+          <CommonButton onPress={() => navigation.navigate('Purchase')} text={'Purchase History'} />
           <CommonButton text={'Setting'} />
           <CommonButton text={'Share'} />
           <CommonButton onPress={() => dispatch(userLogoutSuccess())} text={'Log Out'} />

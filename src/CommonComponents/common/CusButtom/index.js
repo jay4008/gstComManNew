@@ -1,8 +1,10 @@
-import React from 'react';
-import {ActivityIndicator, Image , TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {ActivityIndicator, Image, TouchableOpacity} from 'react-native';
 import {Rtext} from '../Rtext';
-import { Fonts } from '../../../assets/common/common';
-const CusButtom = ({children,
+import {Colors, Fonts} from '../../../assets/common/common';
+import {View} from 'react-native-animatable';
+const CusButtom = ({
+  children,
   text,
   onpress,
   BTNstyle,
@@ -23,9 +25,9 @@ const CusButtom = ({children,
         justifyContent: 'center',
         paddingVertical: 12,
         borderRadius: 12,
-        marginTop : 15,
-        borderColor :"#fff",
-        borderWidth : 1,
+        marginTop: 15,
+        borderColor: '#fff',
+        borderWidth: 1,
         ...BTNstyle,
       }}>
       {image && <Image style={{...ImgStyle}} source={source}></Image>}
@@ -56,9 +58,44 @@ const styles = {
   textStyle: {
     alignSelf: 'center',
     fontSize: 14,
-    fontFamily : Fonts.latoRegular,
+    fontFamily: Fonts.latoRegular,
     letterSpacing: 0.3,
   },
 };
 
-export {CusButtom};
+const RadioButton = ({arrlist = [], selectedValue, setModal , setradioValue}) => {
+  const [isSelectedIndex, setIsselectedIndex] = useState(-1);
+
+  return (
+    <View>
+      {arrlist.map((item, index) => (
+        <TouchableOpacity
+          onPress={() => {
+            setTimeout(() => {
+              setModal(false);
+            }, 800);
+            setradioValue(item)
+            setIsselectedIndex(index);
+          }}
+          style={{flexDirection: 'row', marginTop: 10}}>
+          <Image
+            style={{
+              height: 24,
+              width: 24,
+              resizeMode: 'contain',
+              marginRight: 20,
+            }}
+            source={
+              index === isSelectedIndex
+                ? require('../../../assets/icons/radioon.png')
+                : require('../../../assets/icons/radiooff.png')
+            }
+          />
+          <Rtext>{item}</Rtext>
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+};
+
+export {CusButtom, RadioButton};

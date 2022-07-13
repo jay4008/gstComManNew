@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Dimensions, Platform, StyleSheet, Text } from 'react-native';
+import { Animated, Dimensions, Platform, StyleSheet, Text,View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Colors, Fonts } from '../../assets/common/common';
 import { RootState } from '../../store';
@@ -15,7 +15,7 @@ const CustomToast = () => {
     const fadeIn = () => {
         Animated.timing(fadeAnim, {
             toValue: 1,
-            duration: 400,
+            duration: 800,
         }).start();
     };
 
@@ -24,7 +24,7 @@ const CustomToast = () => {
         setTimeout(() => {
             fadeOut();
             dispatch(setToastMsgToNUll());
-        }, 4000);
+        }, 2000);
     };
     useEffect(() => {
         if (toastMsg !== '') {
@@ -36,10 +36,13 @@ const CustomToast = () => {
         Animated.timing(fadeAnim, {
             toValue: 0,
             duration: 400,
+            useNativeDriver:false
+
         }).start();
     };
     return (
-        <Animated.View
+        <View
+        
             style={{
                 ...styles.viewStyle,
                 opacity: fadeAnim,
@@ -59,7 +62,7 @@ const CustomToast = () => {
                 {toastMsg}
             </Text>
 
-        </Animated.View>
+        </View>
     );
 };
 

@@ -1,25 +1,29 @@
-import React, {useState} from 'react';
-import {View, Text, ImageBackground, StyleSheet, Alert} from 'react-native';
-import {SafeAreaView, Image, TouchableOpacity, Dimensions} from 'react-native';
-import {Colors, Fonts} from '../../assets/common/common';
-import {Rtext} from '../../CommonComponents/common/Rtext';
+import React, { useState } from 'react';
+import { View, Text, ImageBackground, StyleSheet, Alert, TextInput } from 'react-native';
+import { SafeAreaView, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { Colors, Fonts } from '../../assets/common/common';
+import { Rtext } from '../../CommonComponents/common/Rtext';
 import moment from 'moment';
-import {Ainput} from '../../CommonComponents/common/Ainput';
-import {BlurView} from '@react-native-community/blur';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {CusButtom} from '../../CommonComponents/common/CusButtom';
+import { Ainput } from '../../CommonComponents/common/Ainput';
+import { BlurView } from '@react-native-community/blur';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { CusButtom } from '../../CommonComponents/common/CusButtom';
 import DatePickerr from '../popup/DatePicker';
 import DocSelection from '../popup/DocModal';
 import ImagePicker from 'react-native-image-crop-picker';
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 import DocumentPicker from 'react-native-document-picker';
+import { setToastMsg } from '../../Store/popup';
+import { useDispatch } from 'react-redux';
 const UpdateProfile = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setlastName] = useState('');
+  const [email, setEmail] = useState('');
   const [DateModal, setDateModal] = useState(false);
-
+  const [emailValidError, setEmailValidError] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [docPicker, setDocPicker] = useState(false);
+  const dispatch = useDispatch();
 
   const openCamera = () => {
     ImagePicker.openCamera({
@@ -43,6 +47,25 @@ const UpdateProfile = () => {
     });
   };
 
+
+  const handleValidEmail = val => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+
+    if (val.length === 0) {
+      setEmailValidError('email address must be enter');
+    } else if (reg.test(val) === false) {
+      setEmailValidError('enter valid email address');
+    } else if (reg.test(val) === true) {
+      setEmailValidError('');
+    }
+  };
+
+
+
+
+
+
+
   const uploadDoc = async () => {
 
 
@@ -58,7 +81,7 @@ const UpdateProfile = () => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ImageBackground
         style={{
           width: '100%',
@@ -72,7 +95,7 @@ const UpdateProfile = () => {
           width: width,
           backgroundColor: Colors.primaryColor,
         }}>
-        <KeyboardAwareScrollView style={{flex: 1}}>
+        <KeyboardAwareScrollView style={{ flex: 1 }}>
           <View>
             <View>
               <Rtext
@@ -86,13 +109,27 @@ const UpdateProfile = () => {
               </Rtext>
             </View>
             <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Ainput
-                containerStyle={{width: '48%'}}
-                placeholder={'First Name'}></Ainput>
+
+                onChangeText={(val) => console.log(val)}
+
+
+                containerStyle={{ width: '48%' }}
+                placeholder={'First Name'}
+                value={firstName}
+                onChangeText={(newFirstname) => setFirstName(newFirstname)}
+              />
+
+
+
               <Ainput
-                containerStyle={{width: '48%'}}
-                placeholder={'Last Name'}></Ainput>
+                containerStyle={{ width: '48%' }}
+                placeholder={'Last Name'}
+                value={lastName}
+                onChangeText={(newLastname) => setlastName(newLastname)}
+              />
+
             </View>
 
             <CommonButton
@@ -108,21 +145,32 @@ const UpdateProfile = () => {
               }
             />
             <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Ainput
-                containerStyle={{width: '48%'}}
-                placeholder={'Email Id'}></Ainput>
+                containerStyle={{ width: '48%' }}
+                placeholder={'Email Id'}
+                value={email}
+                onChangeText={newValue => {
+                  setEmail(newValue);
+                  // handleValidEmail(newValue);
+                  console.log('value', newValue)
+                }}
+              />
+
+
+
+
               <Ainput
-                containerStyle={{width: '48%'}}
+                containerStyle={{ width: '48%' }}
                 placeholder={'phone number'}></Ainput>
             </View>
             <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Ainput
-                containerStyle={{width: '48%'}}
+                containerStyle={{ width: '48%' }}
                 placeholder={'GST no'}></Ainput>
               <Ainput
-                containerStyle={{width: '48%'}}
+                containerStyle={{ width: '48%' }}
                 placeholder={'PAN no'}></Ainput>
             </View>
 
@@ -146,11 +194,22 @@ const UpdateProfile = () => {
             />
             <CusButtom
               onpress={() => {
-                console.log('selectedDate', selectedDate);
+                //console.log('selectedDate', selectedDate);
+                console.log('email', email)
+                let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+                if (reg.test(email) === false) {
+                  dispatch(setToastMsg("Please enter a valid Email address"));
+                }
+                else if(firstName.length < 2)
+                {
+                  dispatch(setToastMsg("Please enter First name"))
+                }
+
               }}
-              BTNstyle={{backgroundColor: Colors.primaryColor}}
+              BTNstyle={{ backgroundColor: Colors.primaryColor }}
               text={'Submit'}
             />
+
           </View>
         </KeyboardAwareScrollView>
         {DateModal && (
@@ -189,7 +248,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CommonButton = ({onPress, text = '', image = true}) => {
+const CommonButton = ({ onPress, text = '', image = true }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View
@@ -217,10 +276,10 @@ const CommonButton = ({onPress, text = '', image = true}) => {
           />
         )}
 
-        <Text style={{width: 200}}>{text}</Text>
+        <Text style={{ width: 200 }}>{text}</Text>
         <Image
           source={require('../../assets/icons/grater.png')}
-          style={{height: 20, width: 20, resizemode: 'contain'}}
+          style={{ height: 20, width: 20, resizemode: 'contain' }}
         />
       </View>
     </TouchableOpacity>

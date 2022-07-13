@@ -47,21 +47,21 @@ const App = () => {
       setSplash(false);
     }, 3000);
   }, []);
-  if (Splash) {
-    return (
-      <AuthFrame>
-        <Rtext
-          style={{
-            fontSize: 30,
-            color: '#fff',
-            textAlign: 'center',
-            fontFamily: Fonts.latoBlack,
-          }}>
-          GST COMMAN
-        </Rtext>
-      </AuthFrame>
-    );
-  }
+  // if (Splash) {
+  //   return (
+  //     <AuthFrame>
+  //       <Rtext
+  //         style={{
+  //           fontSize: 30,
+  //           color: '#fff',
+  //           textAlign: 'center',
+  //           fontFamily: Fonts.latoBlack,
+  //         }}>
+  //         GST COMMAN
+  //       </Rtext>
+  //     </AuthFrame>
+  //   );
+  // }
   return (
     <>
       <NavigationContainer>

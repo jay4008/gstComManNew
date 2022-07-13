@@ -14,7 +14,11 @@ import UpdateProfile from '../MainScreens/profile/UpdateProfile';
 import Help from '../MainScreens/Help/Help';
 import Notifications from '../MainScreens/notification/Notification';
 import ProductDetailsGst from '../MainScreens/ProductDetails/ProductDetailsGst';
+import Order from '../MainScreens/order/Order';
 import { Colors } from '../assets/common/common';
+import Address from '../MainScreens/Address/Address';
+import Purchase from '../MainScreens/order/Purchase';
+
 enableScreens();
 function MyStack(props) {
 
@@ -159,6 +163,61 @@ const HeaderLeftShown = () =>{
 
         )}
       />
+      <Stack.Screen
+        name="MyOrder"
+        component={Order}
+        options={ ({navigation }) =>(
+          { 
+            title : "My Order",
+            headerTintColor: '#224585',
+            headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+           headerRight :() =>   <HeaderShown />,
+
+          }
+
+        )}
+      />
+      <Stack.Screen
+        name="Address"
+        component={Address}
+        options={ ({navigation }) =>(
+          { 
+            title : "Address",
+            headerTintColor: '#224585',
+            headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+           headerRight :() =>   <HeaderShown />,
+
+          }
+
+        )}
+      />
+
+
+<Stack.Screen
+        name="Purchase"
+        component={Purchase}
+        options={ ({navigation }) =>(
+          { 
+            title : "Address",
+            headerTintColor: '#224585',
+            headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+           headerRight :() =>   <HeaderShown />,
+
+          }
+
+        )}
+      />
+
+
     </Stack.Navigator>
   );
   
