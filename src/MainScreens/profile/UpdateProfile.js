@@ -19,8 +19,10 @@ const UpdateProfile = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setlastName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [pan, setPan] = useState('');
+  const [gst, setGst] = useState('');
   const [DateModal, setDateModal] = useState(false);
-  const [emailValidError, setEmailValidError] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [docPicker, setDocPicker] = useState(false);
   const dispatch = useDispatch();
@@ -46,24 +48,6 @@ const UpdateProfile = () => {
       console.log(image);
     });
   };
-
-
-  const handleValidEmail = val => {
-    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-
-    if (val.length === 0) {
-      setEmailValidError('email address must be enter');
-    } else if (reg.test(val) === false) {
-      setEmailValidError('enter valid email address');
-    } else if (reg.test(val) === true) {
-      setEmailValidError('');
-    }
-  };
-
-
-
-
-
 
 
   const uploadDoc = async () => {
@@ -119,6 +103,7 @@ const UpdateProfile = () => {
                 placeholder={'First Name'}
                 value={firstName}
                 onChangeText={(newFirstname) => setFirstName(newFirstname)}
+
               />
 
 
@@ -153,7 +138,8 @@ const UpdateProfile = () => {
                 onChangeText={newValue => {
                   setEmail(newValue);
                   // handleValidEmail(newValue);
-                  console.log('value', newValue)
+                  //console.log('value', newValue)
+                  //Alert.alert('email')
                 }}
               />
 
@@ -162,16 +148,37 @@ const UpdateProfile = () => {
 
               <Ainput
                 containerStyle={{ width: '48%' }}
-                placeholder={'phone number'}></Ainput>
+                placeholder={'phone number'}
+                value={phone}
+                onChangeText={newPhone => {
+                  setPhone(newPhone)
+                  // Alert.alert('koushik')
+
+                }}
+
+              />
             </View>
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Ainput
                 containerStyle={{ width: '48%' }}
-                placeholder={'GST no'}></Ainput>
+                placeholder={'GST no'}
+                value={gst}
+                onChangeText={newGst => {
+                  setGst(newGst)
+                  //Alert.alert('gst')
+
+                }}
+
+              />
               <Ainput
                 containerStyle={{ width: '48%' }}
-                placeholder={'PAN no'}></Ainput>
+                placeholder={'PAN no'}
+                value={pan}
+                onChangeText={(newPan) => setPan(newPan)}
+
+
+              />
             </View>
 
             <CommonButton
@@ -197,12 +204,28 @@ const UpdateProfile = () => {
                 //console.log('selectedDate', selectedDate);
                 console.log('email', email)
                 let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+                let regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+                let regadhar = /^[2-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$/;
                 if (reg.test(email) === false) {
                   dispatch(setToastMsg("Please enter a valid Email address"));
                 }
-                else if(firstName.length < 2)
-                {
+                else if (firstName.length < 2) {
                   dispatch(setToastMsg("Please enter First name"))
+                }
+                else if (lastName.length < 2) {
+                  dispatch(setToastMsg("Please enter last name"))
+                }
+                else if (phone.length <= 10) {
+                  dispatch(setToastMsg("Please enter phone number"))
+                }
+                else if (regpan.test(pan) === false) {
+                  dispatch(setToastMsg("Please enter email"))
+                }
+                else if (regadhar.test(adhar) === false) {
+                  dispatch(setToastMsg("Please enter adhar"))
+                }
+                else {
+                  dispatch(setToastMsg("Please fill all the field"))
                 }
 
               }}
@@ -227,13 +250,13 @@ const UpdateProfile = () => {
             onPressDoc={() => uploadDoc()}
             onPressCamera={() => openCamera()}
             onPressGallery={() => openGallery()}
-            setIsVisible={setDocPicker}
+            setIsVisible={setDocPicker}         
             isVisible={true}
           />
         )}
       </ImageBackground>
     </SafeAreaView>
-  );
+  );                                
 };
 
 export default UpdateProfile;
