@@ -53,6 +53,14 @@
 		811E7D4A85D14BF2B6BCB0C0 /* prof.png in Resources */ = {isa = PBXBuildFile; fileRef = D243C89E62994C35A1E6A250 /* prof.png */; };
 		691DAB8B06804D548CD143B0 /* schedule.png in Resources */ = {isa = PBXBuildFile; fileRef = 44DAF97469224B05AABF1A6D /* schedule.png */; };
 		5855B63C2A2A40989E9AEFD9 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A34BDFFCD85649239FAFBB99 /* logo.png */; };
+		8B627FEFDF9849A782878A50 /* checkboxoff.png in Resources */ = {isa = PBXBuildFile; fileRef = D2A4B01D813D467CB57F1638 /* checkboxoff.png */; };
+		F1B7D868E0144298AC8D1CEC /* checkboxon.png in Resources */ = {isa = PBXBuildFile; fileRef = 456555E5CFD04277B29F9202 /* checkboxon.png */; };
+		E2564C5E79C3452088908B98 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 82915B0F75CA4426B9554570 /* filter.png */; };
+		0FD28DC94813466BAE0A4B75 /* pdf.png in Resources */ = {isa = PBXBuildFile; fileRef = 9764E79AA0F74CB3996CF5F7 /* pdf.png */; };
+		3EC46FDEF1C747D2BABBD109 /* radiooff.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D7EE268E3EE46E19E4A7971 /* radiooff.png */; };
+		8682D1D2DC644E44B56241E2 /* radioon.png in Resources */ = {isa = PBXBuildFile; fileRef = B16051B55B044F049032DAD8 /* radioon.png */; };
+		7273B061E95648C1B3CD7939 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 12FE2F6DBE4C48928D29DBCE /* search.png */; };
+		E84332C4D3084EC6A7342271 /* sort.png in Resources */ = {isa = PBXBuildFile; fileRef = F651B38FBDD142249B964A3B /* sort.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +147,14 @@
 		D243C89E62994C35A1E6A250 /* prof.png */ = {isa = PBXFileReference; name = "prof.png"; path = "../src/assets/icons/prof.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		44DAF97469224B05AABF1A6D /* schedule.png */ = {isa = PBXFileReference; name = "schedule.png"; path = "../src/assets/icons/schedule.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A34BDFFCD85649239FAFBB99 /* logo.png */ = {isa = PBXFileReference; name = "logo.png"; path = "../src/assets/icons/logo.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D2A4B01D813D467CB57F1638 /* checkboxoff.png */ = {isa = PBXFileReference; name = "checkboxoff.png"; path = "../src/assets/icons/checkboxoff.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		456555E5CFD04277B29F9202 /* checkboxon.png */ = {isa = PBXFileReference; name = "checkboxon.png"; path = "../src/assets/icons/checkboxon.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		82915B0F75CA4426B9554570 /* filter.png */ = {isa = PBXFileReference; name = "filter.png"; path = "../src/assets/icons/filter.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9764E79AA0F74CB3996CF5F7 /* pdf.png */ = {isa = PBXFileReference; name = "pdf.png"; path = "../src/assets/icons/pdf.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5D7EE268E3EE46E19E4A7971 /* radiooff.png */ = {isa = PBXFileReference; name = "radiooff.png"; path = "../src/assets/icons/radiooff.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B16051B55B044F049032DAD8 /* radioon.png */ = {isa = PBXFileReference; name = "radioon.png"; path = "../src/assets/icons/radioon.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		12FE2F6DBE4C48928D29DBCE /* search.png */ = {isa = PBXFileReference; name = "search.png"; path = "../src/assets/icons/search.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F651B38FBDD142249B964A3B /* sort.png */ = {isa = PBXFileReference; name = "sort.png"; path = "../src/assets/icons/sort.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +266,14 @@
 				D243C89E62994C35A1E6A250 /* prof.png */,
 				44DAF97469224B05AABF1A6D /* schedule.png */,
 				A34BDFFCD85649239FAFBB99 /* logo.png */,
+				D2A4B01D813D467CB57F1638 /* checkboxoff.png */,
+				456555E5CFD04277B29F9202 /* checkboxon.png */,
+				82915B0F75CA4426B9554570 /* filter.png */,
+				9764E79AA0F74CB3996CF5F7 /* pdf.png */,
+				5D7EE268E3EE46E19E4A7971 /* radiooff.png */,
+				B16051B55B044F049032DAD8 /* radioon.png */,
+				12FE2F6DBE4C48928D29DBCE /* search.png */,
+				F651B38FBDD142249B964A3B /* sort.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -442,6 +466,14 @@
 				811E7D4A85D14BF2B6BCB0C0 /* prof.png in Resources */,
 				691DAB8B06804D548CD143B0 /* schedule.png in Resources */,
 				5855B63C2A2A40989E9AEFD9 /* logo.png in Resources */,
+				8B627FEFDF9849A782878A50 /* checkboxoff.png in Resources */,
+				F1B7D868E0144298AC8D1CEC /* checkboxon.png in Resources */,
+				E2564C5E79C3452088908B98 /* filter.png in Resources */,
+				0FD28DC94813466BAE0A4B75 /* pdf.png in Resources */,
+				3EC46FDEF1C747D2BABBD109 /* radiooff.png in Resources */,
+				8682D1D2DC644E44B56241E2 /* radioon.png in Resources */,
+				7273B061E95648C1B3CD7939 /* search.png in Resources */,
+				E84332C4D3084EC6A7342271 /* sort.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

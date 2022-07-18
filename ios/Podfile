@@ -16,6 +16,8 @@ target 'GSTCOMMAN' do
 
   pod 'react-native-document-picker', :path => '../node_modules/react-native-document-picker'
 
+  pod 'RNImageToPdf', :path => '../node_modules/react-native-image-to-pdf'
+
   target 'GSTCOMMANTests' do
     inherit! :complete
     # Pods for testing
