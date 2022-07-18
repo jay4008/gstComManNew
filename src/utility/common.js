@@ -6,6 +6,8 @@ import RNFetchBlob from 'rn-fetch-blob';
 import { baseUrl } from './MyUtility';
 // import { baseUrl } from '../utility';
 
+
+
 export const request = async (method, url, data = {}) => {
 
   console.log('baseUrl', baseUrl + url);
