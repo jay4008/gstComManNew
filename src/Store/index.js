@@ -1,9 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
-import { persistReducer, persistStore } from 'redux-persist';
+import {
+  configureStore,
+  getDefaultMiddleware,
+  combineReducers,
+} from '@reduxjs/toolkit';
+import {persistReducer, persistStore} from 'redux-persist';
 import authReducer from './auth';
 import homeReducer from './home';
 import popupReducer from './popup';
+import pdfCreatReducer from './pdfCreat';
 
 const middlewareState = [
   ...getDefaultMiddleware({
@@ -15,12 +20,13 @@ const rootReducer = combineReducers({
   auth: authReducer,
   home: homeReducer,
   popup: popupReducer,
+  pdfCreat: pdfCreatReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['auth']
+  whitelist: ['auth',"pdfCreat" ],
 };
 
 // Middleware: Redux Persist Persisted Reducer
@@ -38,4 +44,4 @@ const store = configureStore({
 let persistor = persistStore(store);
 
 export default store;
-export { persistor };
+export {persistor};

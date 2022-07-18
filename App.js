@@ -31,7 +31,7 @@ import Modal from 'react-native-modal';
 import {Provider, useSelector} from 'react-redux';
 import store from './src/Store';
 import Subscription from './src/MainScreens/popup/Subscription';
-
+import { MenuProvider } from 'react-native-popup-menu';
 // popup/MessagePopUp
 
 import MessagePopUp from './src/MainScreens/popup/MessagePopUp';
@@ -66,7 +66,9 @@ const App = () => {
     <>
       <NavigationContainer>
         <Provider store={store}>
+          <MenuProvider>
           <StackNav />
+          </MenuProvider>
         </Provider>
 
         {/* <RootDrawerNav/> */}

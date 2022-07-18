@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.anyline.RNImageToPDF.RNImageToPdfPackage;
 import io.github.elyx0.reactnativedocumentpicker.DocumentPickerPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.facebook.react.ReactInstanceManager;
