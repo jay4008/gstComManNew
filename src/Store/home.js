@@ -9,7 +9,7 @@ import { request } from '../utility/common';
 let initialStateHome = {
     todos: [],
     newData: {},
-    comments:[],
+    comments: [],
     techno: []
 }
 
@@ -17,8 +17,18 @@ let initialStateHome = {
 const HomeTodosApi = createAsyncThunk(
     'HomeTodosApi',
     async (data, thunkAPI) => {
-        //   console.log('guestUserLogin', data);
-        const response = await request('get', "/todos");
+        console.log('data', data);
+        const response = await request('get', "/todos",);
+        return response.data;
+    },
+);
+
+
+const Koushik = createAsyncThunk(
+    'Koushik',
+    async (data, thunkAPI) => {
+        console.log('data', data);
+        const response = await request('get', "/todos",);
         return response.data;
     },
 );
@@ -29,7 +39,7 @@ const HomeTodosApi1 = createAsyncThunk(
     'HomeTodosApi1',
     async (data, thunkAPI) => {
         //   console.log('guestUserLogin', data);
-        const response = await request('get', "/todos/1");
+        const response = await request('post', "/api/auth/register", data);
         return response.data;
     },
 );
@@ -59,15 +69,36 @@ const homeSlice = createSlice({
     initialState: initialStateHome,
 
     reducers: {
-          emptyAllData: (state , action) => {
-          state.comments = action.payload,
-          state.newData= action.payload,
-          state.todos = action.payload,
-          Alert.alert("all data clear")
-          }
+        emptyAllData: (state, action) => {
+            state.comments = action.payload,
+                state.newData = action.payload,
+                state.todos = action.payload,
+                Alert.alert("all data clear")
+        }
     },
 
     extraReducers: {
+
+
+
+        [Koushik.fulfilled]: (state, action) => {
+
+            console.log("Koushik   action.payload", action.payload);
+            state.todos = action.payload;
+        },
+
+        [Koushik.pending]: (state, action) => {
+
+        },
+
+        [Koushik.rejected]: (state, action) => {
+            // Alert.alert("rejected")
+        },
+
+
+
+
+
         [HomeTodosApi.fulfilled]: (state, action) => {
 
 
@@ -122,6 +153,6 @@ const homeSlice = createSlice({
     },
 });
 
-  export const { emptyAllData } = homeSlice.actions;
-export { HomeTodosApi, HomeTodosApi1 ,commentsApi,Api2};
+export const { emptyAllData } = homeSlice.actions;
+export { HomeTodosApi, HomeTodosApi1, Koushik, commentsApi, Api2 };
 export default homeSlice.reducer;

@@ -1,9 +1,9 @@
 import React from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
-import {createNativeStackNavigator} from 'react-native-screens/native-stack';
+import { Image, TouchableOpacity, View } from 'react-native';
+import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 const Stack = createNativeStackNavigator();
-import {StyleSheet} from 'react-native';
-import {enableScreens} from 'react-native-screens';
+import { StyleSheet } from 'react-native';
+import { enableScreens } from 'react-native-screens';
 import Home from '../MainScreens/Home';
 import MyBottomTabs from './MyBottomTabs';
 import GstMenu from '../MainScreens/gst/GstMenu';
@@ -12,14 +12,17 @@ import Help from '../MainScreens/Help/Help';
 import Notifications from '../MainScreens/notification/Notification';
 import ProductDetailsGst from '../MainScreens/ProductDetails/ProductDetailsGst';
 import Order from '../MainScreens/order/Order';
-import {Colors} from '../assets/common/common';
+import { Colors } from '../assets/common/common';
 import Address from '../MainScreens/Address/Address';
 import Purchase from '../MainScreens/order/Purchase';
 import DocList from '../MainScreens/pdf/DocList';
-import {MyTest} from '../MainScreens/pdf/ImageList';
+import { MyTest } from '../MainScreens/pdf/ImageList';
 import PdfDocumentBackPack from '../MainScreens/pdf/PdfDocumentBackPack';
-import {Rtext} from '../CommonComponents/common/Rtext';
+import { Rtext } from '../CommonComponents/common/Rtext';
 import ImageDetail from '../MainScreens/pdf/ImageDetails';
+import Product from '../../src/Product'
+
+
 
 enableScreens();
 function MyStack(props) {
@@ -42,7 +45,7 @@ function MyStack(props) {
     );
   };
 
-  const Document = ({navigation}) => {
+  const Document = ({ navigation }) => {
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate('PdfDocumentBackPack')}
@@ -52,11 +55,11 @@ function MyStack(props) {
           paddingVertical: 5,
           borderRadius: 6,
         }}>
-        <Rtext style={{color: Colors.white}}>Pdf BackPack</Rtext>
+        <Rtext style={{ color: Colors.white }}>Pdf BackPack</Rtext>
       </TouchableOpacity>
     );
   };
-  const HeaderRightShown = ({navigation}) => {
+  const HeaderRightShown = ({ navigation }) => {
     return (
       <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
         <Image
@@ -81,9 +84,9 @@ function MyStack(props) {
       <Stack.Screen
         name="Home"
         component={MyBottomTabs}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerTintColor: '#224585',
-          headerTitleStyle: {color: '#000', fontSize: 14},
+          headerTitleStyle: { color: '#000', fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -95,9 +98,9 @@ function MyStack(props) {
       <Stack.Screen
         name="GstMenu"
         component={GstMenu}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerTintColor: '#224585',
-          headerTitleStyle: {color: '#000', fontSize: 14},
+          headerTitleStyle: { color: '#000', fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -109,9 +112,9 @@ function MyStack(props) {
       <Stack.Screen
         name="Help"
         component={Help}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerTintColor: '#224585',
-          headerTitleStyle: {color: '#000', fontSize: 14},
+          headerTitleStyle: { color: '#000', fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -124,9 +127,9 @@ function MyStack(props) {
       <Stack.Screen
         name="Notification"
         component={Notifications}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerTintColor: '#224585',
-          headerTitleStyle: {color: '#000', fontSize: 14},
+          headerTitleStyle: { color: '#000', fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -138,10 +141,10 @@ function MyStack(props) {
       <Stack.Screen
         name="ProductDetailsGst"
         component={ProductDetailsGst}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           title: 'Details Page',
           headerTintColor: '#224585',
-          headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -152,10 +155,10 @@ function MyStack(props) {
       <Stack.Screen
         name="UpdateProfile"
         component={UpdateProfile}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           title: 'Edit Profile',
           headerTintColor: '#224585',
-          headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -165,10 +168,10 @@ function MyStack(props) {
       <Stack.Screen
         name="MyOrder"
         component={Order}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           title: 'My Order',
           headerTintColor: '#224585',
-          headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -178,10 +181,10 @@ function MyStack(props) {
       <Stack.Screen
         name="Address"
         component={Address}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           title: 'Address',
           headerTintColor: '#224585',
-          headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -192,10 +195,10 @@ function MyStack(props) {
       <Stack.Screen
         name="Purchase"
         component={Purchase}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           title: 'Address',
           headerTintColor: '#224585',
-          headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -206,10 +209,10 @@ function MyStack(props) {
       <Stack.Screen
         name="DocList"
         component={DocList}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           title: 'My Docs',
           headerTintColor: '#224585',
-          headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -220,10 +223,10 @@ function MyStack(props) {
       <Stack.Screen
         name="MyTest"
         component={MyTest}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           title: 'My Docs',
           headerTintColor: '#224585',
-          headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -234,10 +237,10 @@ function MyStack(props) {
       <Stack.Screen
         name="PdfDocumentBackPack"
         component={PdfDocumentBackPack}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           title: 'My Docs',
           headerTintColor: '#224585',
-          headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -247,16 +250,35 @@ function MyStack(props) {
       <Stack.Screen
         name="ImageDetail"
         component={ImageDetail}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           title: 'Edit Image',
           headerTintColor: '#224585',
-          headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {
             backgroundColor: '#fff',
           },
           headerRight: () => <HeaderShown />,
         })}
       />
+
+
+<Stack.Screen
+        name="Product"
+        component={Product}
+        options={({ navigation }) => ({
+          title: 'Edit Image',
+          headerTintColor: '#224585',
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerRight: () => <HeaderShown />,
+        })}
+      />
+
+
+      
+
     </Stack.Navigator>
   );
 }

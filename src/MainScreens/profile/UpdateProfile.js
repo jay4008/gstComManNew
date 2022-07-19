@@ -270,7 +270,8 @@ const CommonButton = ({ onPress, text = '', image = true }) => {
             style={{
               height: 30,
               width: 30,
-              resizemode: 'contain',
+              // resizemode
+              resizeMode : 'contain',
               tintColor: Colors.primaryColor,
             }}
           />
@@ -279,7 +280,7 @@ const CommonButton = ({ onPress, text = '', image = true }) => {
         <Text style={{ width: 200 }}>{text}</Text>
         <Image
           source={require('../../assets/icons/grater.png')}
-          style={{ height: 20, width: 20, resizemode: 'contain' }}
+          style={{ height: 20, width: 20, resizeMode: 'contain' }}
         />
       </View>
     </TouchableOpacity>

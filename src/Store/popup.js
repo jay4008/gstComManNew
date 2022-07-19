@@ -32,6 +32,7 @@ const Slice = createSlice({
     successFailureheaderTxt: '',
     successFailureContent: '',
     successFailureType: false,
+    loader : false,
   },
 
   reducers: {
@@ -54,6 +55,14 @@ const Slice = createSlice({
     },
     setToastMsgToNUll: (state, action) => {
       state.message = '';
+    },
+
+    LoaderOn: (state, action) => {
+      state.loader = true;
+    },
+
+    LoaderOff: (state, action) => {
+      state.loader = false;
     },
 
     setToastMsg: (state, action) => {
@@ -114,7 +123,8 @@ export const {
   inputPopupAction,
   inputPopupClose,
   setSucessFailerMsg,
-  setSucessFailerClose
-
+  setSucessFailerClose,
+  LoaderOn,
+  LoaderOff
 } = Slice.actions;
 export default Slice.reducer;

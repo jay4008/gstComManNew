@@ -22,6 +22,7 @@ import {
   HomeTodosApi,
   HomeTodosApi1,
   Api2,
+  Koushik,
 } from '../Store/home';
 import {userLogoutSuccess} from '../Store/auth';
 const {width, height} = Dimensions.get('window');
@@ -36,7 +37,8 @@ import {
   setToastMsg,
 } from '../Store/popup';
 import DocSelection from './popup/DocModal';
-const Home = props => {
+import Loader from './popup/Loader';
+const Home = (props) => {
   const todos = useSelector(state => state.home.todos);
   const newData = useSelector(state => state.home.newData);
   const comments = useSelector(state => state.home.comments);
@@ -93,6 +95,7 @@ const Home = props => {
   useEffect(() => {
     console.log('todos', todos);
   }, [todos]);
+
   const ApicallOfTodos = async () => {
     try {
       let Reqdata = await request('get', '/todos');
@@ -105,8 +108,16 @@ const Home = props => {
   useEffect(() => {
     // ApicallOfTodos();
     dispatch(commentsApi());
-    dispatch(HomeTodosApi());
-    dispatch(HomeTodosApi1());
+    dispatch(Koushik({
+      
+    }));
+    dispatch(HomeTodosApi1({
+      username:'koushik',
+      email:'sham@gmail.com',
+      password:'12345',
+      ph:'9865430934',
+      dob:'23-12-2021'
+    }));
     dispatch(Api2());
   }, []);
 
@@ -168,7 +179,6 @@ const Home = props => {
           source={require('../assets/icons/pdf.png')}
         />
       </TouchableOpacity>
-
 
     </SafeAreaView>
   );

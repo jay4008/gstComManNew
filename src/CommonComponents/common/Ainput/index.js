@@ -29,7 +29,7 @@ const Ainput = ({
   onFocus,
   calender,
   image = false,
-  source
+  source , keyboardType = 'default'
 }) => {
   const [lcSecureTextEntry, setLcSecureTextEntry] = useState(secureTextEntry);
   return (
@@ -65,6 +65,7 @@ const Ainput = ({
         onBlur={onBlur}
         multiline={multiline}
         numberOfLines={numberOfLines}
+        keyboardType = { keyboardType  }
         secureTextEntry={lcSecureTextEntry}
       />
       {view ? (

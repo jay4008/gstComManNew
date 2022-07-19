@@ -116,7 +116,7 @@ const Order = ({ navigation }) => {
           <CommonButton text={'Payment Method'} />
           <CommonButton onPress={() => navigation.navigate('Purchase')} text={'Purchase History'} />
           <CommonButton text={'Setting'} />
-          <CommonButton text={'Share'} />
+          <CommonButton onPress={()=>navigation.navigate('Product')} text={'Share'} />
           <CommonButton onPress={() => dispatch(userLogoutSuccess())} text={'Log Out'} />
         </View>
       </KeyboardAwareScrollView>
@@ -159,12 +159,12 @@ const CommonButton = ({ onPress, text = '' }) => {
         }}>
         <Image
           source={require('../../assets/icons/clock.png')}
-          style={{ height: 20, width: 20, resizemode: 'contain', tintColor: Colors.white }}
+          style={{ height: 20, width: 20, resizeMode: 'contain', tintColor: Colors.white }}
         />
         <Rtext style={{ width: 200, color: Colors.white }}>{text}</Rtext>
         <Image
           source={require('../../assets/icons/grater.png')}
-          style={{ height: 20, width: 20, resizemode: 'contain', tintColor: Colors.white }}
+          style={{ height: 20, width: 20, resizeMode: 'contain', tintColor: Colors.white }}
         />
       </View>
     </TouchableOpacity>

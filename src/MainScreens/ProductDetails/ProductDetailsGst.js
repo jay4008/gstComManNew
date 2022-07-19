@@ -164,7 +164,7 @@ const CommonButton = ({onPress, text1 = '', text2 = '', arrHide = false}) => {
           {!arrHide && (
             <Image
               source={require('../../assets/icons/grater.png')}
-              style={{height: 20, width: 20, resizemode: 'contain'}}
+              style={{height: 20, width: 20, resizeMode: 'contain'}}
             />
           )}
         </View>

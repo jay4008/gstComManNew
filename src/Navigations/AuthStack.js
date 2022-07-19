@@ -24,7 +24,7 @@ const Stack = createNativeStackNavigator();
 
 function AuthStack() {
   return (
-    <Stack.Navigator screenOptions = {headerOptionForStackPage}>
+    <Stack.Navigator screenOptions = {headerOptionForStackPage} initialRouteName = {'LogIn'}>
       <Stack.Screen name="LogIn" component={LogIn} />
       <Stack.Screen name="LoginEmail" component={LoginEmail} />
       <Stack.Screen name="Verification" component={Verification} />

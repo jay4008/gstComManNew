@@ -33,7 +33,7 @@ export const request = async (method, url, data = {}) => {
 
   let instance = axios.create({
     baseURL: baseUrl,
-    timeout: 8000,
+    timeout: 20000,
     headers: headerObj,
     // validateStatus: function (status) {
     //   if (status === 401) {
