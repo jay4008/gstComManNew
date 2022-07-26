@@ -20,6 +20,9 @@ import {BlurView} from '@react-native-community/blur';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {addImageToDocumentList, pdfDocumentSet} from '../../Store/pdfCreat';
+import moment from 'moment';
+import { LoaderOff, LoaderOn, setSucessFailerMsg } from '../../Store/popup';
+import { Rtext } from '../../CommonComponents/common/Rtext';
 const {height, width} = Dimensions.get('window');
 export const MyTest = props => {
   const dispatch = useDispatch();
@@ -72,6 +75,7 @@ export const MyTest = props => {
   }, [imageData]);
 
   const myAsyncPDFFunction = async () => {
+    dispatch(LoaderOn())
     let data = pdfArray[pdfArrayIndex]?.ImageArr?.map((item, index) => {
       console.log('item.path', item.path.split('file://').pop());
 
@@ -81,10 +85,32 @@ export const MyTest = props => {
     console.log('data', data, pdfArray[pdfArrayIndex]);
     try {
       const options = {
+        
         imagePaths: data,
-        name: 'PDFNamee.pdf',
+        name: moment().format('ll') + '.pdf',
+        quality: 0.7,
+        maxSize: { // optional maximum image dimension - larger images will be resized
+          width: 900,
+          height: Math.round(height/ width* 900),
+        },
       };
-      const pdf = await RNImageToPdf.createPDFbyImages(options);
+  
+      const pdf = await RNImageToPdf.createPDFbyImages(options).then(() =>{
+        setTimeout(() => {
+          dispatch(LoaderOff())
+          dispatch(setSucessFailerMsg({
+            successFailureheaderTxt : "Pdf created",
+            successFailureContent : "please check the Pdf Document in Pdf Document backpack with the Name of " + moment().format('ll') + '.pdf' ,
+            successFailureType : true
+          }))
+          // state.successFailure = true;
+          // state.successFailureheaderTxt = action.payload.successFailureheaderTxt;
+          // state.successFailureContent = action.payload.successFailureContent;
+          // state.successFailureType = action.payload.successFailureType
+        }, 500);
+    
+      });
+  
       console.log('Generated pdf object', pdf);
       console.log(pdf.filePath);
 
@@ -106,7 +132,7 @@ export const MyTest = props => {
       <View style={styles.item} key={item.key + 'dfdsf'}>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate("ImageDetail")
+            props.navigation.navigate("ImageDetail" , {uri: item.path})
           }}
           style={{
             height: height / 4 - 11,
@@ -132,6 +158,7 @@ export const MyTest = props => {
             source={{uri: item.path}}
           />
         </TouchableOpacity>
+        <Rtext>Delete Item</Rtext>
       </View>
     );
   };

@@ -21,6 +21,7 @@ import PdfDocumentBackPack from '../MainScreens/pdf/PdfDocumentBackPack';
 import { Rtext } from '../CommonComponents/common/Rtext';
 import ImageDetail from '../MainScreens/pdf/ImageDetails';
 import Product from '../../src/Product'
+import PdfView from '../MainScreens/pdf/PdfView';
 
 
 
@@ -267,6 +268,22 @@ function MyStack(props) {
         component={Product}
         options={({ navigation }) => ({
           title: 'Edit Image',
+          headerTintColor: '#224585',
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerRight: () => <HeaderShown />,
+        })}
+      />
+
+
+
+<Stack.Screen
+        name="PdfView"
+        component={PdfView}
+        options={({ navigation }) => ({
+          title: 'Pdf Details',
           headerTintColor: '#224585',
           headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {
