@@ -116,7 +116,7 @@ const Order = ({ navigation }) => {
           <CommonButton text={'Payment Method'} />
           <CommonButton onPress={() => navigation.navigate('Purchase')} text={'Purchase History'} />
           <CommonButton text={'Setting'} />
-          <CommonButton text={'Share'} />
+          <CommonButton onPress={()=> navigation.navigate('Share')} text={'Share'} />
           <CommonButton onPress={() => dispatch(userLogoutSuccess())} text={'Log Out'} />
         </View>
       </KeyboardAwareScrollView>

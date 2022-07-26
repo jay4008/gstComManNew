@@ -83,10 +83,7 @@ const Home = (props) => {
             console.log("datadatadatadatadatadata", e)
         }
 
-
     }
-
-
     useEffect(() => {
         // ApicallOfTodos();
         dispatch(commentsApi())

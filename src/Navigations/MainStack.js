@@ -18,6 +18,7 @@ import Order from '../MainScreens/order/Order';
 import { Colors } from '../assets/common/common';
 import Address from '../MainScreens/Address/Address';
 import Purchase from '../MainScreens/order/Purchase';
+import Share from '../MainScreens/profile/Share';
 
 enableScreens();
 function MyStack(props) {
@@ -202,6 +203,23 @@ const HeaderLeftShown = () =>{
 <Stack.Screen
         name="Purchase"
         component={Purchase}
+        options={ ({navigation }) =>(
+          { 
+            title : "Address",
+            headerTintColor: '#224585',
+            headerTitleStyle: {color: Colors.primaryColor, fontSize: 14},
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+           headerRight :() =>   <HeaderShown />,
+
+          }
+
+        )}
+      />
+<Stack.Screen
+        name="Share"
+        component={Share}
         options={ ({navigation }) =>(
           { 
             title : "Address",

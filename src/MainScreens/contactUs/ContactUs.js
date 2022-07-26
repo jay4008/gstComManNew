@@ -14,15 +14,24 @@ const ContactUs = () => {
                 <View style={{ paddingVertical: 10, paddingHorizontal: 10 }}>
                     <Rtext style={{ fontFamily: Fonts.latoBold , fontSize : 20 }}>Get In Touch</Rtext>
                 </View>
+               
                 <Ainput placeholder={'Name'}></Ainput>
                 <Ainput placeholder={'Email'}></Ainput>
                 <Ainput placeholder={'Subject'}></Ainput>
-                <Ainput placeholder={"Message"} style={{ height: 120, textAlignVertical: "top" }} multiline={true} />
+                <Ainput 
+                
+                placeholder={"Message"} style={{ height: 120, textAlignVertical: "top" }} multiline={true} />
+                
                 <TouchableOpacity>
                     <Ainput editable={false} placeholder={'Select Information Type'}></Ainput>
                 </TouchableOpacity>
 
+               
+               
                 <CusButtom BTNstyle={{ backgroundColor: Colors.primaryColor }} text={'Submit'} />
+                
+                
+     
                 <View style={{ paddingVertical: 20, backgroundColor: Colors.white, marginTop: 20, paddingHorizontal: 10, borderRadius: 10 }}>
                     <Rtext style={{ fontFamily: Fonts.latoBlack }}>Contact Us</Rtext>
                     <View style={{ height: 1, width: "100%", backgroundColor: Colors.silver, marginTop: 10 }} />
