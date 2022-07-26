@@ -23,6 +23,11 @@ export const request = async (method, url, data = {}) => {
   if (method == 'upload') {
     headerObj['Content-Type'] = 'multipart/form-data';
   }
+
+
+
+
+  
   // AsyncStorage.setItem('token' , "sometoken");
 
   // const token = await AsyncStorage.getItem('token');
