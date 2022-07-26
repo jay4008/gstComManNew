@@ -1,6 +1,6 @@
 import axios from 'axios';
 import RNFetchBlob from 'rn-fetch-blob';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { getTimeZone } from 'react-native-localize';
 // import store from '../store';
 import { baseUrl } from './MyUtility';
@@ -24,12 +24,18 @@ export const request = async (method, url, data = {}) => {
     headerObj['Content-Type'] = 'multipart/form-data';
   }
 
-//   const token = await AsyncStorage.getItem('token');
-//   console.log("token", token);
-//   if (token) {
-//     headerObj['Authorization'] = 'Bearer ' + token;
-//     console.log('Authorization', headerObj['Authorization']);
-//   }
+
+
+
+  
+  // AsyncStorage.setItem('token' , "sometoken");
+
+  // const token = await AsyncStorage.getItem('token');
+  // console.log("token", token);
+  // if (token) {
+  //   headerObj['Authorization'] = 'Bearer ' + token;
+  //   console.log('Authorization', headerObj['Authorization']);
+  // }
 
   let instance = axios.create({
     baseURL: baseUrl,
