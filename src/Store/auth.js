@@ -17,7 +17,7 @@ const login = createAsyncThunk(
   'login',
   async (data, thunkAPI) => {
       console.log('guestUserLogin', data);
-    const response = await request('post', "/api/auth/login", data);
+    const response = await request('post', "/api/users/login-user", data);
     return response.data;
   },
 );

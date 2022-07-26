@@ -84,9 +84,7 @@ const StackNav = () => {
   const textInput = useSelector(state => state.popup.textInput);
   const successFailure = useSelector(state => state.popup.successFailure);
   const loader = useSelector(state => state.popup.loader);
-  const successFailureType = useSelector(
-    state => state.popup.successFailureType,
-  );
+  const successFailureType = useSelector(state => state.popup.successFailureType);
   const NetInfo = useNetInfo();
 
   useEffect(() => {

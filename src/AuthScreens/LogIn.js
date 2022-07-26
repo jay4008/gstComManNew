@@ -42,7 +42,7 @@ const LogIn = (props) => {
                     if (reg.test(Email) === false) {
                         dispatch(setToastMsg("Please enter a valid Email address"));
                         return
-                    }else if(Password.length < 5){
+                    }else if(Password.length < 3){
                         dispatch(setToastMsg("Please enter Correct password"));
                         return   
                     }
