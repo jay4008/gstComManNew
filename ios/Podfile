@@ -18,6 +18,10 @@ target 'GSTCOMMAN' do
 
   pod 'RNImageToPdf', :path => '../node_modules/react-native-image-to-pdf'
 
+  pod 'react-native-perspective-image-cropper', :path => '../node_modules/react-native-perspective-image-cropper'
+
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'GSTCOMMANTests' do
     inherit! :complete
     # Pods for testing

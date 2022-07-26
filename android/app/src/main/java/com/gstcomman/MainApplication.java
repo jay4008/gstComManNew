@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
+// import org.opencv.RNCustomCropPackage;
+import fr.michaelvilleneuve.customcrop.RNCustomCropPackage;
 import com.anyline.RNImageToPDF.RNImageToPdfPackage;
 import io.github.elyx0.reactnativedocumentpicker.DocumentPickerPackage;
 import com.cmcewen.blurview.BlurViewPackage;
@@ -29,6 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+          //  packages.add(new RNCustomCropPackage());
+            // packages.add(new SvgPackage());
           return packages;
         }
 
