@@ -37,7 +37,7 @@ const loginSlice = createSlice({
   name: 'auth',
   initialState: {
     token: null,
-    isLogedin: false,
+    isUserLoggedIn: false,
   },
 
   reducers: {

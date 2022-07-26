@@ -19,7 +19,7 @@ import AuthFrame from "./AuthFrame";
 const LogIn = (props) => {
 
     const [Email, setEmail] = useState("");
-    const [Password, setPassword] = useState("")
+    const [Password, setPassword] = useState("");
 
     const dispatch = useDispatch()
     return (
