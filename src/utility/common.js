@@ -2,8 +2,10 @@ import axios from 'axios';
 import RNFetchBlob from 'rn-fetch-blob';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { getTimeZone } from 'react-native-localize';
-// import store from '../store';
+import store from '../Store';
+// ./src/Store
 import { baseUrl } from './MyUtility';
+import { LoaderOff, LoaderOn } from '../Store/popup';
 // import { baseUrl } from '../utility';
 
 
@@ -14,47 +16,39 @@ export const request = async (method, url, data = {}) => {
 
   let headerObj = {
     'Content-Type': 'application/json',
-    // Timezone: getTimeZone(),
-    // 'Timezone-Offset': moment.tz(getTimeZone()).format('Z'),
   };
 
-  // console.log('headerObj', headerObj);
 
   if (method == 'upload') {
     headerObj['Content-Type'] = 'multipart/form-data';
   }
 
+  const token = await AsyncStorage.getItem('token');
+  console.log("new ===============token ", token);
+  if (token) {
+    headerObj['Authorization'] =  token;
+    console.log('Authorization', headerObj['Authorization']);
+  }
 
-
-
-  
-  // AsyncStorage.setItem('token' , "sometoken");
-
-  // const token = await AsyncStorage.getItem('token');
-  // console.log("token", token);
-  // if (token) {
-  //   headerObj['Authorization'] = 'Bearer ' + token;
-  //   console.log('Authorization', headerObj['Authorization']);
-  // }
-
+  // store.dispatch(LoaderOn())
   let instance = axios.create({
     baseURL: baseUrl,
     timeout: 20000,
     headers: headerObj,
-    // validateStatus: function (status) {
-    //   if (status === 401) {
-    //     // showFlashMessage(
-    //     //   'Session token has been expired. You will be directed to Login shortly',
-    //     //   '',
-    //     //   'danger',
-    //     // );
-    //     // setTimeout(() => {
-    //     //   store.dispatch(logoutSuccess());
-    //     // }, 2000);
-    //     store.dispatch(logoutSuccess());
-    //   }
-    //   return status == 200;
-    // },
+    validateStatus: function (status) {
+      if (status === 401) {
+        // showFlashMessage(
+        //   'Session token has been expired. You will be directed to Login shortly',
+        //   '',
+        //   'danger',
+        // );
+        // setTimeout(() => {
+        //   store.dispatch(logoutSuccess());
+        // }, 2000);
+        store.dispatch(logoutSuccess());
+      }
+      return status == 200;
+    },
   });
 
   let base;
@@ -88,6 +82,8 @@ export const request = async (method, url, data = {}) => {
     // }
   } else base = instance.get(url, { params: data });
 
+
+  // store.dispatch(LoaderOff())
   return base;
 };
 

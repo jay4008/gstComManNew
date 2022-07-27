@@ -38,7 +38,9 @@ import {
 } from '../Store/popup';
 import DocSelection from './popup/DocModal';
 import Loader from './popup/Loader';
-const Home = (props) => {
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const Home = props => {
+  const [token, setToken] = useState('');
   const todos = useSelector(state => state.home.todos);
   const newData = useSelector(state => state.home.newData);
   const comments = useSelector(state => state.home.comments);
@@ -46,36 +48,64 @@ const Home = (props) => {
   const [messagePopUp, setMessagePopup] = useState(false);
   const dispatch = useDispatch();
   const [popUp, setPopUp] = useState(false);
+  const ReturnImage = (data = "") => {
+    console.log('data', data);
+
+    let dateToSend;
+    switch (data) {
+      case 'GST':
+        dateToSend = require('../assets/icons/gst.png');
+        break;
+
+      case 'Monthely compliance':
+        dateToSend = require('../assets/icons/month.png');
+        break;
+
+      case  'Quaterly compliance':
+        dateToSend = require('../assets/icons/quater.png');
+        break;
+      case 'Annual compliance':
+        dateToSend = require('../assets/icons/annual.png');
+        break;
+
+      default:
+        dateToSend = require('../assets/icons/help.png');
+        break;
+    }
+
+    return dateToSend;
+  };
+
   const homeData = [
     {
       name: 'GST',
       description: `GST, or Goods and Services Tax, is an indirect tax imposed on the supply of goods and services`,
-      image: require('../assets/icons/gst.png'),
+      // image: require('../assets/icons/gst.png'),
       navigation: true,
       pageName: 'GstMenu',
     },
     {
       name: 'Monthely compliance',
       description: `Monthly Compliance Certificate means a certificate signed by a responsible officer of Parent, in substantially the form attached hereto as Exhibit N and reasonably satisfactory to the Holder or Agent, as applicable.`,
-      image: require('../assets/icons/month.png'),
+      // image: require('../assets/icons/month.png'),
     },
     {
       name: 'Quaterly compliance',
       description:
         'Quarterly Compliance Certificate means a certificate delivered by the Borrower to the Agent in the form of Exhibit "H".',
-      image: require('../assets/icons/quater.png'),
+      // image: require('../assets/icons/quater.png'),
     },
     {
       name: 'Annual compliance',
       description:
         'Evaluation of advance tax liability and payment of advance tax periodically. Filing of Income Tax Returns (Tax will be obligatory at a flat rate of 30% plus Education Cess) Filing of Tax Audit Report.',
-      image: require('../assets/icons/annual.png'),
+      // image: require('../assets/icons/annual.png'),
     },
     {
       name: 'Help',
       description:
         'Evaluation of advance tax liability and payment of advance tax periodically. Filing of Income Tax Returns (Tax will be obligatory at a flat rate of 30% plus Education Cess) Filing of Tax Audit Report.',
-      image: require('../assets/icons/help.png'),
+      // image: require('../assets/icons/help.png'),
       navigation: true,
       pageName: 'Help',
     },
@@ -105,23 +135,31 @@ const Home = (props) => {
     }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     // ApicallOfTodos();
+    // Alert.alert(ReturnImage("jay"));
+    const newtoken = await AsyncStorage.getItem('token');
+    setToken(newtoken);
     dispatch(commentsApi());
-    dispatch(Koushik({
-      
-    }));
-    dispatch(HomeTodosApi1({
-      username:'koushik',
-      email:'sham@gmail.com',
-      password:'12345',
-      ph:'9865430934',
-      dob:'23-12-2021'
-    }));
+    dispatch(Koushik({}));
+    dispatch(
+      HomeTodosApi1({
+        username: 'koushik',
+        email: 'sham@gmail.com',
+        password: '12345',
+        ph: '9865430934',
+        dob: '23-12-2021',
+      }),
+    );
     dispatch(Api2());
+    console.log('token', token);
+    // Alert.alert(`${token}`)
   }, []);
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item, index}) => {
+    console.log('====================================');
+    console.log(ReturnImage(index));
+    console.log('====================================');
     return (
       <TouchableOpacity
         style={styles.flatlistMainView}
@@ -131,7 +169,7 @@ const Home = (props) => {
           }
         }}>
         <View style={styles.rowWiseChild}>
-          <Image source={item.image} style={styles.flatListIconStyle} />
+          <Image source={ReturnImage(item?.name)} style={styles.flatListIconStyle} />
           <View>
             <Rtext>{item?.name}</Rtext>
             <Rtext
@@ -157,18 +195,17 @@ const Home = (props) => {
       />
       <TouchableOpacity
         onPress={() => {
-            props.navigation.navigate('DocList');
+          props.navigation.navigate('DocList');
         }}
         style={{
           position: 'absolute',
           bottom: 50,
           right: 40,
-          backgroundColor: Colors.mainblue ,
+          backgroundColor: Colors.mainblue,
           paddingVertical: 7,
           paddingHorizontal: 8,
           borderRadius: 10,
         }}>
-
         <Image
           style={{
             height: 40,
@@ -179,7 +216,6 @@ const Home = (props) => {
           source={require('../assets/icons/pdf.png')}
         />
       </TouchableOpacity>
-
     </SafeAreaView>
   );
 };
