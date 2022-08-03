@@ -5924,11 +5924,6 @@ react-native-pdf@^6.5.0:
   dependencies:
     crypto-js "^3.2.0"
 
-react-native-perspective-image-cropper@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/react-native-perspective-image-cropper/-/react-native-perspective-image-cropper-0.4.4.tgz#f636e67730027f2a25d6d2e5908450ca9627ca9b"
-  integrity sha512-cTR695lClNyH8X97NPbkl9h2RGgKA0Ao+jWDH2HW4x8MJ+mm/psdsctXFbJxhU5Lw0Ev1k1a3jBVaJH+AlG+Tw==
-
 react-native-popup-menu@^0.15.12:
   version "0.15.12"
   resolved "https://registry.yarnpkg.com/react-native-popup-menu/-/react-native-popup-menu-0.15.12.tgz#386852f4245f8d661a5003776989b9b55c9ce381"
