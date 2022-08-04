@@ -63,7 +63,7 @@ const renderItem = ({ item }) => {
 
                     <View>
                         <View style={styles.upView}>
-                            <Image source={require('../../assets/bank.png')} style={{ marginLeft: 5, borderColor: "#808080", borderWidth: 1, width: 30, height: 30, borderRadius: 3 }}></Image>
+                            <Image source={require('../../assets/bank.png')} style={styles.logo}></Image>
                             <Rtext fontSize={16}>{item.title}</Rtext>
                             <TouchableOpacity>
                                 <Text style={{ color: "#D77D00", fontFamily: Fonts.latoBold, marginLeft: 50 }}>APPLY</Text>
@@ -126,12 +126,19 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         padding: 5
     },
+    logo: {
+        marginLeft: 5,
+        borderColor: "#808080",
+        borderWidth: 1,
+        width: 30,
+        height: 30,
+        borderRadius: 3
+    },
     item: {
         backgroundColor: '#C0C0C0',
         marginVertical: 8,
         marginHorizontal: 15,
         height: 150,
-
 
     },
     title: {
