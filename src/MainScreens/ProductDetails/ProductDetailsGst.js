@@ -19,7 +19,7 @@ import Subscription from '../popup/Subscription';
 
 const ProductDetailsGst = (props) => {
   let [price, setPrice] = useState("");
-  let data = { "item": { "desc": "Hhhhh", "maxamount": "10000", "maxvaluerange": "200000", "midamount": "5000", "midvaluerange": "25000", "minamount": "1000", "name": "Gggggg" } };
+  // let data = { "item": { "desc": "Hhhhh", "maxamount": "10000", "maxvaluerange": "200000", "midamount": "5000", "midvaluerange": "25000", "minamount": "1000", "name": "Gggggg" } };
   const [index, setIndex] = useState(1)
   const [showModal, setShowModal] = useState(false);
   console.log("props", props.route.params);
@@ -111,23 +111,23 @@ const ProductDetailsGst = (props) => {
         </View> */}
 
 
-          <Ainput value={gstAmt} onChangeText={(val) => {
+          <Ainput  keyboardType={'numeric'} value={gstAmt} onChangeText={(val) => {
             setGstAmt(val);
             if(val === ""){
               setPrice("")
             }
 
-            if (parseInt(val) > 0 && parseInt(val) < parseInt(data.item.midvaluerange)) {
-              setPrice(parseInt(data.item.minamount));
+            if (parseInt(val) > 0 && parseInt(val) < parseInt(props.route.params.item.midvaluerange)) {
+              setPrice(parseInt(props.route.params.item.minamount));
             }
 
 
-            if (parseInt(val) > parseInt(data.item.midvaluerange) && parseInt(val) < parseInt(data.item.maxvaluerange)) {
-              setPrice(data.item.midamount);
+            if (parseInt(val) > parseInt(props.route.params.item.midvaluerange) && parseInt(val) < parseInt(props.route.params.item.maxvaluerange)) {
+              setPrice(props.route.params.item.midamount);
             }
 
-            if (parseInt(val) > parseInt(data.item.maxvaluerange)) {
-              setPrice(data.item.maxamount);
+            if (parseInt(val) > parseInt(props.route.params.item.maxvaluerange)) {
+              setPrice(props.route.params.item.maxamount);
             }
 
 
