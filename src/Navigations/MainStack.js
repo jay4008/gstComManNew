@@ -22,6 +22,7 @@ import { Rtext } from '../CommonComponents/common/Rtext';
 import ImageDetail from '../MainScreens/pdf/ImageDetails';
 import Product from '../../src/Product'
 import PdfView from '../MainScreens/pdf/PdfView';
+import CouponCode from '../MainScreens/Payment/CouponCode'
 
 
 
@@ -292,11 +293,25 @@ function MyStack(props) {
           headerRight: () => <HeaderShown />,
         })}
       />
+      <Stack.Screen
+        name="CouponCode"
+        component={CouponCode}
+        options={({ navigation }) => ({
+          title: 'Coupon Code',
+          headerTintColor: '#224585',
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerRight: () => <HeaderShown />,
+        })}
+      />
 
 
       
 
     </Stack.Navigator>
+    
   );
 }
 export default MyStack;
