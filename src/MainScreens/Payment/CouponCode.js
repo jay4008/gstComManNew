@@ -1,92 +1,63 @@
 import React from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, TouchableOpacity } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Colors } from '../../assets/common/common'
 import { Fonts } from '../../assets/common/common';
 import { Rtext } from '../../CommonComponents/common/Rtext';
-
-const DATA = [
-    {
-        id: '1',
-        off: '15%',
-        title: 'PAYZAPP75',
-        offer: 'Save 75 on this offer using SBI Credit Card',
-        desc: 'Use code PAYZAPP75 & get 30% off on Order'
-    },
-    {
-        id: '2',
-        off: "75%",
-        title: 'MBK100',
-        offer: 'Save 75 on this offer using AXIS Credit Card',
-        desc: 'Use code PAYZAPP75 & get 30% off on Order'
-    },
-    {
-        id: '3',
-        off: "FLAT 100 OFF",
-        title: 'FCH25',
-        offer: 'Save 75 on this offer using UCO Credit Card',
-        desc: 'Use code PAYZAPP75 & get 30% off on Order ',
-    },
-    {
-        id: '4',
-        off: "FLAT 200 OFF",
-        title: 'SWIGGYIT',
-        offer: 'Save 75 on this offer',
-        desc: 'Use code PAYZAPP75 & get 30% off on Order'
-    },
-];
-
-const CouponCode = () => {
+import { getCoupon } from '../../Store/coupon';
+// import { dispatch } from 'jest-circus/build/state';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 
+const CouponCode = (props) => {
+    const dispatch = useDispatch();
+    const data = useSelector(state => state.coupon.getCoupon);
+    console.log('==================', data)
+    useEffect(() => {
+        dispatch(getCoupon())
+    }, [])
     return (
         <SafeAreaView style={styles.container}>
             <FlatList
-                data={DATA}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
+                data={data}
+
+                renderItem={({ item, index }) => <RenderItem item={item} props={props} />}
+            // keyExtractor={item => item.id}
             />
+
         </SafeAreaView>
     );
 }
 
-const renderItem = ({ item }) => {
+const RenderItem = ({ item, props }) => {
+
     return (
-        <TouchableOpacity>
-            <View style={{ flex: 1, alignItems: "center", width: "100%" }}>
-
+        <TouchableOpacity onPress={() => {
+            props.navigation.goBack();
+        }}>
+            <View style={{ flex: 1, alignItems: "center", width: "100%", borderRadius: 15 }}>
                 <View style={styles.card}>
-
-
                     <View style={styles.offer}>
                         <Rtext style={styles.offerText}>15% OFF</Rtext>
                     </View>
-
                     <View>
                         <View style={styles.upView}>
-                            <Image source={require('../../assets/bank.png')} style={styles.logo}></Image>
-                            <Rtext fontSize={16}>{item.title}</Rtext>
+                            <Image source={require('../../assets/icons/coupon.png')} style={styles.logo}></Image>
+                            <Rtext style={styles.couponCode} >{item.couponCode}</Rtext>
                             <TouchableOpacity>
-                                <Text style={{ color: "#D77D00", fontFamily: Fonts.latoBold, marginLeft: 50 }}>APPLY</Text>
+                                <Rtext style={{ color: Colors.mainblue, fontFamily: Fonts.latoBold, marginLeft: 50 , borderBottomColor : Colors.mainblue , borderBottomWidth : 1 }}>APPLY</Rtext>
                             </TouchableOpacity>
                         </View>
                         <View style={{ marginLeft: 5 }}>
-                            <Text style={{ color: "#00C269", width: "60%", marginBottom: 5 }}>{item.offer}</Text>
-
-
+                            <Text style={{ color: "#00C269", width: "60%", marginBottom: 5 }}>{item.couponValue}</Text>
                         </View>
-                        <View style={{ height: 1, width: "85%", borderColor: "#D77D00", borderWidth: .5 }}></View>
-
-                        <Text style={{ marginLeft: 5, width: "85%" }}>{item.desc}</Text>
+                        <View style={{ height: 1, width: "85%", borderColor: Colors.mainblue, borderWidth: .5 }}></View>
+                        <Text style={{ marginLeft: 5, width: "85%" }}>{item.descriPtion}</Text>
                         <TouchableOpacity>
                             <Text style={{ marginLeft: 5, fontWeight: "600" }}>+More</Text>
                         </TouchableOpacity>
                     </View>
-
-
-
-
                 </View>
-
             </View>
         </TouchableOpacity>
     );
@@ -97,20 +68,23 @@ const renderItem = ({ item }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
+        backgroundColor: Colors.lightSilver,
     },
     card: {
         flexDirection: "row",
         height: 150,
-        backgroundColor: "#C0C0C0",
+
+        backgroundColor: Colors.white,
         borderRadius: 10,
         width: "95%",
         marginVertical: 10,
     },
     offer: {
-        backgroundColor: "#D77D00",
+        borderTopLeftRadius: 14,
+        backgroundColor: Colors.mainblue,
         width: "20%",
-        justifyContent: "center"
+        justifyContent: "center",
+        borderBottomLeftRadius: 14,
     },
     offerText: {
         color: "#FFF",
@@ -128,11 +102,13 @@ const styles = StyleSheet.create({
     },
     logo: {
         marginLeft: 5,
-        borderColor: "#808080",
-        borderWidth: 1,
-        width: 30,
-        height: 30,
-        borderRadius: 3
+        borderColor: Colors.mainblue,
+        // borderWidth: 0.3,
+        width: 50,
+        height: 50,
+        tintColor: Colors.silver
+        // borderRadius: 3,
+
     },
     item: {
         backgroundColor: '#C0C0C0',
@@ -144,6 +120,12 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 32,
     },
+    couponCode: {
+        fontFamily: Fonts.latoBold,
+        fontSize: 13,
+        width: 95,
+        marginLeft: 5,
+    }
 });
 
 export default CouponCode;
