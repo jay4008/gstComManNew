@@ -16,6 +16,9 @@ import { Ainput } from '../../CommonComponents/common/Ainput';
 import { CusButtom } from '../../CommonComponents/common/CusButtom';
 import { Rtext } from '../../CommonComponents/common/Rtext';
 import Subscription from '../popup/Subscription';
+import { getCoupon } from '../../Store/coupon';
+// import { dispatch } from 'jest-circus/build/state';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ProductDetailsGst = (props) => {
   let [price, setPrice] = useState("");
@@ -24,6 +27,7 @@ const ProductDetailsGst = (props) => {
   const [showModal, setShowModal] = useState(false);
   console.log("props", props.route.params);
   const [gstAmt, setGstAmt] = useState("");
+ 
   return (
     <ImageBackground
       style={{
@@ -111,9 +115,9 @@ const ProductDetailsGst = (props) => {
         </View> */}
 
 
-          <Ainput  keyboardType={'numeric'} value={gstAmt} onChangeText={(val) => {
+          <Ainput keyboardType={'numeric'} value={gstAmt} onChangeText={(val) => {
             setGstAmt(val);
-            if(val === ""){
+            if (val === "") {
               setPrice("")
             }
 
@@ -134,16 +138,36 @@ const ProductDetailsGst = (props) => {
           }} placeholder={"Please enter Amount for GST."} style={{}} />
 
         </View>
-        <View style={{flexDirection:'row',marginHorizontal:15,marginVertical:15}}>
-        {
-          price !== "" && <Rtext style={{ width : "100%"}}> You have to pay {price === "" ? "":  parseInt(price) *  (index === 1 ? 1 : (index === 2?  4:12  ))} rs {index === 1 ? " for monthly Suscription ":index === 2 ? "for quaterly Suscription " : "for yealy Suscription"}</Rtext>
-        }
-       
+        <View style={{ flexDirection: 'row', marginHorizontal: 15, marginVertical: 15 }}>
+          {
+            price !== "" && <Rtext style={{ width: "100%" }}> You have to pay {price === "" ? "" : parseInt(price) * (index === 1 ? 1 : (index === 2 ? 4 : 12))} rs {index === 1 ? " for monthly Suscription " : index === 2 ? "for quaterly Suscription " : "for yealy Suscription"}</Rtext>
+          }
 
-     
+
+
         </View>
-        <View style ={{marginHorizontal : 15}}>
-        <CusButtom text = {"Apply Coupon or Promo Code"} />
+        <View style={{ marginHorizontal: 15 }}>
+          <CusButtom text={"Apply Coupon or Promo Code"}
+            onpress={() =>
+              // dispatch(getCoupon())
+               
+              
+              //   .then(Reqdata => {
+              //     // dispatch(LoaderOff());
+              //     // dispatch(userLoginSuccess());
+              //     // dispatch(userLoginSuccess());
+              //     //console.log('Reqdata  ==>', Reqdata);
+              //     props.navigation.navigate('CouponCode',{item:data})
+              //   })
+              //   .catch((e) => {
+              //     // dispatch(setToastMsg("Something went wrong!"));
+              //     // dispatch(LoaderOff())
+              //     console.log('Reqdata  ==>',e);
+              //   })
+
+               props.navigation.navigate('CouponCode')
+            }
+          />
         </View>
       </KeyboardAwareScrollView>
 
