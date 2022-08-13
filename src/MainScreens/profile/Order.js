@@ -113,7 +113,7 @@ const Order = ({ navigation }) => {
               navigation.navigate('Address')
             }
           />
-          <CommonButton text={'Payment Method'} />
+          <CommonButton onPress={()=> navigation.navigate('CouponCode')} text={'Payment Method'} />
           <CommonButton onPress={() => navigation.navigate('Purchase')} text={'Purchase History'} />
           <CommonButton text={'Setting'} />
           <CommonButton onPress={()=>navigation.navigate('Product')} text={'Share'} />

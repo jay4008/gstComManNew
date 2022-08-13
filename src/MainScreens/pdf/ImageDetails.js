@@ -23,51 +23,52 @@ import {addImageToDocumentList, pdfDocumentSet} from '../../Store/pdfCreat';
 import {Rtext} from '../../CommonComponents/common/Rtext';
 const {height, width} = Dimensions.get('window');
 
-import CustomCrop from 'react-native-perspective-image-cropper';
+// import CustomCrop from 'react-native-perspective-image-cropper';
 class ImageDetail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      imageWidth: width,
-      imageHeight: height,
-      initialImage: this.props.route.params.uri,
-      rectangleCoordinates: {
-        topLeft: {x: 30, y: 30},
-        topRight: {x: width - 30, y: 30},
-        bottomRight: {x: width - 10, y: height - 100},
-        bottomLeft: {x: 10, y: height - 100},
-      },
-    };
-  }
 
-  componentWillMount() {
-    Image.getSize(this.props.route.params.uri, (width, height) => {
-      this.setState({
-        imageWidth: width,
-        imageHeight: height,
-        initialImage: this.props.route.params.uri,
-        rectangleCoordinates: {
-          topLeft: {x: 10, y: 10},
-          topRight: {x: width - 10, y: 10},
-          bottomRight: {x: 10, y: height - 10},
-          bottomLeft: {x: 10, y: height - 10},
-        },
-      });
-    });
+  // constructor(props){
+  //   super(props);
+  //   this.state= {
+  //     imageWidth: width,
+  //     imageHeight: height,
+  //     initialImage: this.props.route.params.uri,
+  //     rectangleCoordinates: {
+  //       topLeft: {x: 30, y: 30},
+  //       topRight: {x: width -30, y: 30},
+  //       bottomRight: {  x:  width -10, y: height - 100  },
+  //       bottomLeft: { x: 10, y: height - 100},
+  //     },
+  //   }
+  // }
 
-    console.log('this.props', this.props.route.params.uri);
-  }
-  updateImage(image, newCoordinates) {
-    this.setState({image, rectangleCoordinates: newCoordinates});
-  }
-  crop() {
-    this.customCrop.crop();
-  }
+  // componentWillMount() {
+  //   Image.getSize(this.props.route.params.uri, (width, height) => {
+  //     this.setState({
+  //       imageWidth: width,
+  //       imageHeight: height,
+  //       initialImage: this.props.route.params.uri,
+  //       rectangleCoordinates: {
+  //         topLeft: {x: 10, y: 10},
+  //         topRight: {x: width -10, y: 10},
+  //         bottomRight: {x: 10, y: height - 10},
+  //         bottomLeft: {x: 10, y: height - 10},
+  //       },
+  //     });
+  //   });
+
+    // console.log("this.props", this.props.route.params.uri)
+  // }
+  // updateImage(image, newCoordinates) {
+  //   this.setState({image, rectangleCoordinates: newCoordinates});
+  // }
+  // crop() {
+  //   this.customCrop.crop();
+  // }
   render() {
     return (
-      <View style={{flex: 1}}>
-        <Image style={{flex: 1}} source={{uri: this.props.route.params.uri}} />
-        {/* <CustomCrop
+      <View style = {{flex : 1}}>
+{/*     
+        <CustomCrop
           updateImage={this.updateImage.bind(this)}
           rectangleCoordinates={this.state.rectangleCoordinates}
           initialImage={this.state.initialImage}
@@ -79,8 +80,8 @@ class ImageDetail extends React.Component {
           handlerColor="rgba(20,150,160, 1)"
           enablePanStrict={false}
       
-        />
-        <TouchableOpacity onPress={this.crop.bind(this)}>
+        /> */}
+        <TouchableOpacity>
 
           <Text>CROP IMAGE</Text>
         </TouchableOpacity> */}

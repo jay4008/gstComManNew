@@ -25,8 +25,8 @@ const login = createAsyncThunk(
 const product = createAsyncThunk(
   'product',
   async (data, thunkAPI) => {
-      console.log('guestUserLogin', data);
-    const response = await request('post', "/api/products/register", data);
+      // console.log('guestUserLogin', data);
+    const response = await request('get', "/api/products/");
     return response.data;
   },
 );
@@ -38,6 +38,7 @@ const loginSlice = createSlice({
   initialState: {
     token: null,
     isUserLoggedIn: false,
+    productList:{}
   },
 
   reducers: {
@@ -57,14 +58,17 @@ const loginSlice = createSlice({
 
 
     [product.fulfilled]: (state, action) => {
+      state.productList=action.payload;
+      console.log('fullfilldata',state.productList)
     },
     [product.pending]: (state, action) => {
     },
     [product.rejected]: (state, action) => {
+      console.log('Rejected data',action)
     },
   },
 });
 
 export const { userLoginSuccess, userLogoutSuccess } = loginSlice.actions;
-export { registration,login,product};
+export { product , registration , login};
 export default loginSlice.reducer;

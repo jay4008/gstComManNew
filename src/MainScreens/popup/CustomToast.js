@@ -29,7 +29,7 @@ const CustomToast = () => {
     setTimeout(() => {
       fadeOut();
       dispatch(setToastMsgToNUll());
-    }, 2000);
+    }, 4000);
   };
   useEffect(() => {
     if (toastMsg !== '') {

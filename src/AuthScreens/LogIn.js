@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {useState} from 'react';
 import {Alert, View} from 'react-native';
 import {useDispatch} from 'react-redux';
@@ -15,9 +15,9 @@ import AuthFrame from './AuthFrame';
 const LogIn = props => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
-useEffect(() => {
-  AsyncStorage.setItem('token', "");
-},[])
+  useEffect(() => {
+    AsyncStorage.setItem('token', '');
+  }, []);
   const dispatch = useDispatch();
   return (
     <>
@@ -58,6 +58,8 @@ useEffect(() => {
               }),
             )
               .then(async Reqdata => {
+
+                console.log('Reqdata  ==>', Reqdata);
                 if (Reqdata?.payload?.success) {
                   await AsyncStorage.setItem('token', Reqdata?.payload?.token);
                   dispatch(userLoginSuccess());
@@ -70,7 +72,10 @@ useEffect(() => {
 
                 dispatch(LoaderOff());
               })
-              .catch(() => {
+              .catch(errr => {
+                console.log('====================================');
+                console.log('errr', errr);
+                console.log('====================================');
                 dispatch(
                   setToastMsg('Please enter correct email or Password .'),
                 );
