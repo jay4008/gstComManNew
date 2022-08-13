@@ -20,9 +20,10 @@ import { MyTest } from '../MainScreens/pdf/ImageList';
 import PdfDocumentBackPack from '../MainScreens/pdf/PdfDocumentBackPack';
 import { Rtext } from '../CommonComponents/common/Rtext';
 import ImageDetail from '../MainScreens/pdf/ImageDetails';
-import Product from '../../src/Product'
+import Product from '../MainScreens/message/Product'
 import PdfView from '../MainScreens/pdf/PdfView';
 import CouponCode from '../MainScreens/Payment/CouponCode'
+import message from '../MainScreens/message/message'
 
 
 
@@ -63,11 +64,25 @@ function MyStack(props) {
   };
   const HeaderRightShown = ({ navigation }) => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
-        <Image
-          style={styles.HeaderIcon}
-          source={require('../assets/icons8-notification-100.png')}></Image>
-      </TouchableOpacity>
+      <View style={{ flexDirection: 'row', width: '30%' }}>
+        <View style={{}}>
+          <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
+            <Image
+              style={styles.HeaderIcon}
+              source={require('../assets/icons8-notification-100.png')}></Image>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity style={{}} onPress={() => navigation.navigate('Product')}>
+            <Image
+              style={styles.HeaderIcon1}
+              source={require('../assets/icons/message1.png')}></Image>
+
+          </TouchableOpacity>
+        </View>
+      </View>
+
+
     );
   };
 
@@ -264,11 +279,11 @@ function MyStack(props) {
       />
 
 
-<Stack.Screen
+      <Stack.Screen
         name="Product"
         component={Product}
         options={({ navigation }) => ({
-          title: 'Edit Image',
+          title: 'Chat',
           headerTintColor: '#224585',
           headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {
@@ -280,7 +295,7 @@ function MyStack(props) {
 
 
 
-<Stack.Screen
+      <Stack.Screen
         name="PdfView"
         component={PdfView}
         options={({ navigation }) => ({
@@ -307,11 +322,25 @@ function MyStack(props) {
         })}
       />
 
+      <Stack.Screen
+        name="message"
+        component={message}
+        options={({ navigation }) => ({
+          title: 'Message',
+          headerTintColor: '#224585',
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerRight: () => <HeaderShown />,
+        })}
+      />
 
-      
+
+
 
     </Stack.Navigator>
-    
+
   );
 }
 export default MyStack;
@@ -327,5 +356,12 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25,
     resizeMode: 'stretch',
+  },
+  HeaderIcon1: {
+    tintColor: '#9370DB',
+    height: 25,
+    width: 25,
+    resizeMode: 'stretch',
+    marginRight: 5
   },
 });
