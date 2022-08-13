@@ -8,6 +8,7 @@ import {
   ScrollView,
   Alert,
   Image,
+  Pressable,
 } from 'react-native';
 import RNImageToPdf from 'react-native-image-to-pdf';
 import {DraggableGrid} from 'react-native-draggable-grid';
@@ -21,8 +22,8 @@ import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {addImageToDocumentList, pdfDocumentSet} from '../../Store/pdfCreat';
 import moment from 'moment';
-import { LoaderOff, LoaderOn, setSucessFailerMsg } from '../../Store/popup';
-import { Rtext } from '../../CommonComponents/common/Rtext';
+import {LoaderOff, LoaderOn, setSucessFailerMsg} from '../../Store/popup';
+import {Rtext} from '../../CommonComponents/common/Rtext';
 const {height, width} = Dimensions.get('window');
 export const MyTest = props => {
   const dispatch = useDispatch();
@@ -33,7 +34,11 @@ export const MyTest = props => {
   const [pdfArrayIndex, setpdfArrayIndex] = useState(-1);
   const openCamera = () => {
     setDocPicker(false);
-    ImagePicker.openCamera({}).then(image => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
       console.log(image);
       let data = [...imageData];
       data.push({path: image.path, key: 'keys' + imageData.length});
@@ -43,7 +48,12 @@ export const MyTest = props => {
 
   const openGallery = () => {
     setDocPicker(false);
-    ImagePicker.openPicker({}).then(image => {
+    ImagePicker.openPicker({
+
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
       console.log(image);
       let data = [...imageData];
       data.push({path: image.path, key: 'keys' + imageData.length});
@@ -75,53 +85,62 @@ export const MyTest = props => {
   }, [imageData]);
 
   const myAsyncPDFFunction = async () => {
-    dispatch(LoaderOn())
+
+    
+    dispatch(LoaderOn());
     let data = pdfArray[pdfArrayIndex]?.ImageArr?.map((item, index) => {
       console.log('item.path', item.path.split('file://').pop());
 
       return item.path.split('file://').pop();
     });
 
-    console.log('data', data, pdfArray[pdfArrayIndex]);
+    
     try {
       const options = {
-        
         imagePaths: data,
-        name: moment().format('ll') + '.pdf',
+        name: moment().format('MMMM_Do_YYYY_h_mm_ss_a') + '.pdf',
         quality: 0.7,
-        maxSize: { // optional maximum image dimension - larger images will be resized
+        maxSize: {
+          // optional maximum image dimension - larger images will be resized
           width: 900,
-          height: Math.round(height/ width* 900),
+          height: Math.round((height / width) * 900),
         },
       };
-  
-      const pdf = await RNImageToPdf.createPDFbyImages(options).then(() =>{
+
+      const pdf = await RNImageToPdf.createPDFbyImages(options).then(data => {
+        console.log('====================================');
+        console.log('data', data);
+        console.log('====================================');
+
+        dispatch(
+          pdfDocumentSet({
+            name: pdfArray[pdfArrayIndex].name,
+            desc: pdfArray[pdfArrayIndex].desc,
+            imagePath: pdfArray[pdfArrayIndex].ImageArr[0].path,
+            pdfPath: data.filePath,
+          }),
+        );
         setTimeout(() => {
-          dispatch(LoaderOff())
-          dispatch(setSucessFailerMsg({
-            successFailureheaderTxt : "Pdf created",
-            successFailureContent : "please check the Pdf Document in Pdf Document backpack with the Name of " + moment().format('ll') + '.pdf' ,
-            successFailureType : true
-          }))
+          dispatch(LoaderOff());
+          dispatch(
+            setSucessFailerMsg({
+              successFailureheaderTxt: 'Pdf created',
+              successFailureContent:
+                'please check the Pdf Document in Pdf Document backpack with the Name of ' +
+                moment().format('MMMM_Do_YYYY_h_mm_ss_a')+
+                '.pdf',
+              successFailureType: true,
+            }),
+          );
           // state.successFailure = true;
           // state.successFailureheaderTxt = action.payload.successFailureheaderTxt;
           // state.successFailureContent = action.payload.successFailureContent;
           // state.successFailureType = action.payload.successFailureType
         }, 500);
-    
       });
-  
+
       console.log('Generated pdf object', pdf);
       console.log(pdf.filePath);
-
-      dispatch(
-        pdfDocumentSet({
-          name: pdfArray[pdfArrayIndex].name,
-          desc: pdfArray[pdfArrayIndex].desc,
-          imagePath: pdfArray[pdfArrayIndex].ImageArr[0].path,
-          pdfPath: pdf.filePath,
-        }),
-      );
     } catch (e) {
       console.log(e);
       console.log('Generated pdf object err');
@@ -132,7 +151,8 @@ export const MyTest = props => {
       <View style={styles.item} key={item.key + 'dfdsf'}>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate("ImageDetail" , {uri: item.path})
+            // Alert.alert("fdgfd")
+            props.navigation.navigate('ImageDetail', {uri: item.path});
           }}
           style={{
             height: height / 4 - 11,
@@ -144,6 +164,7 @@ export const MyTest = props => {
           }}
           onLongPress={() => {
             setScroll(false);
+            // Alert.alert("fdgfd")
             setTimeout(() => {
               setScroll(true);
             }, 6000);
@@ -157,8 +178,9 @@ export const MyTest = props => {
             }}
             source={{uri: item.path}}
           />
+        
         </TouchableOpacity>
-        <Rtext>Delete Item</Rtext>
+      
       </View>
     );
   };
@@ -216,7 +238,7 @@ export const MyTest = props => {
         </BlurView>
       )}
 
-<TouchableOpacity
+      <TouchableOpacity
         onPress={() => {
           setnamePicker(true);
         }}

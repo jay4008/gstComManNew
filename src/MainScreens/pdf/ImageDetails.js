@@ -25,20 +25,19 @@ const {height, width} = Dimensions.get('window');
 
 import CustomCrop from 'react-native-perspective-image-cropper';
 class ImageDetail extends React.Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state= {
+    this.state = {
       imageWidth: width,
       imageHeight: height,
       initialImage: this.props.route.params.uri,
       rectangleCoordinates: {
         topLeft: {x: 30, y: 30},
-        topRight: {x: width -30, y: 30},
-        bottomRight: {  x:  width -10, y: height - 100  },
-        bottomLeft: { x: 10, y: height - 100},
+        topRight: {x: width - 30, y: 30},
+        bottomRight: {x: width - 10, y: height - 100},
+        bottomLeft: {x: 10, y: height - 100},
       },
-    }
+    };
   }
 
   componentWillMount() {
@@ -49,14 +48,14 @@ class ImageDetail extends React.Component {
         initialImage: this.props.route.params.uri,
         rectangleCoordinates: {
           topLeft: {x: 10, y: 10},
-          topRight: {x: width -10, y: 10},
+          topRight: {x: width - 10, y: 10},
           bottomRight: {x: 10, y: height - 10},
           bottomLeft: {x: 10, y: height - 10},
         },
       });
     });
 
-    console.log("this.props", this.props.route.params.uri)
+    console.log('this.props', this.props.route.params.uri);
   }
   updateImage(image, newCoordinates) {
     this.setState({image, rectangleCoordinates: newCoordinates});
@@ -66,9 +65,9 @@ class ImageDetail extends React.Component {
   }
   render() {
     return (
-      <View style = {{flex : 1}}>
-    
-        <CustomCrop
+      <View style={{flex: 1}}>
+        <Image style={{flex: 1}} source={{uri: this.props.route.params.uri}} />
+        {/* <CustomCrop
           updateImage={this.updateImage.bind(this)}
           rectangleCoordinates={this.state.rectangleCoordinates}
           initialImage={this.state.initialImage}
@@ -84,7 +83,31 @@ class ImageDetail extends React.Component {
         <TouchableOpacity onPress={this.crop.bind(this)}>
 
           <Text>CROP IMAGE</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+
+        <View
+          style={{
+            backgroundColor: Colors.primaryColor,
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            paddingHorizontal: 15,
+          }}>
+          <CusButtom
+            onpress={() => setDocPicker(true)}
+            BTNstyle={{
+              marginBottom: 10,
+              width: width / 2 - 30,
+            }}
+            text={'Delete Images'}
+          />
+          {
+            <CusButtom
+              onpress={() => myAsyncPDFFunction()}
+              BTNstyle={{marginBottom: 10, width: width / 2 - 30}}
+              text={'Retake'}
+            />
+          }
+        </View>
       </View>
     );
   }
