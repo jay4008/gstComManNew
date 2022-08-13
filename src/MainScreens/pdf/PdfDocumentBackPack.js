@@ -28,7 +28,7 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
-import FileViewer from "react-native-file-viewer";
+import FileViewer from 'react-native-file-viewer';
 import {useIsFocused} from '@react-navigation/native';
 import RNFetchBlob from 'rn-fetch-blob';
 var RNFS = require('react-native-fs');
@@ -58,12 +58,10 @@ const PdfDocumentBackPack = props => {
     return (
       <TouchableOpacity
         style={styles.flatlistMainView}
-        onPress={async() => {
-
-          // await FileViewer.open(item?.pdfPath);
+        onPress={async () => {
           props.navigation.navigate('PdfView', {item: item});
         }}>
-        <CustomMenu index={index}  item = {item} />
+        <CustomMenu index={index} item={item} />
         <View style={styles.rowWiseChild}>
           <Image
             source={{uri: item?.imagePath}}
@@ -151,7 +149,7 @@ const PdfDocumentBackPack = props => {
   );
 };
 
-const CustomMenu = ({index = 0 , item}) => {
+const CustomMenu = ({index = 0, item}) => {
   const dispatch = useDispatch();
   return (
     <View style={{position: 'absolute', top: 10, right: 0}}>
@@ -167,45 +165,44 @@ const CustomMenu = ({index = 0 , item}) => {
             }}></Image>
         </MenuTrigger>
         <MenuOptions>
-          <MenuOption onSelect={async() =>{
+          <MenuOption
+            onSelect={async () => {
+              console.log('GET', item.pdfPath);
+              let type = 'application/pdf';
+              // let filePath = null;
+              // let file_url_length = item.pdfPath.length;
+              // const configOptions = { fileCache: true };
+              // RNFetchBlob.config(configOptions)
+              //   .fetch('GET',  item.pdfPath)
+              //   .then(resp => {
+              //     filePath = resp.path();
+              //     return resp.readFile('base64');
+              //   })
 
-            console.log('GET',  item.pdfPath)
-            let type = 'application/pdf';
-            // let filePath = null;
-            // let file_url_length = item.pdfPath.length;
-            // const configOptions = { fileCache: true };
-            // RNFetchBlob.config(configOptions)
-            //   .fetch('GET',  item.pdfPath)
-            //   .then(resp => {
-            //     filePath = resp.path();
-            //     return resp.readFile('base64');
-            //   })
-           
-            var data = await RNFS.readFile(item.pdfPath, 'base64').then(res => { return res });
+              var data = await RNFS.readFile(item.pdfPath, 'base64').then(
+                res => {
+                  return res;
+                },
+              );
 
-            base64Data = `data:${type};base64,` + data;
-            await Share.open({ url: base64Data });
-// try{
-//   await RNFetchBlob.fs.readFile(  item.pdfPath, 'base64' , 1122224443)
-//               .then(async base64Data => {
-//                 console.log('====================================');
-//                 console.log("base64Data",base64Data);
-//                 console.log('====================================');
-//                 base64Data = `data:${type};base64,` + base64Data;
-//                 await Share.open({ url: base64Data });
-//                 // remove the image or pdf from device's storage
-//                 // await RNFS.unlink(filePath);
-//               });
-// }catch(err){
-//   console.log(err)
+              base64Data = `data:${type};base64,` + data;
+              await Share.open({url: base64Data});
+              // try{
+              //   await RNFetchBlob.fs.readFile(  item.pdfPath, 'base64' , 1122224443)
+              //               .then(async base64Data => {
+              //                 console.log('====================================');
+              //                 console.log("base64Data",base64Data);
+              //                 console.log('====================================');
+              //                 base64Data = `data:${type};base64,` + base64Data;
+              //                 await Share.open({ url: base64Data });
+              //                 // remove the image or pdf from device's storage
+              //                 // await RNFS.unlink(filePath);
+              //               });
+              // }catch(err){
+              //   console.log(err)
 
-// }
-            
-
-
-
-            
-          }}>
+              // }
+            }}>
             <Text style={styles.menuOptionTxt}>Share Pdf</Text>
           </MenuOption>
           <MenuOption onSelect={() => dispatch(deleteCollectionPdf(index))}>
@@ -216,7 +213,6 @@ const CustomMenu = ({index = 0 , item}) => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   flatlistMainView: {

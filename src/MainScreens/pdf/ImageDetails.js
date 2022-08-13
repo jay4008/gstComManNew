@@ -84,7 +84,31 @@ class ImageDetail extends React.Component {
         <TouchableOpacity>
 
           <Text>CROP IMAGE</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+
+        <View
+          style={{
+            backgroundColor: Colors.primaryColor,
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            paddingHorizontal: 15,
+          }}>
+          <CusButtom
+            onpress={() => setDocPicker(true)}
+            BTNstyle={{
+              marginBottom: 10,
+              width: width / 2 - 30,
+            }}
+            text={'Delete Images'}
+          />
+          {
+            <CusButtom
+              onpress={() => myAsyncPDFFunction()}
+              BTNstyle={{marginBottom: 10, width: width / 2 - 30}}
+              text={'Retake'}
+            />
+          }
+        </View>
       </View>
     );
   }

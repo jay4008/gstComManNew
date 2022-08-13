@@ -22,6 +22,8 @@ target 'GSTCOMMAN' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'RNPdfScanner', :path => '../node_modules/react-native-document-scanner'
+
   target 'GSTCOMMANTests' do
     inherit! :complete
     # Pods for testing

@@ -4,23 +4,23 @@ import { request } from '../utility/common';
 
 
 
-// const registration = createAsyncThunk(
-//   'registration',
-//   async (data, thunkAPI) => {
-//       console.log('guestUserRegistration', data);
-//     const response = await request('post', "/api/auth/register", data);
-//     return response.data;
-//   },
-// );
+const registration = createAsyncThunk(
+  'registration',
+  async (data, thunkAPI) => {
+      console.log('guestUserRegistration', data);
+    const response = await request('post', "/api/auth/register", data);
+    return response.data;
+  },
+);
 
-// const login = createAsyncThunk(
-//   'login',
-//   async (data, thunkAPI) => {
-//       console.log('guestUserLogin', data);
-//     const response = await request('post', "/api/users/login-user", data);
-//     return response.data;
-//   },
-// );
+const login = createAsyncThunk(
+  'login',
+  async (data, thunkAPI) => {
+      console.log('guestUserLogin', data);
+    const response = await request('post', "/api/users/login-user", data);
+    return response.data;
+  },
+);
 
 const product = createAsyncThunk(
   'product',
@@ -70,5 +70,5 @@ const loginSlice = createSlice({
 });
 
 export const { userLoginSuccess, userLogoutSuccess } = loginSlice.actions;
-export { product};
+export { product , registration , login};
 export default loginSlice.reducer;

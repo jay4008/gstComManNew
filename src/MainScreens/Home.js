@@ -49,14 +49,6 @@ const Home = (props) => {
   const [messagePopUp, setMessagePopup] = useState(false);
   const dispatch = useDispatch();
   const [popUp, setPopUp] = useState(false);
-  console.log('data=========================')
-  console.log('data', Data)
-  console.log('data=========================')
-  console.log('data=========================')
-  // console.log('Catogery',Catogery)
-  console.log('data=========================')
-
-
   useEffect(() => {
     isFocus && 
     dispatch(product())
@@ -148,7 +140,6 @@ const Home = (props) => {
           paddingHorizontal: 8,
           borderRadius: 10,
         }}>
-
         <Image
           style={{
             height: 40,
@@ -159,7 +150,6 @@ const Home = (props) => {
           source={require('../assets/icons/pdf.png')}
         />
       </TouchableOpacity>
-
     </SafeAreaView>
   );
 };
