@@ -39,6 +39,7 @@
     "react-native-modal": "^13.0.1",
     "react-native-pdf": "^6.5.0",
     "react-native-popup-menu": "^0.15.12",
+    "react-native-razorpay": "^2.2.9",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^3.4.0",
     "react-native-share": "^7.6.6",

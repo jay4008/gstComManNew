@@ -22,6 +22,8 @@ target 'GSTCOMMAN' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'react-native-razorpay', :path => '../node_modules/react-native-razorpay'
+
   target 'GSTCOMMANTests' do
     inherit! :complete
     # Pods for testing
