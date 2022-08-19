@@ -92,7 +92,7 @@ const StackNav = () => {
   }, [NetInfo.isConnected]);
   return (
     <View style={{ flex: 1 }}>
-      {true ? <MyStack /> : <AuthStack />}
+      {isUserLoggedIn ? <MyStack /> : <AuthStack />}
       {messagePop && <MessagePopUp />}
       {textInput && <TextInputPopUp />}
 

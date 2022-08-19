@@ -8,7 +8,7 @@ const registration = createAsyncThunk(
   'registration',
   async (data, thunkAPI) => {
       console.log('guestUserRegistration', data);
-    const response = await request('post', "/api/auth/register", data);
+    const response = await request('post', "/api/users/register-user", data);
     return response.data;
   },
 );

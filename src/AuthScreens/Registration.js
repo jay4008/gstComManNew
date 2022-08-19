@@ -53,7 +53,7 @@ const Registration = (props) => {
                     dispatch(setToastMsg("Please enter First name"))
                     return
                 }
-                else if (reg.test(Email) === true) {
+                else if (reg.test(Email) === false) {
                     dispatch(setToastMsg("Please enter a valid Email address"));
                     return
                 }
