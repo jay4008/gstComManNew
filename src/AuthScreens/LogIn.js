@@ -7,11 +7,11 @@ import {Colors, Fonts} from '../assets/common/common';
 import {Ainput} from '../CommonComponents/common/Ainput';
 import {CusButtom} from '../CommonComponents/common/CusButtom';
 import {Rtext} from '../CommonComponents/common/Rtext';
-import {login, userLoginSuccess} from '../Store/auth';
+import {login, setUserTokenInfo, userLoginSuccess} from '../Store/auth';
 import {LoaderOff, LoaderOn, setToastMsg} from '../Store/popup';
 import LoginStyle from '../Styles/Login';
 import AuthFrame from './AuthFrame';
-
+import jwt_decode from 'jwt-decode';
 const LogIn = props => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
@@ -36,9 +36,12 @@ const LogIn = props => {
           onChangeText={setEmail}
           placeholder={'Email'}></Ainput>
         <Ainput
+        secureTextEntry = {true}
           value={Password}
           onChangeText={setPassword}
+          eye = {true}
           placeholder={'Password.'}></Ainput>
+     
         <CusButtom
           onpress={async () => {
             let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -64,6 +67,9 @@ const LogIn = props => {
                   await AsyncStorage.setItem('token', Reqdata?.payload?.token);
                   dispatch(userLoginSuccess());
                   console.log('Reqdata  ==>', Reqdata);
+                  var userData = jwt_decode(Reqdata?.payload?.token.replace('Bearer ', ''));
+                  console.log("data", userData ,);
+                  dispatch(setUserTokenInfo(userData))
                 } else {
                   dispatch(
                     setToastMsg('Please enter correct email or Password .'),
@@ -83,15 +89,18 @@ const LogIn = props => {
               });
           }}
           text={'LogIn'}></CusButtom>
-        <View style={LoginStyle.ViewToMarginTen}>
+    
+    <View style={LoginStyle.ViewToMarginTen}>
           <Rtext
             style={LoginStyle.ForgetPassword}
-            onPress={() => props.navigation.navigate('LoginEmail')}>
-            {' '}
-            <Rtext style={{color: Colors.bule}}>Login With </Rtext>: Email
-            Address ?
-          </Rtext>
+            onPress={() => props.navigation.navigate('ForgotEmail')}>
+       Forgot Password 
+            </Rtext>
+
+         
+        
         </View>
+  
       </AuthFrame>
     </>
   );

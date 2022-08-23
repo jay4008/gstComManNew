@@ -36,9 +36,11 @@ const product = createAsyncThunk(
 const loginSlice = createSlice({
   name: 'auth',
   initialState: {
+    userData :{},
     token: null,
     isUserLoggedIn: false,
-    productList:{}
+    productList:{},
+    userTokenInfo: {}
   },
 
   reducers: {
@@ -47,6 +49,11 @@ const loginSlice = createSlice({
       state.token = "gfh"
     },
 
+
+    setUserTokenInfo: (state , action) => {
+      state.userTokenInfo = action.payload;
+     
+    },
     userLogoutSuccess: (state) => {
       state.isUserLoggedIn = false;
       state.token = null;
@@ -66,9 +73,19 @@ const loginSlice = createSlice({
     [product.rejected]: (state, action) => {
       console.log('Rejected data',action)
     },
+
+    [login.fulfilled]: (state, action) => {
+      state.userData=action.payload;
+      console.log('fullfilldata',state.productList)
+    },
+    [login.pending]: (state, action) => {
+    },
+    [login.rejected]: (state, action) => {
+      console.log('Rejected data',action)
+    },
   },
 });
 
-export const { userLoginSuccess, userLogoutSuccess } = loginSlice.actions;
+export const { userLoginSuccess, userLogoutSuccess , setUserTokenInfo } = loginSlice.actions;
 export { product , registration , login};
 export default loginSlice.reducer;

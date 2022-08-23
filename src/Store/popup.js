@@ -53,6 +53,16 @@ const Slice = createSlice({
           ? action.payload.btnBackgroundColor
           : Colors.primaryColor);
     },
+
+
+    // USEAGES
+    // dispatch(messagePopUpActions({
+    //   headerText:"WELCOME",
+    //   headerColor: Colors.primaryColor ,
+    //   desc : "SOMETHING OK" ,
+    //   butnTxt : "OK"
+
+    // }))
     setToastMsgToNUll: (state, action) => {
       state.message = '';
     },

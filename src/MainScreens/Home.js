@@ -55,36 +55,34 @@ const Home = (props) => {
 
   }, []);
 
-  // const ApicallOfTodos = async () => {
-  //   try {
-  //     let Reqdata = await request('get', '/todos');
-  //     console.log('datadatadatadatadatadata', Reqdata.data);
-  //   } catch (e) {
-  //     console.log('datadatadatadatadatadata', e);
-  //   }
-  // };
-
-  // useEffect(() => {
-  // ApicallOfTodos();
-  // dispatch(commentsApi());
-  // dispatch(Koushik({
-
-  // }));
-  // dispatch(HomeTodosApi1({
-  //   username:'koushik',
-  //   email:'sham@gmail.com',
-  //   password:'12345',
-  //   ph:'9865430934',
-  //   dob:'23-12-2021'
-  // }));
-  // dispatch(Api2());
-  //   dispatch(product())
-
-  // }, []);
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity
+      <View>
+        {
+          item?.help  ? <TouchableOpacity
+          style={styles.flatlistMainView}
+          onPress={() => {
+  
+            props.navigation.navigate('GstMenu', { item: item });
+  
+          }}>
+          <View style={styles.rowWiseChild}>
+            <Image source={require('../assets/icons/help.png')} style={styles.flatListIconStyle} />
+            <View>
+              <Rtext>{"Help"}</Rtext>
+              <Rtext
+                style={{
+                  width: width - 140,
+                  fontSize: 12,
+                  color: 'silver',
+                  marginTop: 5,
+                }}>
+                   {"Frequently Asked Question"}
+              </Rtext>
+            </View>
+          </View>
+        </TouchableOpacity> :  <TouchableOpacity
         style={styles.flatlistMainView}
         onPress={() => {
 
@@ -92,9 +90,9 @@ const Home = (props) => {
 
         }}>
         <View style={styles.rowWiseChild}>
-          <Image source={require('../assets/icons/gst.png')} style={styles.flatListIconStyle} />
+          <Image source={require('../assets/icons/product.png')} style={styles.flatListIconStyle} />
           <View>
-            <Rtext>{item?.name}</Rtext>
+            <Rtext>{item?.name} </Rtext>
             <Rtext
               style={{
                 width: width - 140,
@@ -102,11 +100,14 @@ const Home = (props) => {
                 color: 'silver',
                 marginTop: 5,
               }}>
-              {item?.desc}
+           {item?.desc}
             </Rtext>
           </View>
         </View>
       </TouchableOpacity>
+        }
+      </View>
+     
     );
   };
   return (
@@ -123,7 +124,7 @@ const Home = (props) => {
 
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={Data}
+        data={[...Data , {help : true}]}
         renderItem={renderItem}
         keyExtractor={(item) => item._id}
       />
@@ -170,6 +171,7 @@ const styles = StyleSheet.create({
     width: 64,
     resizeMode: 'contain',
     marginHorizontal: 15,
+    tintColor : Colors.primaryColor
   },
   absolute: {
     position: 'absolute',

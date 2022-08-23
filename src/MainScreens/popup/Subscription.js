@@ -18,14 +18,14 @@ import { messagePopUpClose } from "../../Store/popup";
 const { width } = Dimensions.get('window');
 const Subscription = ({setShowModal , selectedData}) => {
     return (
-        <Modal isVisible={true} backdropColor={Colors.tranparentBlack} >
+        <Modal isVisible={true}  >
             <View style={{ flex: 1, justifyContent: 'center', borderRadius: 10, }}>
-                <View style={{ paddingVertical: 30, backgroundColor: Colors.white, borderRadius: 30, backgroundColor: Colors.black, }}>
+                <View style={{ paddingVertical: 30, backgroundColor: Colors.white, borderRadius: 30,  }}>
                 <CusButtom onpress={() => {
                             setShowModal(false)
                         }} BTNstyle={{ position : 'absolute' , top : 10 , right : 20 ,paddingHorizontal : 5 , paddingVertical : 5 }} text={"Premium"}></CusButtom>
 
-                    <Rtext style={ {marginLeft : 30 , color : Colors.white , fontFamily : Fonts.latoBold , marginBottom : 20, fontSize : 18 , width : 180}}>{selectedData.name}</Rtext>
+                    <Rtext style={ {marginLeft : 30 , color : Colors.mainblue , fontFamily : Fonts.latoBold , marginBottom : 20, fontSize : 18 , width : 180}}>{selectedData.name}</Rtext>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginBottom: 30, }}>
                         <Image source={require('../../assets/icons/subscription.png')} style={{ height: 50, width: 50, resizeMode: 'contain', }} />
                         <View>
