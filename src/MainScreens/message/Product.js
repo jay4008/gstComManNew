@@ -168,7 +168,7 @@ const Chat = props => {
       </TouchableOpacity>
       <View>
         {
-          showModal && <MessgePopUp setShowModal={setShowModal}  />
+          showModal && <MessgePopUp setShowModal={setShowModal} />
         }
       </View>
     </View>

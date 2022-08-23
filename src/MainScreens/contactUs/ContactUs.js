@@ -1,28 +1,89 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, SafeAreaView, Linking , StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { useDispatch } from 'react-redux'
 import { Colors, Fonts } from '../../assets/common/common'
 import { Ainput } from '../../CommonComponents/common/Ainput'
 import { CusButtom } from '../../CommonComponents/common/CusButtom'
 import { Rtext } from '../../CommonComponents/common/Rtext'
-
+import { setToastMsg } from '../../Store/popup'
+import { contactus } from '../../Store/auth'
 
 const ContactUs = () => {
+    const [name,setName]=useState('')
+    const [email,setEmail]=useState('')
+    const [subject,setSubject]=useState('')
+    const [message,setMessage]=useState('')
+    const[it,setIt]=useState('')
+
+    const dispatch=useDispatch()
+
     return (
         <SafeAreaView style={{ flex: 1, marginHorizontal: 10 }}>
             <KeyboardAwareScrollView showsVerticalScrollIndicator = {false} style={{ flex: 1 }}>
                 <View style={{ paddingVertical: 10, paddingHorizontal: 10 }}>
                     <Rtext style={{ fontFamily: Fonts.latoBold , fontSize : 20 }}>Get In Touch</Rtext>
                 </View>
-                <Ainput placeholder={'Name'}></Ainput>
-                <Ainput placeholder={'Email'}></Ainput>
-                <Ainput placeholder={'Subject'}></Ainput>
-                <Ainput placeholder={"Message"} style={{ height: 120, textAlignVertical: "top" }} multiline={true} />
+                <Ainput value={name} onChangeText={setName} placeholder={'Name'}></Ainput>
+                <Ainput value={email} onChangeText={setEmail}  placeholder={'Email'} 
+                    keyboardType={'email-address'}
+                />
+                <Ainput value={subject} onChangeText={setSubject}  placeholder={'Subject'}></Ainput>
+                <Ainput value={message} onChangeText={setMessage}  placeholder={"Message"} style={{ height: 120, textAlignVertical: "top" }} multiline={true} />
                 <TouchableOpacity>
-                    <Ainput editable={false} placeholder={'Select Information Type'}></Ainput>
+                    <Ainput value={it} onChangeText={setIt} placeholder={'Select Information Type'}></Ainput>
                 </TouchableOpacity>
 
-                <CusButtom BTNstyle={{ backgroundColor: Colors.primaryColor }} text={'Submit'} />
+                <CusButtom BTNstyle={{ backgroundColor: Colors.primaryColor }} text={'Submit'} 
+                onpress={()=>{
+                    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+                    if (name.length < 2) {
+                        dispatch(setToastMsg("Please enter First name"))
+                        return
+                    }
+                    else if (reg.test(email) === false) {
+                        dispatch(setToastMsg("Please enter a valid Email address"));
+                        return
+                    }
+                    
+                    else if (subject.length < 2 )
+                    {
+                        dispatch(setToastMsg("Please enter a valid Subject"));
+                        return
+                    }
+                    else if (message.length < 2 )
+                     {
+                        dispatch(setToastMsg("Please enter a valid message"));
+                        return  
+                     }
+                     else if (it.length < 2 )
+                     {
+                        dispatch(setToastMsg("Please enter Correct Information"));
+                        return  
+                     }
+                     dispatch(contactus({
+                        "name":name,
+                        "email":email,
+                        "subject":subject,
+                        "message":message,
+                        "informationType":it 
+                     })).then(()=>{
+
+                            dispatch(setToastMsg('Thank you !! for your information'));
+                            return
+
+                     })
+
+                
+                
+                }}
+                
+                
+                
+                
+                
+                
+                />
                 <View style={{ paddingVertical: 20, backgroundColor: Colors.white, marginTop: 20, paddingHorizontal: 10, borderRadius: 10 }}>
                     <Rtext style={{ fontFamily: Fonts.latoBlack }}>Contact Us</Rtext>
                     <View style={{ height: 1, width: "100%", backgroundColor: Colors.silver, marginTop: 10 }} />

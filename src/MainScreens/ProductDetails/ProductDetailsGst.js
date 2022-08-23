@@ -27,7 +27,15 @@ const ProductDetailsGst = (props) => {
   const [showModal, setShowModal] = useState(false);
   console.log("props", props.route.params);
   const [gstAmt, setGstAmt] = useState("");
- 
+
+  const[couponData,setcouponData]=useState('')
+  
+  const value=props.route.params;
+  console.log('value==============',value)
+  const getdata=(data)=>{
+    setcouponData(data)
+    }
+console.log('data',couponData)
   return (
     <ImageBackground
       style={{
@@ -140,12 +148,11 @@ const ProductDetailsGst = (props) => {
         </View>
         <View style={{ flexDirection: 'row', marginHorizontal: 15, marginVertical: 15 }}>
           {
-            price !== "" && <Rtext style={{ width: "100%" }}> You have to pay {price === "" ? "" : parseInt(price) * (index === 1 ? 1 : (index === 2 ? 4 : 12))} rs {index === 1 ? " for monthly Suscription " : index === 2 ? "for quaterly Suscription " : "for yealy Suscription"}</Rtext>
-          }
-
-
+            price !== "" && <Rtext style={{ width: "100%" }}> You have to pay {price === "" ? "" : parseInt(price) * (index === 1 ? 1 : (index === 2 ? 4 : 12))-couponData} rs {index === 1 ? " for monthly Suscription " : index === 2 ? "for quaterly Suscription " : "for yealy Suscription"}</Rtext>
+          }       
 
         </View>
+       
         <View style={{ marginHorizontal: 15 }}>
           <CusButtom text={"Apply Coupon or Promo Code"}
             onpress={() =>
@@ -165,9 +172,16 @@ const ProductDetailsGst = (props) => {
               //     console.log('Reqdata  ==>',e);
               //   })
 
-               props.navigation.navigate('CouponCode')
+               props.navigation.navigate('CouponCode',{getdata:getdata})
             }
           />
+
+          {/* <CusButtom title={'Submit'}
+          onpress={()=>
+          console.log('data',couponData)
+          }
+          /> */}
+
         </View>
       </KeyboardAwareScrollView>
 

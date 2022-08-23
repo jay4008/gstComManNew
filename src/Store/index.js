@@ -9,7 +9,8 @@ import authReducer from './auth';
 import homeReducer from './home';
 import popupReducer from './popup';
 import pdfCreatReducer from './pdfCreat';
-import couponReducer from './coupon'
+import couponReducer from './coupon';
+import subscriptionReducer from './subscription'
 
 const middlewareState = [
   ...getDefaultMiddleware({
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   home: homeReducer,
   popup: popupReducer,
   pdfCreat: pdfCreatReducer,
-  coupon:couponReducer
+  coupon:couponReducer,
+  subscription:subscriptionReducer
 });
 
 const persistConfig = {
