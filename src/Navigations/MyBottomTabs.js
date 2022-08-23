@@ -7,6 +7,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Order from '../MainScreens/profile/Order';
 import ContactUs from '../MainScreens/contactUs/ContactUs';
+import MySubscription from '../MainScreens/subscription/MySubscription';
 
 
 const Tab = createBottomTabNavigator();
@@ -27,8 +28,8 @@ function MyBottomTabs() {
           ),
         }}
 />
-      <Tab.Screen name="Settings" component={Home}     options={{
-          tabBarLabel: 'Settings',
+      <Tab.Screen name="Subscription" component={MySubscription}     options={{
+          tabBarLabel: 'Subscription',
           tabBarIcon: ({ color }) => (
             <AntDesign name="profile" color={color} size={26} />
           ),

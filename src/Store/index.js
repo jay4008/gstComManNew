@@ -11,6 +11,7 @@ import popupReducer from './popup';
 import pdfCreatReducer from './pdfCreat';
 import couponReducer from './coupon'
 import message from './message'
+import subscriptionReducer from './subscription'
 
 const middlewareState = [
   ...getDefaultMiddleware({
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   popup: popupReducer,
   pdfCreat: pdfCreatReducer,
   coupon:couponReducer,
-  message :message
+  message :message,
+  subscription:subscriptionReducer
 });
 
 const persistConfig = {

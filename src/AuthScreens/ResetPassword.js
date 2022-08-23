@@ -14,6 +14,7 @@ const ResetPassword = (props) =>{
                 }}>
                 Reset Password
             </Rtext>
+            <Ainput placeholder = {"Email or Ph No "}></Ainput>
             <Ainput placeholder = {"Password "}></Ainput>
             <Ainput placeholder = {"Confirm Password"}></Ainput>
             <CusButtom text = {"SUBMIT"} onpress = {() => props.navigation.navigate('LogIn')}></CusButtom>

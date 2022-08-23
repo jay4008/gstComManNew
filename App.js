@@ -39,6 +39,10 @@ import TextInputPopUp from './src/MainScreens/popup/TextInputPopUp';
 import CustomToast from './src/MainScreens/popup/CustomToast';
 import SucessOrFailure from './src/MainScreens/popup/SucessOrFailure';
 import Loader from './src/MainScreens/popup/Loader';
+import MySubscription from './src/MainScreens/subscription/MySubscription';
+
+
+
 const { width } = Dimensions.get('window');
 // import RootDrawerNav from './src/Navigations/RootDrawerNav';
 const App = () => {
@@ -69,6 +73,8 @@ const App = () => {
         <Provider store={store}>
           <MenuProvider>
             <StackNav />
+            {/* <AuthStack/> */}
+            {/* <MySubscription/> */}
           </MenuProvider>
         </Provider>
 
