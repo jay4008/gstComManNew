@@ -7,6 +7,7 @@ import { getCoupon } from '../../Store/coupon';
 // import { dispatch } from 'jest-circus/build/state';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import RazorpayCheckout from 'react-native-razorpay';
 
 
 const CouponCode = (props) => {
@@ -30,11 +31,33 @@ const CouponCode = (props) => {
 }
 
 const RenderItem = ({ item, props }) => {
+const   makePayment=()=>{
+    var options = {
+        description: 'Credits towards consultation',
+        image: 'https://i.imgur.com/3g7nmJC.png',
+        currency: 'INR',
+        key: 'rzp_test_GQvvt2m7UTpdIw', // Your api key
+        amount: '5000',
+        name: 'TechnoPlat',
+        prefill: {
+          email: 'Shouvik@razorpay.com',
+          contact: '8961700942',
+          name: 'Razorpay Software'
+        },
+        theme: {color: '#F37254'}
+      }
+      RazorpayCheckout.open(options).then((data) => {
 
+
+        // handle success
+        alert(`Payment Successfull: ${data.razorpay_payment_id}`);
+      }).catch((error) => {
+        // handle failure
+        alert(`Error: ${error.code} | ${error.description}`);
+      });
+}
     return (
-        <TouchableOpacity onPress={() => {
-            props.navigation.goBack();
-        }}>
+        <TouchableOpacity onPress={makePayment}>
             <View style={{ flex: 1, alignItems: "center", width: "100%", borderRadius: 15 }}>
                 <View style={styles.card}>
                     <View style={styles.offer}>
