@@ -15,7 +15,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Colors } from '../../assets/common/common';
 import { Fonts } from '../../assets/common/common';
 import { Rtext } from '../../CommonComponents/common/Rtext';
+import { messagePopUpActions } from '../../Store/popup';
+import InputMsg from '../popup/InputMessage';
 import MessgePopUp from '../popup/MessagePopUp';
+import jwt_decode from 'jwt-decode';
+import { useIsFocused } from '@react-navigation/native';
+import { getMsg } from '../../Store/message';
+import moment from 'moment';
 // import {Rtext} from '../../CommonComponents/common/Rtext';
 // import {getSuperAdmin} from '../../Store/auth';
 // import PushNotification from 'react-native-push-notification';
@@ -127,22 +133,71 @@ const { height, width } = Dimensions.get('window');
 
 
 const Chat = props => {
+  const userTokenInfo = useSelector(state => state.auth.userTokenInfo)
+  const messagesAll = useSelector(state => state.message.messagesAll)
+  const dispatch = useDispatch()
   // const dispatch=useDispatch();
+
+const isFocus = useIsFocused()
+  useEffect(() =>{
+dispatch(getMsg({
+  userid: userTokenInfo.userId
+}))
+  },[isFocus])
   const [showModal, setShowModal] = useState(false);
+
+console.log('====================================');
+console.log(messagesAll);
+console.log('====================================');
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          //   haldleNotification(item);
+          props.navigation.navigate('message')
+        }}
+        style={styles.click}>
+        <View style={{ flexDirection: 'row' }}>
+          <Image
+            style={styles.Img}
+            source={require('../../assets/icons/feedback.png')}
+          />
+          <View>
+            <View style={styles.card}>
+              {/* <Image style={{ height: 20, width: 20 }} source={require('../../assets/icons/profile.png')} />   */}
+              <Rtext style={styles.name}>{item.userName}</Rtext>
+              <Rtext style={{ color: Colors.silver , marginRight : 40 , fontSize : 12 }}>{moment(item.updatedAt).format('l')}</Rtext>
+            </View>
+            <View>
+              <Rtext style={{ marginTop: 7, color: Colors.silver }}>
+                {item.message}
+              </Rtext>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+  
   return (
     <View style={{ flex: 1, backgroundColor: Colors.white }}>
       {/* <CommonHeader Title='Posts' /> */}
       <FlatList
         style={styles.flatlistMainView}
         showsVerticalScrollIndicator={false}
-        data={DATA}
+        data={[...messagesAll]}
         renderItem={renderItem}
         
       />
       <TouchableOpacity
         onPress={() => {
+          console.log('====================================');
+          // var userData = jwt_decode(data.replace('Bearer ', ''));
+          console.log("data", userTokenInfo.userId ,);
+          console.log('====================================');
           //props.navigation.navigate('DocList');
           //dispatch(MessgePopUp())
+        
           setShowModal(true)
         }}
         style={{
@@ -163,44 +218,15 @@ const Chat = props => {
             resizeMode: 'contain',
             tintColor: Colors.white,
           }}
-          source={require('../../assets/icons/like.png')}
+          source={require('../../assets/icons/message.png')}
         />
       </TouchableOpacity>
       <View>
-        {
-          showModal && <MessgePopUp setShowModal={setShowModal}  />
-        }
+        
+         <InputMsg userId = {userTokenInfo.userId} showModal = {showModal} setShowModal={setShowModal}  />
+        
       </View>
     </View>
-  );
-};
-const renderItem = ({ item }) => {
-  return (
-    <TouchableOpacity
-      onPress={() => {
-        //   haldleNotification(item);
-        props.navigation.navigate('message')
-      }}
-      style={styles.click}>
-      <View style={{ flexDirection: 'row' }}>
-        <Image
-          style={styles.Img}
-          source={item.img}
-        />
-        <View>
-          <View style={styles.card}>
-            {/* <Image style={{ height: 20, width: 20 }} source={require('../../assets/icons/profile.png')} />   */}
-            <Rtext style={styles.name}>{item.name}</Rtext>
-            <Rtext style={{ color: Colors.silver }}>{item.time}</Rtext>
-          </View>
-          <View>
-            <Rtext style={{ marginTop: 7, color: Colors.silver }}>
-              {item.mess}
-            </Rtext>
-          </View>
-        </View>
-      </View>
-    </TouchableOpacity>
   );
 };
 
@@ -223,6 +249,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     borderRadius: 50,
     marginHorizontal: 10,
+    tintColor : Colors.primaryColor,
     //backgroundColor: Colors.lightSilver,
     // tintColor: Colors.primaryColor
     alignSelf: 'center',
@@ -250,7 +277,15 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     justifyContent: 'space-evenly',
+    marginRight : 15,
     // padding: 10,
     //alignItems: "center"
+  },
+  icon: {
+    height: 24,
+    width: 24,
+    resizeMode: 'contain',
+    marginRight: 10,
+    tintColor: Colors.white,
   },
 });

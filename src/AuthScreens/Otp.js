@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { View, Alert, BackHandler } from 'react-native';
+import {View, Alert, BackHandler} from 'react-native';
 import {
   CodeField,
   Cursor,
@@ -8,17 +7,17 @@ import {
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 import AuthFrame from './AuthFrame';
-import { Ainput } from "../CommonComponents/common/Ainput";
-import { CusButtom } from "../CommonComponents/common/CusButtom";
-import { Rtext } from "../CommonComponents/common/Rtext";
-import { useDispatch } from 'react-redux';
-import { userLoginSuccess } from '../Store/auth';
-const Verification = (prop) => {
-  const [timeLeft, setTimeLeft] = React.useState(10);
+import {Ainput} from '../CommonComponents/common/Ainput';
+import {CusButtom} from '../CommonComponents/common/CusButtom';
+import {Rtext} from '../CommonComponents/common/Rtext';
+import {useDispatch} from 'react-redux';
+import {userLoginSuccess} from '../Store/auth';
+const Verification = prop => {
+  const [timeLeft, setTimeLeft] = React.useState(30);
   const [resendHide, setResendHide] = React.useState(false);
   const CELL_COUNT = 5;
   const dispatch = useDispatch();
-  const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
+  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const [value, setValue] = React.useState('');
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -31,13 +30,12 @@ const Verification = (prop) => {
         onPress: () => null,
         style: 'cancel',
       },
-      { text: 'YES', onPress: () => prop.navigation.goBack() },
+      {text: 'YES', onPress: () => prop.navigation.goBack()},
     ]);
     return true;
   };
 
-  const otpVerify = () => {
-  };
+  const otpVerify = () => {};
   React.useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', backAction);
     return () =>
@@ -66,32 +64,33 @@ const Verification = (prop) => {
         {' '}
         Verification code
       </Rtext>
-      <View style={{
-        borderRadius: 10, borderColor: 'silver',
+      <View
+        style={{
+          borderRadius: 10,
+          borderColor: 'silver',
 
-        shadowColor: '#000',
-        backgroundColor: '#fff',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        padding: 20,
-        borderWidth: 0.1,
-        elevation: 2,
-        position: 'relative'
-      }}>
+          shadowColor: '#000',
+          backgroundColor: '#fff',
+          shadowOffset: {width: 0, height: 2},
+          shadowOpacity: 0.2,
+          padding: 20,
+          borderWidth: 0.1,
+          elevation: 2,
+          position: 'relative',
+        }}>
         <CodeField
           ref={ref}
           {...props}
           value={value}
           onChangeText={setValue}
           cellCount={4}
-
-          rootStyle={{ marginVertical: 10, justifyContent: 'space-evenly' }}
+          rootStyle={{marginVertical: 10, justifyContent: 'space-evenly'}}
           keyboardType="number-pad"
           textContentType="oneTimeCode"
-          renderCell={({ index, symbol, isFocused }) => (
+          renderCell={({index, symbol, isFocused}) => (
             <Rtext
               key={index}
-              style={[
+              style={
                 {
                   width: 50,
                   height: 50,
@@ -102,9 +101,9 @@ const Verification = (prop) => {
                   borderColor: '#D4D4D4',
                   textAlign: 'center',
                   borderRadius: 5,
-                },
-                isFocused && { borderColor: '#000' },
-              ]}
+                }
+                // isFocused && { borderColor: '#000' },
+              }
               onLayout={getCellOnLayoutHandler(index)}>
               {symbol || (isFocused ? <Cursor /> : null)}
             </Rtext>
@@ -116,28 +115,31 @@ const Verification = (prop) => {
             justifyContent: 'space-between',
             marginTop: 10,
           }}>
-          <Rtext style={{ color: "#224585", fontSize: 13, marginLeft: 15, }}>
+          <Rtext style={{color: '#224585', fontSize: 13, marginLeft: 15}}>
             {timeLeft == 0 ? '' : timeLeft}
           </Rtext>
           {resendHide ? (
             <Rtext
-              style={{ color: "#224585", fontSize: 13, marginRight: 15, }}
+              style={{color: '#224585', fontSize: 13, marginRight: 15}}
               onPress={() => {
-                setTimeLeft(10), setResendHide(false);
+                setTimeLeft(30), setResendHide(false);
               }}>
               {'Resend'}
             </Rtext>
           ) : (
-            <Rtext style={{ color: "#000", fontSize: 13, marginLeft: 15, }}>{'Resend'}</Rtext>
+            <Rtext style={{color: '#000', fontSize: 13, marginLeft: 15}}>
+              {'Resend'}
+            </Rtext>
           )}
         </View>
       </View>
       <CusButtom
         text={'Submit'}
-        textStyle={{ color: '#fff' }}
+        textStyle={{color: '#fff'}}
         onpress={() => {
-          dispatch(userLoginSuccess());
-        }  }></CusButtom>
+          prop.navigation.navigate('ResetPassword')
+          // dispatch(userLoginSuccess());
+        }}></CusButtom>
     </AuthFrame>
   );
 };

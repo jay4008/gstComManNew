@@ -28,6 +28,42 @@ const ProductDetailsGst = (props) => {
   console.log("props", props.route.params);
   const [gstAmt, setGstAmt] = useState("");
  
+
+
+
+    const makepayment=()=>{
+        
+
+        var options = {
+            description: 'Credits towards consultation',
+            image: 'https://cdn-icons-png.flaticon.com/800/7207/7207388.png',
+            currency: 'INR',
+            key: 'rzp_test_GQvvt2m7UTpdIw', // Your api key
+            amount: '1000',
+            name: 'TechnoPlat',
+            prefill: {
+              email: 'void@razorpay.com',
+              contact: '9191919191',
+              name: 'Razorpay Software'
+            },
+            theme: {color: '#F37254'}
+          }
+          RazorpayCheckout.open(options).then((data) => {
+            //const [flag,setflag]=useState(false);
+            // handle success
+        //alert(`Success: ${data.razorpay_payment_id}`);
+           // setflag=true
+            console.log('Data================================>',data);
+             //console.log('Data================================>',setflag);
+            // console.log('Data================================>',prefill.name);
+          }).catch((error) => {
+            // handle failure
+            //setflag=false
+            alert(`Error: ${error.code} | ${error.description}`);
+          });
+    }
+
+    
   return (
     <ImageBackground
       style={{
@@ -201,7 +237,7 @@ const ProductDetailsGst = (props) => {
             backgroundColor: Colors.white,
           }}
           textStyle={{ color: Colors.mainblue }}
-          text={'Suscribe'}
+          text={'Purchase'}
         />
       </View>
 

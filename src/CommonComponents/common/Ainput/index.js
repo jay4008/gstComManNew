@@ -19,18 +19,16 @@ const Ainput = ({
   onBlur = () => { },
   containerStyle,
   placeholder = '',
-  onPressDate,
   numberOfLines = 1,
   secureTextEntry = false,
   editable = true,
-  border = '#76A8C8',
   style = {},
-  view = false,
   onFocus,
-  calender,
   image = false,
+  eye = false,
   source , keyboardType = 'default'
 }) => {
+
   const [lcSecureTextEntry, setLcSecureTextEntry] = useState(secureTextEntry);
   return (
     <View style={{ ...styles.containerStyle, ...containerStyle }}>
@@ -68,34 +66,18 @@ const Ainput = ({
         keyboardType = { keyboardType  }
         secureTextEntry={lcSecureTextEntry}
       />
-      {view ? (
-        <TouchableOpacity
-          style={styles.searchIcon}
-          onPress={() => {
-            setLcSecureTextEntry(!lcSecureTextEntry);
-          }}>
-          {/* {lcSecureTextEntry ? (
-            // <Ionicons name="ios-eye" color="gray" size={26}></Ionicons>
-            <Image
-              style={{height: 20, width: 20, resizeMode: 'stretch'}}
-              source={require('../../../assets/icons/invisible.png')}
-            />
-          ) : (
-            <Image
-              style={{height: 20, width: 20, resizeMode: 'stretch'}}
-              source={require('../../../assets/icons/visibility.png')}
-            />
-          )} */}
-        </TouchableOpacity>
-      ) : null}
+  
+  {
+    eye &&<TouchableOpacity style = {{position : 'absolute' , top : 10 , right : 10}} onPress = {() => setLcSecureTextEntry(prev => !prev)}>
+      {
+        lcSecureTextEntry ? <Image style = {styles.icon} source = {require('../../../assets/icons/eye.png')}/> : 
+        <Image style = {styles.icon} source = {require('../../../assets/icons/eyeclose.png')}/>
+      }
+  
+  </TouchableOpacity>
+  }
 
-      {/* {calender ? (
-        <TouchableOpacity style={styles.searchIcon} onPress={onPressDate}>
-          <Image
-            style={{height: 25, width: 25, resizeMode: 'stretch'}}
-            source={require('../../../assets/icons/date.png')}></Image>
-        </TouchableOpacity>
-      ) : null} */}
+   
     </View>
   );
 };
@@ -152,6 +134,15 @@ const styles = StyleSheet.create({
     left: 15,
     top: 12,
   },
+  icon: {
+    height: 24,
+    width: 24,
+    resizeMode: 'contain',
+    marginRight: 10,
+    tintColor: Colors.black,
+  },
 });
+
+
 
 export { Ainput };

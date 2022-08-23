@@ -80,7 +80,7 @@ export const request = async (method, url, data = {}) => {
     // } catch (error) {
     //   console.log('upload error', error);
     // }
-  } else base = instance.get(url, { params: data });
+  } else base = instance.get(url, headerObj, data );
 
 
   // store.dispatch(LoaderOff())

@@ -10,6 +10,9 @@ import LoginEmail from '../AuthScreens/LoginEmail';
 import Verification from '../AuthScreens/Otp';
 import ResetPassword from '../AuthScreens/ResetPassword';
 import Registration from '../AuthScreens/Registration';
+import LoginOptions from '../AuthScreens/LoginOptions';
+import ForgotEmail from '../AuthScreens/ForgotEmail';
+
 const headerOptionForStackPage = {
     headerStyle: {
       backgroundColor: '#fff',
@@ -24,12 +27,14 @@ const Stack = createNativeStackNavigator();
 
 function AuthStack() {
   return (
-    <Stack.Navigator screenOptions = {headerOptionForStackPage} initialRouteName = {'LogIn'}>
+    <Stack.Navigator screenOptions = {headerOptionForStackPage} initialRouteName = {'LoginOptions'}>
       <Stack.Screen name="LogIn" component={LogIn} />
       <Stack.Screen name="LoginEmail" component={LoginEmail} />
       <Stack.Screen name="Verification" component={Verification} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />
       <Stack.Screen name="Registration" component={Registration} />
+      <Stack.Screen name="LoginOptions" component={LoginOptions} />
+      <Stack.Screen name="ForgotEmail" component={ForgotEmail} />
     </Stack.Navigator>
   );
 }
