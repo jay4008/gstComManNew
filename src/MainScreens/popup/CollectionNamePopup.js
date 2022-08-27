@@ -38,12 +38,13 @@ const CollectionNamePopUP = ({
             paddingHorizontal: 20,
             alignItems: 'center',
             borderRadius: 10,
+            
           }}>
           <Rtext
             style={{
               color: Colors.primaryColor,
               fontSize: 18,
-              alignSelef: 'center',
+              alignSelf: 'center',
               marginBottom: 10,
             }}>
             {headerText}

@@ -16,9 +16,6 @@ const getCoupon = createAsyncThunk(
 );
 
 
-//https://gstcomman.herokuapp.com/api/coupon/coupon
-
-
 const userSlice = createSlice({
     name: 'coupon',
     initialState: {

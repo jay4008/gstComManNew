@@ -29,7 +29,7 @@ const dispatch = useDispatch()
         <Modal isVisible={true} backdropColor={Colors.tranparentBlack} >
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }}>
                 <View style={{ paddingVertical: 30, width: "100%", backgroundColor: Colors.white, paddingHorizontal: 20, alignItems: 'center', borderRadius: 10 }}>
-                    <Rtext style={{ color: headerColor, fontSize: 18, alignSelef: 'center', borderBottomWidth: 1, borderBottomColor: headerColor, marginBottom: 10 }}>{headerText}</Rtext>
+                    <Rtext style={{ color: headerColor, fontSize: 18, alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: headerColor, marginBottom: 10 }}>{headerText}</Rtext>
 
                     <Rtext>{desc}</Rtext>
             

@@ -92,7 +92,12 @@ const Home = (props) => {
         <View style={styles.rowWiseChild}>
           <Image source={require('../assets/icons/product.png')} style={styles.flatListIconStyle} />
           <View>
-            <Rtext>{item?.name} </Rtext>
+            <Rtext 
+             style={{
+              width: width - 150,
+            }}
+            >
+              {item?.name} </Rtext>
             <Rtext
               style={{
                 width: width - 140,

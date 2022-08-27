@@ -133,28 +133,29 @@ const { height, width } = Dimensions.get('window');
 
 
 const Chat = props => {
+
   const userTokenInfo = useSelector(state => state.auth.userTokenInfo)
   const messagesAll = useSelector(state => state.message.messagesAll)
   const dispatch = useDispatch()
   // const dispatch=useDispatch();
-
-const isFocus = useIsFocused()
-  useEffect(() =>{
-dispatch(getMsg({
-  userid: userTokenInfo.userId
-}))
-  },[isFocus])
   const [showModal, setShowModal] = useState(false);
+  const isFocus = useIsFocused()
+  useEffect(() => {
+    dispatch(getMsg({
+      userid: userTokenInfo.userId
+    }))
+  }, [isFocus, showModal])
 
-console.log('====================================');
-console.log(messagesAll);
-console.log('====================================');
+
+  console.log('====================================');
+  console.log(messagesAll);
+  console.log('====================================userTokenInfo', userTokenInfo.userId);
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
         onPress={() => {
           //   haldleNotification(item);
-          props.navigation.navigate('message')
+          props.navigation.navigate('message', {item:item})
         }}
         style={styles.click}>
         <View style={{ flexDirection: 'row' }}>
@@ -166,7 +167,7 @@ console.log('====================================');
             <View style={styles.card}>
               {/* <Image style={{ height: 20, width: 20 }} source={require('../../assets/icons/profile.png')} />   */}
               <Rtext style={styles.name}>{item.userName}</Rtext>
-              <Rtext style={{ color: Colors.silver , marginRight : 40 , fontSize : 12 }}>{moment(item.updatedAt).format('l')}</Rtext>
+              <Rtext style={{ color: Colors.silver, marginRight: 40, fontSize: 12 }}>{moment(item.updatedAt).format('l')}</Rtext>
             </View>
             <View>
               <Rtext style={{ marginTop: 7, color: Colors.silver }}>
@@ -178,26 +179,25 @@ console.log('====================================');
       </TouchableOpacity>
     );
   };
-  
+
   return (
     <View style={{ flex: 1, backgroundColor: Colors.white }}>
       {/* <CommonHeader Title='Posts' /> */}
       <FlatList
         style={styles.flatlistMainView}
         showsVerticalScrollIndicator={false}
-        data={[...messagesAll]}
+        data={[...messagesAll].reverse()}
         renderItem={renderItem}
-        
       />
       <TouchableOpacity
         onPress={() => {
           console.log('====================================');
           // var userData = jwt_decode(data.replace('Bearer ', ''));
-          console.log("data", userTokenInfo.userId ,);
+          console.log("data", userTokenInfo.userId,);
           console.log('====================================');
           //props.navigation.navigate('DocList');
           //dispatch(MessgePopUp())
-        
+
           setShowModal(true)
         }}
         style={{
@@ -208,13 +208,13 @@ console.log('====================================');
           paddingVertical: 7,
           paddingHorizontal: 8,
           borderRadius: 10,
-         
+
         }}>
 
         <Image
           style={{
             height: 40,
-             width: 40,
+            width: 40,
             resizeMode: 'contain',
             tintColor: Colors.white,
           }}
@@ -222,9 +222,11 @@ console.log('====================================');
         />
       </TouchableOpacity>
       <View>
-        
-         <InputMsg userId = {userTokenInfo.userId} showModal = {showModal} setShowModal={setShowModal}  />
-        
+        {
+          showModal && <InputMsg userId={userTokenInfo.userId} showModal={showModal} setShowModal={setShowModal} />
+        }
+
+
       </View>
     </View>
   );
@@ -249,7 +251,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     borderRadius: 50,
     marginHorizontal: 10,
-    tintColor : Colors.primaryColor,
+    tintColor: Colors.primaryColor,
     //backgroundColor: Colors.lightSilver,
     // tintColor: Colors.primaryColor
     alignSelf: 'center',
@@ -277,7 +279,7 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     justifyContent: 'space-evenly',
-    marginRight : 15,
+    marginRight: 15,
     // padding: 10,
     //alignItems: "center"
   },

@@ -14,7 +14,7 @@ const getMsg = createAsyncThunk(
     'getMsg',
     async (data, thunkAPI) => {
         console.log('data', data);
-        const response = await request('get','/api/message/msg' ,data );
+        const response = await request('post','/api/message/msg' ,data );
         return response.data;
     },
 );
@@ -47,12 +47,12 @@ const userSlice = createSlice({
         [getMsg.fulfilled]: (state, action) => {
             state.messagesAll=action.payload;
             // console.log('data',state.userList)
-            console.log(' ====get coupon sucess======', action.payload)
+            console.log(' ====Message======', action.payload)
         }, 
         [getMsg.pending]: (state, action) => {
         },
         [getMsg.rejected]: (state, action) => {
-            console.log('rget coupon rejected', action)
+            console.log('Message rejected', action)
         },
     },
 });

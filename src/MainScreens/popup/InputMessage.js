@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -11,18 +11,29 @@ import {
   Alert,
 } from 'react-native';
 
-import {Colors} from '../../assets/common/common';
-import {Rtext} from '../../CommonComponents/common/Rtext';
+import { Colors } from '../../assets/common/common';
+import { Rtext } from '../../CommonComponents/common/Rtext';
 import Modal from 'react-native-modal';
-import {BlurView} from '@react-native-community/blur';
-import {CusButtom} from '../../CommonComponents/common/CusButtom';
-import {Ainput} from '../../CommonComponents/common/Ainput';
-import { useDispatch } from 'react-redux';
+import { BlurView } from '@react-native-community/blur';
+import { CusButtom } from '../../CommonComponents/common/CusButtom';
+import { Ainput } from '../../CommonComponents/common/Ainput';
+import { useDispatch, useSelector } from 'react-redux';
 import { postMsg } from '../../Store/message';
-const {width} = Dimensions.get('window');
-const InputMsg = ({setShowModal  ,showModal , userId }) => {
+import moment from 'moment';
+import { setToastMsg } from '../../Store/popup';
+const { width } = Dimensions.get('window');
+const InputMsg = ({ setShowModal, showModal, userId }) => {
+  const userTokenInfo = useSelector(state => state.auth.userTokenInfo);
+  const [reply , setReply] = useState([]);
+  console.log('============usertoken========', userTokenInfo);
+  const dispatch = useDispatch()
+  const [messge, stMessage] = useState("")
 
-    const dispatch = useDispatch()
+
+
+
+
+
   return (
     <Modal isVisible={showModal} backdropColor={Colors.tranparentBlack}>
       <View
@@ -42,7 +53,7 @@ const InputMsg = ({setShowModal  ,showModal , userId }) => {
             alignItems: 'center',
             borderRadius: 10,
           }}>
-          <TouchableOpacity  onPress = {() => setShowModal(false)} style={{position: 'absolute', top: 10, right: 10}}>
+          <TouchableOpacity onPress={() => setShowModal(false)} style={{ position: 'absolute', top: 10, right: 10 }}>
             <Image
               style={styles.icon}
               source={require('../../assets/icons/cancel.png')}
@@ -53,7 +64,7 @@ const InputMsg = ({setShowModal  ,showModal , userId }) => {
               marginTop: 10,
               color: Colors.mainblue,
               fontSize: 18,
-              alignSelef: 'center',
+              alignSelf: 'center',
               borderBottomWidth: 1,
               borderBottomColor: Colors.mainblue,
               marginBottom: 10,
@@ -62,8 +73,10 @@ const InputMsg = ({setShowModal  ,showModal , userId }) => {
           </Rtext>
           <Ainput
             multiline={true}
-            style={{height: 100, textAlignVertical: 'top'}}
+            style={{ height: 100, textAlignVertical: 'top' }}
             placeholder={'Messages'}
+            value={messge}
+            onChangeText={stMessage}
           />
           <View
             style={{
@@ -73,18 +86,52 @@ const InputMsg = ({setShowModal  ,showModal , userId }) => {
             }}>
             <CusButtom
               onpress={() => {
-                dispatch(postMsg({
-                    message :"test",
-                    userName : "test2",
-                    userid: userId,
-                    reply :[{
-                        replymessageid : "10",
-                        message : "something",
-                        userName : "koushik shah" ,
-                        
-                        },]
+                if (messge === '') {
+                dispatch(setToastMsg('Please Enter the Message'))
+                return
+                }
 
-                }))
+                dispatch(postMsg(
+                  {
+
+                    message: messge,
+                    userName: userTokenInfo.username,
+                    userid: userTokenInfo.userId,
+                    assid: null,
+                    tlid: null,
+                    date: moment().format('DD/MM/YYYY'),
+                    userSeen: true,
+                    assSeen: false,
+                    tlSeen: false,
+                    imgulr: null,
+                    profilePic: null,
+                    // reply :{
+                    //         replymessageid : null,
+                    //         message : 'how can i help you?',
+                    //         userName : null,
+                    //         userid: null,
+                    //         assid: null,
+                    //         tlid: null,
+                    //         date: moment().format('DD/MM/YYYY'),
+                    //         userSeen: true,
+                    //         assSeen: true,
+                    //         tlSeen: true,
+                    //         imgulr:true,
+                    //         profilePic:true,
+                    //         userType: true,
+                    //         edit:true,
+
+                    //             default:true
+                    //         }
+
+                          
+
+                  },
+
+
+                )).then(()=>{
+                  setShowModal(false)
+                })
               }}
               BTNstyle={{
                 width: width - 80,
