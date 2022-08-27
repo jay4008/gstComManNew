@@ -1,14 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, {useEffect} from 'react';
-import {useState} from 'react';
-import {Alert, View} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {Colors, Fonts} from '../assets/common/common';
-import {Ainput} from '../CommonComponents/common/Ainput';
-import {CusButtom} from '../CommonComponents/common/CusButtom';
-import {Rtext} from '../CommonComponents/common/Rtext';
-import {login, setUserTokenInfo, userLoginSuccess} from '../Store/auth';
-import {LoaderOff, LoaderOn, setToastMsg} from '../Store/popup';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import { Alert, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { Colors, Fonts } from '../assets/common/common';
+import { Ainput } from '../CommonComponents/common/Ainput';
+import { CusButtom } from '../CommonComponents/common/CusButtom';
+import { Rtext } from '../CommonComponents/common/Rtext';
+import { login, setUserTokenInfo, userLoginSuccess } from '../Store/auth';
+import { LoaderOff, LoaderOn, setToastMsg } from '../Store/popup';
 import LoginStyle from '../Styles/Login';
 import AuthFrame from './AuthFrame';
 import jwt_decode from 'jwt-decode';
@@ -36,12 +36,12 @@ const LogIn = props => {
           onChangeText={setEmail}
           placeholder={'Email'}></Ainput>
         <Ainput
-        secureTextEntry = {true}
+          secureTextEntry={true}
           value={Password}
           onChangeText={setPassword}
-          eye = {true}
+          eye={true}
           placeholder={'Password.'}></Ainput>
-     
+
         <CusButtom
           onpress={async () => {
             let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -68,7 +68,7 @@ const LogIn = props => {
                   dispatch(userLoginSuccess());
                   console.log('Reqdata  ==>', Reqdata);
                   var userData = jwt_decode(Reqdata?.payload?.token.replace('Bearer ', ''));
-                  console.log("data", userData ,);
+                  console.log("data", userData,);
                   dispatch(setUserTokenInfo(userData))
                 } else {
                   dispatch(
@@ -89,18 +89,18 @@ const LogIn = props => {
               });
           }}
           text={'LogIn'}></CusButtom>
-    
-    <View style={LoginStyle.ViewToMarginTen}>
+
+        <View style={LoginStyle.ViewToMarginTen}>
           <Rtext
             style={LoginStyle.ForgetPassword}
             onPress={() => props.navigation.navigate('ForgotEmail')}>
-       Forgot Password 
-            </Rtext>
+            Forgot Password
+          </Rtext>
 
-         
-        
+
+
         </View>
-  
+
       </AuthFrame>
     </>
   );

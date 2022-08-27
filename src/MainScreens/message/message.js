@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -11,12 +11,12 @@ import {
   Dimensions,
   FlatList,
 } from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Rtext} from '../../CommonComponents/common/Rtext';
-import {Colors} from '../../assets/common/common';
-import {Fonts} from '../../assets/common/common';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Rtext } from '../../CommonComponents/common/Rtext';
+import { Colors } from '../../assets/common/common';
+import { Fonts } from '../../assets/common/common';
 
-const {height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 const DATA = [
   {
@@ -119,8 +119,10 @@ const DATA = [
 ];
 
 const message = props => {
+  const [messageData, setMessageData] = useState(props.route.params);
+  console.log("props.route.params", props.route.params)
   return (
-    <View style={{flex: 1, padding: 10, borderRadius: 15}}>
+    <View style={{ flex: 1, padding: 10, borderRadius: 15 }}>
       <View
         style={{
           borderRadius: 15,
@@ -129,17 +131,17 @@ const message = props => {
           width: '98%',
           padding: 5,
         }}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <Image
-            style={{width: 45, height: 45}}
+            style={{ width: 45, height: 45 }}
             source={require('../../assets/icons/profile.png')}
           />
-          <View style={{flexDirection: 'column', paddingHorizontal: 10}}>
-            <Rtext>Koushik Sham</Rtext>
+          <View style={{ flexDirection: 'column', paddingHorizontal: 10 }}>
+            <Rtext>{messageData.item.userName}</Rtext>
             <Rtext>Message:</Rtext>
-            <View style={{width: '95%', paddingVertical: 5}}>
-              <Rtext style={{color: Colors.primaryColor}}>
-                Lorem Ipsum has been the industry's standard dummy text ever{' '}
+            <View style={{ width: '95%', paddingVertical: 5 }}>
+              <Rtext  style={{ color: Colors.primaryColor,width:'100%' }}>
+                {props.route.params.item.message}{' '}
               </Rtext>
             </View>
             <View
@@ -148,34 +150,34 @@ const message = props => {
                 borderColor: Colors.tranparentBlack,
                 borderWidth: 0.5,
                 marginBottom: 5,
+               
               }}></View>
             <View
               style={{
-                flexDirection: 'row',
+                flexDirection: 'row-reverse',
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
-              <TouchableOpacity>
-                <Image
-                  source={require('../../assets/icons/like.png')}
-                  style={{
-                    width: 25,
-                    height: 25,
-                    resizemode: 'container',
-                    padding: 10,
-                    tintColor: Colors.primaryColor,
-                  }}></Image>
-              </TouchableOpacity>
-
-              <TouchableOpacity>
-                <Rtext
-                  style={{
-                    fontFamily: Fonts.latoBold,
-                    color: Colors.primaryColor,
-                  }}>
-                  Comment
-                </Rtext>
-              </TouchableOpacity>
+              {/* //<View style={{flexDirection:'row-reverse'}}> */}
+                <TouchableOpacity>
+                  {/* <Image
+                    source={require('../../assets/icons/like.png')}
+                    style={{
+                      width: 25,
+                      height: 25,
+                      resizemode: 'container',
+                      padding: 10,
+                      tintColor: Colors.primaryColor,
+                    }}></Image> */}
+                  <Rtext
+                    style={{
+                      fontFamily: Fonts.latoBold,
+                      color: Colors.primaryColor,
+                    }}>
+                    Comment
+                  </Rtext>
+                </TouchableOpacity>
+              {/* </View> */}
             </View>
           </View>
         </View>
@@ -186,7 +188,7 @@ const message = props => {
           showsVerticalScrollIndicator={false}
           data={DATA}
           renderItem={renderItem}
-          ListFooterComponent={() => <View style={{height: 500}} />}
+          ListFooterComponent={() => <View style={{ height: 500 }} />}
         />
       </View>
 
@@ -227,7 +229,7 @@ const message = props => {
 };
 export default message;
 
-const renderItem = ({item}) => {
+const renderItem = ({ item }) => {
   return (
     <TouchableOpacity
       onPress={() => {
@@ -235,7 +237,7 @@ const renderItem = ({item}) => {
         // props.navigation.navigate('message')
       }}
       style={styles.click}>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row' }}>
         {/* <Image
             style={styles.Img}
             source={item.img}
@@ -244,10 +246,10 @@ const renderItem = ({item}) => {
           <View style={styles.card}>
             {/* <Image style={{ height: 20, width: 20 }} source={require('../../assets/icons/profile.png')} />   */}
             <Rtext style={styles.name}>{item.name}</Rtext>
-            <Rtext style={{color: Colors.silver}}>{item.time}</Rtext>
+            <Rtext style={{ color: Colors.silver }}>{item.time}</Rtext>
           </View>
           <View>
-            <Rtext style={{marginTop: 7, color: Colors.silver}}>
+            <Rtext style={{ marginTop: 7, color: Colors.silver }}>
               {item.mess}
             </Rtext>
           </View>

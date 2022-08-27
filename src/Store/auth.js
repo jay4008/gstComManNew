@@ -5,10 +5,7 @@ import { request } from '../utility/common';
 
 // <===================register==================>>>
 
-<<<<<<< HEAD
-=======
 
->>>>>>> d39723e4e953aa86fdf20d429db432a2b9a4ff61
 const registration = createAsyncThunk(
   'registration',
   async (data, thunkAPI) => {
@@ -18,11 +15,8 @@ const registration = createAsyncThunk(
   },
 );
 
-<<<<<<< HEAD
-=======
 // <===================Login==================>>>
 
->>>>>>> d39723e4e953aa86fdf20d429db432a2b9a4ff61
 const login = createAsyncThunk(
   'login',
   async (data, thunkAPI) => {
@@ -63,6 +57,10 @@ const contactus = createAsyncThunk(
     return response.data;
   },
 );
+
+
+
+
 
 
 
@@ -109,13 +107,13 @@ const loginSlice = createSlice({
 
     [login.fulfilled]: (state, action) => {
       state.userData=action.payload;
-      console.log('fullfilldata',state.productList)
+      console.log('fullfilldata',state.userData)
     },
     [login.pending]: (state, action) => {
     },
     [login.rejected]: (state, action) => {
       console.log('Rejected data',action)
-    }
+    },
     [address.fulfilled]: (state, action) => {
       //state.productList=action.payload;
       console.log('Address fullfield',action)
@@ -136,6 +134,7 @@ const loginSlice = createSlice({
     [contactus.rejected]: (state, action) => {
       console.log(' contactus Rejected',action)
     },
+    
   },
 });
 

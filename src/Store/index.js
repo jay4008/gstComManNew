@@ -9,9 +9,11 @@ import authReducer from './auth';
 import homeReducer from './home';
 import popupReducer from './popup';
 import pdfCreatReducer from './pdfCreat';
-import couponReducer from './coupon'
-import message from './message'
-import subscriptionReducer from './subscription'
+import couponReducer from './coupon';
+import message from './message';
+import subscriptionReducer from './subscription';
+import paymentReducer from './payment'
+
 
 const middlewareState = [
   ...getDefaultMiddleware({
@@ -26,7 +28,8 @@ const rootReducer = combineReducers({
   pdfCreat: pdfCreatReducer,
   coupon:couponReducer,
   message :message,
-  subscription:subscriptionReducer
+  subscription:subscriptionReducer,
+  payment:paymentReducer
 });
 
 const persistConfig = {

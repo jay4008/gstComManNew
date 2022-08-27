@@ -26,7 +26,7 @@ import { inputPopupClose } from "../../Store/popup";
         <Modal isVisible={true} backdropColor={Colors.tranparentBlack} >
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }}>
                 <View style={{ paddingVertical: 30, width: "100%", backgroundColor: Colors.white, paddingHorizontal: 20, alignItems: 'center', borderRadius: 10 }}>
-                    <Rtext style={{ color: Colors.primaryColor, fontSize: 18, alignSelef: 'center', marginBottom: 10 }}>{headerText}</Rtext>
+                    <Rtext style={{ color: Colors.primaryColor, fontSize: 18, alignSelf: 'center', marginBottom: 10 }}>{headerText}</Rtext>
                     <View style={{ width: '100%', height: 1, backgroundColor: Colors.primaryColor, marginTop: 5 }} />
                     <View style={{ width: "100%", marginTop: 10 }}>
                         <Rtext>{headerText}</Rtext>

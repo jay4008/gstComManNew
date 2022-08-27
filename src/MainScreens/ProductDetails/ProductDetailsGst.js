@@ -8,6 +8,7 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
+  Alert,
 } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -19,60 +20,28 @@ import Subscription from '../popup/Subscription';
 import { getCoupon } from '../../Store/coupon';
 // import { dispatch } from 'jest-circus/build/state';
 import { useDispatch, useSelector } from 'react-redux';
+import { setToastMsg } from '../../Store/popup';
 
 const ProductDetailsGst = (props) => {
   let [price, setPrice] = useState("");
+  const dispatch = useDispatch()
   // let data = { "item": { "desc": "Hhhhh", "maxamount": "10000", "maxvaluerange": "200000", "midamount": "5000", "midvaluerange": "25000", "minamount": "1000", "name": "Gggggg" } };
   const [index, setIndex] = useState(1)
   const [showModal, setShowModal] = useState(false);
   console.log("props", props.route.params);
+
+  console.log("**********", props.route.params.item.desc);
+
   const [gstAmt, setGstAmt] = useState("");
- 
 
+  const [couponData, setcouponData] = useState('')
 
-
-    const makepayment=()=>{
-        
-
-        var options = {
-            description: 'Credits towards consultation',
-            image: 'https://cdn-icons-png.flaticon.com/800/7207/7207388.png',
-            currency: 'INR',
-            key: 'rzp_test_GQvvt2m7UTpdIw', // Your api key
-            amount: '1000',
-            name: 'TechnoPlat',
-            prefill: {
-              email: 'void@razorpay.com',
-              contact: '9191919191',
-              name: 'Razorpay Software'
-            },
-            theme: {color: '#F37254'}
-          }
-          RazorpayCheckout.open(options).then((data) => {
-            //const [flag,setflag]=useState(false);
-            // handle success
-        //alert(`Success: ${data.razorpay_payment_id}`);
-           // setflag=true
-            console.log('Data================================>',data);
-             //console.log('Data================================>',setflag);
-            // console.log('Data================================>',prefill.name);
-          }).catch((error) => {
-            // handle failure
-            //setflag=false
-            alert(`Error: ${error.code} | ${error.description}`);
-          });
-    }
-
-    
-
-  const[couponData,setcouponData]=useState('')
-  
-  const value=props.route.params;
-  console.log('value==============',value)
-  const getdata=(data)=>{
+  const value = props.route.params;
+  console.log('value==============', value)
+  const getdata = (data) => {
     setcouponData(data)
-    }
-console.log('data',couponData)
+  }
+  console.log('data', couponData)
   return (
     <ImageBackground
       style={{
@@ -105,36 +74,6 @@ console.log('data',couponData)
             }}>{props.route.params.item.description} </Rtext>
         </View>
 
-        {/* <View
-        style={{
-          paddingVertical: 15,
-          borderRadius: 10,
-          backgroundColor: Colors.white,
-          marginHorizontal: 15,
-           marginBottom :200
-        }}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Rtext style={{paddingHorizontal: 10}}>{props.route.params.item.name}</Rtext>
-          <Rtext style={{color: 'red', marginHorizontal: 10}}>
-           {moment().format('DD MMM YYYY')}
-          </Rtext>
-        </View>
-        <View style={styles.mainview3}>
-          <Image
-            source={props.route.params.item.image}
-            style={{height: 50, width: 50}}
-          />
-          <View style={{flexDirection: 'column', paddingRight: 50}}>
-            <Rtext>Koushik Sham</Rtext>
-            <Rtext style={{paddingTop: 10}}>sham@gmail.com</Rtext>
-          </View>
-          <Rtext style={{paddingTop: 30}}>Total:1000</Rtext>
-        </View>
-        <CommonButton text1={'Quantity'} text2={'5'} arrHide={true} />
-        <CommonButton text1={'jay shsh'} text2={'dsfsd'} />
-        <CommonButton text1={'jay shsh'} text2={'dsfsd'} />
-        <CommonButton text1={'jay shsh'} text2={'dsfsd'} />
-      </View> */}
 
         <View style={{ borderRadius: 10, width: 250, alignItems: 'center', justifyContent: 'center', marginLeft: 15 }}>
           <Rtext style={{ color: Colors.black, fontFamily: Fonts.latoBold, paddingHorizontal: 10 }}> Please choose your plan</Rtext>
@@ -185,17 +124,17 @@ console.log('data',couponData)
         </View>
         <View style={{ flexDirection: 'row', marginHorizontal: 15, marginVertical: 15 }}>
           {
-            price !== "" && <Rtext style={{ width: "100%" }}> You have to pay {price === "" ? "" : parseInt(price) * (index === 1 ? 1 : (index === 2 ? 4 : 12))-couponData} rs {index === 1 ? " for monthly Suscription " : index === 2 ? "for quaterly Suscription " : "for yealy Suscription"}</Rtext>
-          }       
+            price !== "" && <Rtext style={{ width: "100%" }}> You have to pay {price === "" ? "" : parseInt(price) * (index === 1 ? 1 : (index === 2 ? 4 : 12)) - couponData} rs {index === 1 ? " for monthly Suscription " : index === 2 ? "for quaterly Suscription " : "for yealy Suscription"}</Rtext>
+          }
 
         </View>
-       
+
         <View style={{ marginHorizontal: 15 }}>
           <CusButtom text={"Apply Coupon or Promo Code"}
             onpress={() =>
               // dispatch(getCoupon())
-               
-              
+
+
               //   .then(Reqdata => {
               //     // dispatch(LoaderOff());
               //     // dispatch(userLoginSuccess());
@@ -209,7 +148,7 @@ console.log('data',couponData)
               //     console.log('Reqdata  ==>',e);
               //   })
 
-               props.navigation.navigate('CouponCode',{getdata:getdata})
+              props.navigation.navigate('CouponCode', { getdata: getdata },)
             }
           />
 
@@ -235,16 +174,26 @@ console.log('data',couponData)
         }}>
 
         <CusButtom
+
           BTNstyle={{
             width: '50%',
             borderRadius: 0,
             marginTop: 0,
             backgroundColor: Colors.mainblue,
           }}
+
+
           text={'Cancel'}
         />
         <CusButtom
-          onpress={() => setShowModal(true)}
+          onpress={() => {
+            if (gstAmt === "") {
+              dispatch(setToastMsg("Please enter the gst amount to purchase the suscription.!"))
+            } else {
+              setShowModal(true)
+            }
+
+          }}
           BTNstyle={{
             width: '50%',
             borderRadius: 0,
@@ -258,7 +207,7 @@ console.log('data',couponData)
 
       <View>
         {
-          showModal && <Subscription setShowModal={setShowModal} selectedData={props.route.params.item} />
+          gstAmt !== "" && showModal && <Subscription setShowModal={setShowModal} selectedData={props.route.params.item} price={price === "" ? "" : parseInt(price) * (index === 1 ? 1 : (index === 2 ? 4 : 12)) - couponData} index={index} coupon={couponData} />
         }
       </View>
     </ImageBackground>
