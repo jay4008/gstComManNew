@@ -31,7 +31,6 @@ const userSlice = createSlice({
 
         [getCoupon.fulfilled]: (state, action) => {
             state.getCoupon=action.payload;
-            // console.log('data',state.userList)
             console.log(' ====get coupon sucess======', state.getCoupon)
         }, 
         [getCoupon.pending]: (state, action) => {

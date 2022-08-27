@@ -22,6 +22,7 @@ import jwt_decode from 'jwt-decode';
 import { useIsFocused } from '@react-navigation/native';
 import { getMsg } from '../../Store/message';
 import moment from 'moment';
+import Loader from '../popup/Loader';
 // import {Rtext} from '../../CommonComponents/common/Rtext';
 // import {getSuperAdmin} from '../../Store/auth';
 // import PushNotification from 'react-native-push-notification';
@@ -140,10 +141,16 @@ const Chat = props => {
   // const dispatch=useDispatch();
   const [showModal, setShowModal] = useState(false);
   const isFocus = useIsFocused()
+  const [loader , setLoader] = useState(false)
   useEffect(() => {
+    setLoader(true)
     dispatch(getMsg({
       userid: userTokenInfo.userId
-    }))
+    })).then(() =>{
+      setLoader(false)
+    }).catch(() =>{
+      setLoader(false)
+    })
   }, [isFocus, showModal])
 
 
@@ -170,7 +177,7 @@ const Chat = props => {
               <Rtext style={{ color: Colors.silver, marginRight: 40, fontSize: 12 }}>{moment(item.updatedAt).format('l')}</Rtext>
             </View>
             <View>
-              <Rtext style={{ marginTop: 7, color: Colors.silver }}>
+              <Rtext style={{ width : width- 100, marginTop: 7, color: Colors.silver }}>
                 {item.message}
               </Rtext>
             </View>
@@ -228,6 +235,10 @@ const Chat = props => {
 
 
       </View>
+      {
+        loader &&  <Loader/>
+      }
+    
     </View>
   );
 };
