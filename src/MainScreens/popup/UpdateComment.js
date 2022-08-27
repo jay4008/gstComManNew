@@ -18,22 +18,15 @@ import { BlurView } from '@react-native-community/blur';
 import { CusButtom } from '../../CommonComponents/common/CusButtom';
 import { Ainput } from '../../CommonComponents/common/Ainput';
 import { useDispatch, useSelector } from 'react-redux';
-import { postMsg } from '../../Store/message';
+import { postMsg, singleMsg, updateMsg } from '../../Store/message';
 import moment from 'moment';
 import { setToastMsg } from '../../Store/popup';
 const { width } = Dimensions.get('window');
-const InputMsg = ({ setShowModal, showModal, userId }) => {
+const UpdateComment = ({setReply,reply, messageData,  index, setUpdateReply,updateReply, setShowModal, showModal, userId }) => {
   const userTokenInfo = useSelector(state => state.auth.userTokenInfo);
-  const [reply , setReply] = useState([]);
-  console.log('============usertoken========', userTokenInfo);
+//   console.log('============usertoken========', userTokenInfo);
   const dispatch = useDispatch()
   const [messge, stMessage] = useState("")
-
-
-
-
-
-
   return (
     <Modal isVisible={showModal} backdropColor={Colors.tranparentBlack}>
       <View
@@ -75,8 +68,8 @@ const InputMsg = ({ setShowModal, showModal, userId }) => {
             multiline={true}
             style={{ height: 100, textAlignVertical: 'top' }}
             placeholder={'Messages'}
-            value={messge}
-            onChangeText={stMessage}
+            value={updateReply}
+            onChangeText={setUpdateReply}
           />
           <View
             style={{
@@ -86,15 +79,13 @@ const InputMsg = ({ setShowModal, showModal, userId }) => {
             }}>
             <CusButtom
               onpress={() => {
-                if (messge === '') {
+                if (updateReply === '') {
                 dispatch(setToastMsg('Please Enter the Message'))
                 return
                 }
-
-                dispatch(postMsg(
-                  {
-
-                    message: messge,
+                let newReply = [...reply]
+                newReply.splice(index, 1, {
+                    message: updateReply,
                     userName: userTokenInfo.username,
                     userid: userTokenInfo.userId,
                     assid: null,
@@ -105,28 +96,31 @@ const InputMsg = ({ setShowModal, showModal, userId }) => {
                     tlSeen: false,
                     imgulr: null,
                     profilePic: null,
-                    reply :[{
-                     
-                      message : "ok please chcek ",
-                      userName :"jayshah",
-                      userid:"675131652176",
-                      assid:"kdshfjhdsf",
-                      tlid: "sdhfkjdshfds",
-                      date: moment().format("DD/MM/YYYY"),
-                      userSeen: true,
-                      assSeen: false,
-                      tlSeen:false,
-                      imgulr:null,
-                      profilePic:null,
-                      userType:"user",
-                      edit:false
-                      }],
-                  },
+                    userType: userTokenInfo.role,
+                    edit: true,
+                  })
+                //   return 
+                dispatch(
+                  updateMsg({
+                    id: messageData?._id,
+                    data: {
+                      ...messageData,
+                      reply: newReply,
+                    },
+                  }),
+                ).then(() => {
+                  dispatch(
+                    singleMsg({
+                      id: messageData?._id,
+                    }),
+                  ).then(res => {
+                   setUpdateReply("")
+                    setReply(res.payload.reply);
 
-
-                )).then(()=>{
-                  setShowModal(false)
-                })
+                    setShowModal(false)
+                  });
+                });
+           
               }}
               BTNstyle={{
                 width: width - 80,
@@ -143,7 +137,7 @@ const InputMsg = ({ setShowModal, showModal, userId }) => {
   );
 };
 
-export default InputMsg;
+export default UpdateComment;
 const styles = StyleSheet.create({
   icon: {
     height: 24,
