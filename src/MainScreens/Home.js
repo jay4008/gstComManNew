@@ -64,7 +64,7 @@ const Home = (props) => {
           style={styles.flatlistMainView}
           onPress={() => {
   
-            props.navigation.navigate('GstMenu', { item: item });
+            props.navigation.navigate('Help');
   
           }}>
           <View style={styles.rowWiseChild}>

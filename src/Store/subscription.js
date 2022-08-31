@@ -10,10 +10,13 @@ const subscription = createAsyncThunk(
     'subscription',
     async (data, thunkAPI) => {
         //console.log('guestUserLogin', data);
-        const response = await request('get','/api/subscription/showsub');
+        const response = await request('post','/api/subscription/showsub',data);
         return response.data;
     },
 );
+
+
+//https://gstcomman.herokuapp.com/api/subscription
 
 const subSlice = createSlice({
     name: 'subscription',

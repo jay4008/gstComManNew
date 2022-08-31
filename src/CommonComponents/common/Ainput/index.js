@@ -58,6 +58,7 @@ const Ainput = ({
         editable={editable}
         // style={[styles.inputStyle,style, {borderColor:border, paddingRight: view ? 20 : 15}] }
         autoCorrect={false}
+        autoCapitalize = {'none'}
         placeholder={placeholder}
         placeholderTextColor={Platform.OS === 'ios' ? Colors.silver : Colors.silver}
         onBlur={onBlur}

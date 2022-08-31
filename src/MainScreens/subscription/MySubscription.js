@@ -11,6 +11,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 //import subscription from '../../Store/subscription'
 import { subscription } from '../../Store/subscription'
+import moment from 'moment'
+import { useIsFocused } from '@react-navigation/native'
 
 
 const DATA = [
@@ -34,123 +36,136 @@ const DATA = [
 
 
 
-const MySubscription = () => {
-    const [modalVisible, setModalVisible] = useState(false);
-    const Data = useSelector(state => state.subscription.subscription);
-    console.log('Subscription data============',Data);
-   // console.log('iddddddddd======',Data.purchaseMonth)
-    const dispatch=useDispatch();
-    useEffect(()=>{
-        dispatch(subscription())
+const MySubscription = (props) => {
+const isfocus = useIsFocused()
+    // const [modalVisible, setModalVisible] = useState(!paid);
+    const userTokenInfo = useSelector(state => state.auth.userTokenInfo);
+    const userId = userTokenInfo.userId
 
-    },[])
+    console.log('userTokenInfo data============', userTokenInfo);
+    console.log('userTokenInfo id============', userId);
+
+
+    const SuscriptionData = useSelector(state => state.subscription.subscription);
+    // const paid=SuscriptionData.isPaid
+    console.log('Subscription data============', SuscriptionData);
+    // console.log('Subscription ispaid============', paid);
+
+
+
+    // console.log('iddddddddd======',SuscriptionData.purchaseMonth)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if(isfocus){
+            dispatch(subscription({ userId }))
+        }
     
 
-
-  
-
+    }, [isfocus])
     return (
         <SafeAreaView>
             <KeyboardAwareScrollView>
                 <View style={{ paddingHorizontal: 10 }}>
-                    <View style={{ paddingHorizontal: 10, }}>
-                        <Rtext style={{ color: Colors.black, fontFamily: Fonts.latoBold, fontsize: 20, }}>August:</Rtext>
-                        <View style={{ height: 1, borderColor: Colors.black, borderWidth: 1, justifyContent: 'center', marginTop: 4, width: 50 }} />
-                    </View>
-                    <Rtext style={{ paddingHorizontal: 40, marginTop: 10 }}>No Subscription</Rtext>
-                    <View style={{ paddingVertical: 20 }}>
-                        <CusButtom  BTNstyle = {{ marginHorizontal :"10%"}} text={'Subscribe'} />
-                    </View>
-                    <View style={{}} >
-                        <Rtext style={{ color: Colors.black, fontFamily: Fonts.latoBold, fontsize: 20, }}>Document:</Rtext>
-
-                        <View style={{ height: 1, borderColor: Colors.black, borderWidth: 1, marginTop: 4, width: 70 }} />
-                        <Rtext style={{ paddingHorizontal: 40, marginTop: 10 }}>Empty</Rtext>
-                    </View>
 
 
+                    {
+                        !SuscriptionData?.isPaid &&
 
-                    <View style={{ paddingVertical: 20 ,   }}>
-                        <CusButtom  BTNstyle = {{ marginHorizontal :"10%"}} text={'Upload'}
-                        // onpress={() => setModalVisible(true)}
+                        <>
+
+                            <View style={{ paddingHorizontal: 10, marginTop : 20}}>
+                                <Rtext style={{ color: Colors.black, fontFamily: Fonts.latoBold, fontsize: 20, }}>{"Subscription for Month  " +   moment().format('MMMM')}</Rtext>
+                                <View style={{ height: 1, borderColor: Colors.black, borderWidth: 1, justifyContent: 'center', marginTop: 4, width: 220 }} />
+                            </View>
+                            <View style = {{paddingVertical : 60 ,backgroundColor : Colors.white , borderRadius : 20, marginTop : 10 , alignItems :'center', justifyContent :'center' }}>
+                              <Image style = {{tintColor : Colors.mainblue , height : 60 , width : 60 , resizeMode :'contain'}} source = {require('../../assets/icons/suscription.png')} />
+                            <Rtext style={{ fontFamily : Fonts.latoBold ,  paddingHorizontal: 40, marginTop: 10 }}> {"You dont have any active Plan"}</Rtext>
+                            </View>
+                            <View style={{}} >
+                            </View>
+
+                            <View style = {{width : "70%" ,alignSelf :'center'}}>
+                    <CusButtom onpress = {() => props.navigation.navigate('Home')} textStyle = {{fontFamily : Fonts.latoBlack}} source = {require('../../assets/icons/cal.png')}  image = {true} ImgStyle = {{height : 30 , width : 30 ,tintColor : Colors.white, resizeMode : "contain" , marginRight : 10}} text={'Suscribe now'} />
+                </View>
+                        </>
+                    }
+
+
+
+                    {SuscriptionData?.isPaid && <>
+                        <View style={{ width: '100%', paddingHorizontal: 10 }}>
+                            <View style={{ paddingHorizontal: 10, }}>
+                                <Rtext style={{ color: Colors.black, fontFamily: Fonts.latoBold, fontsize: 20, }}>Monthely Subscription:</Rtext>
+                                <View style={{ height: 1, borderColor: Colors.black, borderWidth: 1, justifyContent: 'center', marginTop: 4, width: 150 }} />
+                            </View>
+                            <View style={{ paddingHorizontal: 10 }}>
+                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 7 }}>Category Name:<Rtext> SGST</Rtext> </Rtext>
+                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }}>DESC: <Rtext> is simply dummy text of the printing</Rtext></Rtext>
+                            </View>
+                            <View style={{ paddingHorizontal: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }} >Start Date:<Rtext>12-Aug-2022</Rtext></Rtext>
+                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }}>End Date:<Rtext>12-sep-2022</Rtext></Rtext>
+                            </View>
+
+
+
+                        </View>
+                    </>
+                    }
+
+                    {
+                        SuscriptionData?.isPaid &&
+                        <FlatList
+                            ListHeaderComponent={() => (
+                                <Rtext style={{ marginVertical: 20, color: Colors.black, fontFamily: Fonts.latoBold, fontsize: 20, }}>Document:</Rtext>
+                            )}
+                            ListFooterComponent={() => (
+                                <View style={{ paddingVertical: 20, }}>
+                                    <CusButtom BTNstyle={{ marginHorizontal: "10%" }} text={'Upload'}
+                                    // onpress={() => setModalVisible(true)}
+                                    />
+                                </View>
+                            )}
+                            data={DATA}
+                            // renderItem={renderItem} 
+                            renderItem={({ item, index }) => <RenderItem item={item} index={index} />}
+                            keyExtractor={item => item.id}
                         />
-                    </View>
+                    }
 
 
-                    <FlatList
-                        data={DATA}
-                        renderItem={renderItem}
-                    // keyExtractor={item => item.id}
-                    />
-
-
-                </View>
-                {/* <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    Alert.alert("Modal has been closed.");
-                    setModalVisible(!modalVisible);
-                }}
-            >
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Hello World!</Text>
-                        <Pressable
-                            style={[styles.button, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}
-                        >
-                            <Text style={styles.textStyle}>Hide Modal</Text>
-                        </Pressable>
-                    </View>
-                </View>
-            </Modal> */}
-                <View style={{ width: '100%', paddingHorizontal : 10 }}>
-                    <View style={{ paddingHorizontal: 10, }}>
-                        <Rtext style={{ color: Colors.black, fontFamily: Fonts.latoBold, fontsize: 20, }}>Monthely Subscription:</Rtext>
-                        <View style={{ height: 1, borderColor: Colors.black, borderWidth: 1, justifyContent: 'center', marginTop: 4, width: 150 }} />
-                    </View>
-                    <View style={{ paddingHorizontal: 10 }}>
-                        <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 7 }}>Category Name:<Rtext> SGST</Rtext> </Rtext>
-                        <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }}>DESC: <Rtext> is simply dummy text of the printing</Rtext></Rtext>
-                    </View>
-                    <View style={{ paddingHorizontal: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }} >Start Date:<Rtext>12-Aug-2022</Rtext></Rtext>
-                        <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }}>End Date:<Rtext>12-sep-2022</Rtext></Rtext>
-                    </View>
-
-
-                    <View>
-                        <CusButtom text={'Product'} />
-                    </View>
 
                 </View>
 
 
 
+              
             </KeyboardAwareScrollView>
         </SafeAreaView>
     )
 }
 
 
-const renderItem = ({ item }) => {
+const RenderItem = ({ item, index }) => {
     return (
-        <View style={{ }}>
-            < TouchableOpacity style={styles.flatlistMainView}>
-                <View style={styles.rowWiseChild}>
+
+        <View style={{}}>
+            {<>
+                < TouchableOpacity style={styles.flatlistMainView}>
+                    <View style={styles.rowWiseChild}>
 
 
-                    <Image source={require('../../assets/icons/image.png')} style={styles.flatListIconStyle} />
-                    <View style={{ flexDirection: 'column',width:'60%'}}>
-                        <Rtext >{item.name}</Rtext>
-                        <Rtext>{item.desc}</Rtext>
+                        <Image source={require('../../assets/icons/image.png')} style={styles.flatListIconStyle} />
+                        <View style={{ flexDirection: 'column', width: '60%' }}>
+                            <Rtext >{item.name}</Rtext>
+                            <Rtext>{item.desc}</Rtext>
+                        </View>
+                        <Image style={{ position: 'absolute', top: 10, right: 10 }} source={require('../../assets/icons/threedots.png')} />
                     </View>
-                    <Image style = {{position :'absolute' , top : 10 , right : 10}} source={require('../../assets/icons/threedots.png')} />
-                </View>
-                
-            </TouchableOpacity>
+
+                </TouchableOpacity>
+            </>
+            }
         </View>
     )
 }
@@ -160,52 +175,11 @@ export default MySubscription
 
 
 const styles = StyleSheet.create({
-    // centeredView: {
-    //     flex: 1,
-    //     justifyContent: "center",
-    //     alignItems: "center",
-    //     marginTop: 22
-    // },
-    // modalView: {
-    //     margin: 20,
-    //     backgroundColor: "white",
-    //     borderRadius: 20,
-    //     padding: 35,
-    //     alignItems: "center",
-    //     shadowColor: "#000",
-    //     shadowOffset: {
-    //         width: 0,
-    //         height: 2
-    //     },
-    //     shadowOpacity: 0.25,
-    //     shadowRadius: 4,
-    //     elevation: 5
-    // },
-    // button: {
-    //     borderRadius: 20,
-    //     padding: 10,
-    //     elevation: 2
-    // },
-    // buttonOpen: {
-    //     backgroundColor: "#F194FF",
-    // },
-    // buttonClose: {
-    //     backgroundColor: "#2196F3",
-    // },
-    // textStyle: {
-    //     color: "white",
-    //     fontWeight: "bold",
-    //     textAlign: "center"
-    // },
-    // modalText: {
-    //     marginBottom: 15,
-    //     textAlign: "center"
-    // },
     flatlistMainView: {
         paddingVertical: 15,
         backgroundColor: Colors.white,
         marginBottom: 5,
-       // marginHorizontal: 15,
+        // marginHorizontal: 15,
         borderRadius: 10,
     },
     rowWiseChild: {

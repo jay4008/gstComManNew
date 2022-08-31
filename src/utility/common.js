@@ -92,35 +92,35 @@ export const request = async (method, url, data = {}) => {
 // }
 
 export const DownloadFile = async (url, method = 'GET', data = null) => {
-  const { config, fs } = RNFetchBlob;
-  let date = new Date();
-  let PictureDir = fs.dirs.PictureDir; // this is the pictures directory. You can check the available directories in the wiki.
-  console.log('feaching');
-  let options = {
-    fileCache: true,
-    addAndroidDownloads: {
-      useDownloadManager: true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
-      notification: true,
-      path:
-        PictureDir +
-        '/file_' +
-        Math.floor(date.getTime() + date.getSeconds() / 2) +
-        '.pdf', // this is the path where your downloaded file will live in
-      description: 'Downloading image.',
-    },
-  };
-  let res;
-  if (method.toUpperCase() === 'GET')
-    res = await config(options).fetch(
-      method,
-      'https://dev-idiosys.s3-ap-southeast-1.amazonaws.com/' + url,
-    );
-  else
-    res = await config(options).fetch(
-      method,
-      'https://dev-idiosys.s3-ap-southeast-1.amazonaws.com/' + url,
-      data,
-    );
+  // const { config, fs } = RNFetchBlob;
+  // let date = new Date();
+  // let PictureDir = fs.dirs.PictureDir; // this is the pictures directory. You can check the available directories in the wiki.
+  // console.log('feaching');
+  // let options = {
+  //   fileCache: true,
+  //   addAndroidDownloads: {
+  //     useDownloadManager: true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
+  //     notification: true,
+  //     path:
+  //       PictureDir +
+  //       '/file_' +
+  //       Math.floor(date.getTime() + date.getSeconds() / 2) +
+  //       '.pdf', // this is the path where your downloaded file will live in
+  //     description: 'Downloading image.',
+  //   },
+  // };
+  // let res;
+  // if (method.toUpperCase() === 'GET')
+  //   res = await config(options).fetch(
+  //     method,
+  //     'https://dev-idiosys.s3-ap-southeast-1.amazonaws.com/' + url,
+  //   );
+  // else
+  //   res = await config(options).fetch(
+  //     method,
+  //     'https://dev-idiosys.s3-ap-southeast-1.amazonaws.com/' + url,
+  //     data,
+  //   );
 
   if (res) return true;
   else return false;

@@ -26,6 +26,21 @@ const login = createAsyncThunk(
   },
 );
 
+
+// <===================sendotp==================>>>
+
+const sendotp = createAsyncThunk(
+  'sendotp',
+  async (data, thunkAPI) => {
+      //console.log('guestUserLogin', data);
+    const response = await request('post', "/api/users/email-send", data);
+    return response.data;
+  },
+);
+
+
+
+
 // <===================product==================>>>
 
 const product = createAsyncThunk(
@@ -58,7 +73,15 @@ const contactus = createAsyncThunk(
   },
 );
 
+// <===================upload Image==================>>>
 
+// const uploadimage = createAsyncThunk(
+//   'uploadimage',
+//   async (data, thunkAPI) => {
+//     const response = await request('post', "/api/contactus/save", data);
+//     return response.data;
+//   },
+// );
 
 
 
@@ -134,10 +157,35 @@ const loginSlice = createSlice({
     [contactus.rejected]: (state, action) => {
       console.log(' contactus Rejected',action)
     },
+
+   // <===================Extrareducer for sendotp==================>>>
+
+    [sendotp.fulfilled]: (state, action) => {
+      //state.productList=action.payload;
+      console.log('sendotp fullfield',action)
+    },
+    [sendotp.pending]: (state, action) => {
+    },
+    [sendotp.rejected]: (state, action) => {
+      sendotp.log(' sendotp Rejected',action)
+    },
+
+  //  // <===================upload Image==================>>>
+  //  [uploadimage.fulfilled]: (state, action) => {
+  //   //state.productList=action.payload;
+  //   console.log('uploadimage fullfield',action)
+  // },
+  // [uploadimage.pending]: (state, action) => {
+  // },
+  // [uploadimage.rejected]: (state, action) => {
+  //   console.log(' uploadimage Rejected',action)
+  // },
     
   },
 });
 
+
+
 export const { userLoginSuccess, userLogoutSuccess , setUserTokenInfo } = loginSlice.actions;
-export { product , registration , login , contactus , address};
+export { product , registration , login , contactus , address,sendotp,};
 export default loginSlice.reducer;
