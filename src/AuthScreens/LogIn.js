@@ -37,6 +37,7 @@ const LogIn = props => {
           placeholder={'Email'}></Ainput>
         <Ainput
           secureTextEntry={true}
+          
           value={Password}
           onChangeText={setPassword}
           eye={true}

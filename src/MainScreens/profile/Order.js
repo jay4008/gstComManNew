@@ -6,12 +6,76 @@ import { setData } from '../utility/auth';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { userLogoutSuccess } from '../../Store/auth';
 import DocSelection from '../popup/DocModal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ImagePicker from 'react-native-image-crop-picker';
 import { useState } from 'react';
+import RNFetchBlob from 'rn-fetch-blob';
 const Order = ({ navigation }) => {
+  const userTokenInfo = useSelector(state => state.auth.userTokenInfo);
   const dispatch = useDispatch();
   const [docPicker, setDocPicker] = useState(false);
+  // console.log('data=====',userTokenInfo)
+
+
+  const formDatapost = async(  uri = "")=>  {
+
+   
+
+
+
+    const data = new FormData(); 
+
+    data.append("image", {
+  
+      uri:
+        Platform.OS === "android"
+          ? uri
+          : uri.replace("file://", "")
+    });
+
+
+
+    console.log("datadatadatadatadata", data)
+    // const URL = `${"https://gstcomman.herokuapp.com"}${"/api/userinfo/upload"}`;
+    //const URL = "/api/userinfo/upload";
+    const URL = "https://gstcomman.herokuapp.com/api/userinfo/profile/" + userTokenInfo.userId;
+    // console.log('formDatapost url----------->', URL);
+    // RNFetchBlob.fetch('POST', URL, headers, data)
+    //   .then((sucessRes) => {
+    //     // resolve(sucessRes);
+    //     console.log("sucessRes", sucessRes);
+
+    //   })
+    //   .catch((errorRes) => {
+    //     // reject(errorRes);
+    //   });
+
+    try{
+      let res = await fetch(URL, {
+        method: "POST",
+        body: data,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Accept: "application/json",
+          // Authorization: this.state.accesstoken
+        }
+      });
+      console.log("resresresres",res);
+    }catch(error) {
+      console.log("error",error);
+
+    }
+ 
+
+
+
+
+  }
+
+
+  // https://gstcomman.herokuapp.com/api/userinfo/upload
+
+
 
   const openCamera = () => {
     ImagePicker.openCamera({
@@ -19,17 +83,44 @@ const Order = ({ navigation }) => {
       height: 400,
       cropping: true,
     }).then(image => {
-      console.log(image);
+
+let uri = image.path.replace("//" , "/")
+      // let data = [
+      //   {
+      //     name: 'image',
+      //     data: RNFetchBlob.wrap(uri),
+      //   },
+     
+      // ]
+      // console.log("Imageeeeeeee========= camera", image.path);
+
+
+      formDatapost(uri)
+
     });
   };
 
   const openGallery = () => {
+
+ 
     ImagePicker.openPicker({
       width: 300,
       height: 400,
       cropping: true,
     }).then(image => {
-      console.log(image);
+      let uri = image.path
+      let data = [
+        {
+          name: 'image',
+          data: RNFetchBlob.wrap(uri),
+        },
+      ]
+      console.log("Imageeeeeeee========= camera", image.path);
+
+
+   
+      formDatapost(uri)
+
     });
   };
   return (
@@ -40,33 +131,35 @@ const Order = ({ navigation }) => {
           <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
 
             <Image
-              source={require('../../assets/icons/prof.png')}
+              source={{uri : "file:/storage/emulated/0/Android/data/com.gstcomman/files/Pictures/7e3a57f5-e467-4ceb-8b16-530e50e07122.jpg"}}
               style={{
                 height: 100,
                 width: 100,
-                tintColor: Colors.primaryColor,
+                // tintColor: Colors.primaryColor,
                 resizeMode: 'contain',
                 marginTop: 20,
               }}
             />
-            <TouchableOpacity onPress={() => {
-
-              setDocPicker(true)
-            }} style={{ position: 'absolute', top: 70, right: 5, height: 30, width: 30 }}>
-              <Image
-                source={require('../../assets/icons/cameraa.png')}
-                style={{
-                  height: 30,
-                  width: 30,
-                  resizeMode: 'contain',
-                  marginTop: 20,
-
-                  tintColor: Colors.mainblue,
-                  borderRadius: 10
-                }}
-              />
-            </TouchableOpacity>
+        
           </View>
+
+          <TouchableOpacity onPress={() => {
+
+setDocPicker(true)
+}} >
+<Image
+  source={require('../../assets/icons/cameraa.png')}
+  style={{
+    height: 30,
+    width: 30,
+    resizeMode: 'contain',
+    marginTop: 20,
+
+    tintColor: Colors.mainblue,
+    borderRadius: 10
+  }}
+/>
+</TouchableOpacity>
 
           <View>
             <Text
@@ -105,7 +198,8 @@ const Order = ({ navigation }) => {
           </View>
           <CommonButton text={'My Order'}
             onPress={() =>
-              navigation.navigate('MyOrder')
+              // navigation.navigate('MyOrder')
+              setDocPicker(true)
             }
           />
           <CommonButton text={'Address'}
@@ -113,15 +207,13 @@ const Order = ({ navigation }) => {
               navigation.navigate('Address')
             }
           />
-          <CommonButton onPress={()=> navigation.navigate('CouponCode')} text={'Payment Method'} />
+          <CommonButton onPress={() => navigation.navigate('CouponCode')} text={'Payment Method'} />
           <CommonButton onPress={() => navigation.navigate('Purchase')} text={'Purchase History'} />
           <CommonButton text={'Setting'} />
-          <CommonButton onPress={()=>navigation.navigate('Product')} text={'Share'} />
+          <CommonButton onPress={() => navigation.navigate('Product')} text={'Share'} />
           <CommonButton onPress={() => dispatch(userLogoutSuccess())} text={'Log Out'} />
         </View>
-      </KeyboardAwareScrollView>
-
-      {docPicker && (
+        {docPicker && (
         <DocSelection
           onPressDoc={() => uploadDoc()}
           onPressCamera={() => openCamera()}
@@ -131,6 +223,9 @@ const Order = ({ navigation }) => {
           doc={false}
         />
       )}
+      </KeyboardAwareScrollView>
+
+  
 
     </SafeAreaView>
   );

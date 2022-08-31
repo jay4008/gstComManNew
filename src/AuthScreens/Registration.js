@@ -45,7 +45,7 @@ const Registration = (props) => {
                   : moment(selectedDate, 'YYYY-MM-DD').format('DD MMM YYYY')
               }
             />
-            <Ainput value={Password} onChangeText={setPassword} placeholder={"Password"}></Ainput>
+            <Ainput   eye={true} secureTextEntry = {true} value={Password} onChangeText={setPassword} placeholder={"Password"}></Ainput>
             <CusButtom text={"SUBMIT"} onpress={() => {
 
                 let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;

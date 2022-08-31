@@ -99,7 +99,7 @@ function MyStack(props) {
   return (
     <Stack.Navigator screenOptions={headerOptionForStackPage}>
       <Stack.Screen
-        name="Home"
+        name="MyBottomTabs"
         component={MyBottomTabs}
         options={({ navigation }) => ({
           headerTintColor: '#224585',
@@ -325,6 +325,22 @@ function MyStack(props) {
       <Stack.Screen
         name="message"
         component={message}
+        options={({ navigation }) => ({
+          title: 'Message',
+          headerTintColor: '#224585',
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerRight: () => <HeaderShown />,
+        })}
+
+      />
+
+
+<Stack.Screen
+        name="Home"
+        component={Home}
         options={({ navigation }) => ({
           title: 'Message',
           headerTintColor: '#224585',

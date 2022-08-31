@@ -20,9 +20,13 @@ const EditPopup = ({
       <View style={styles.container}>
         <View style={{...styles.selectionView , justifyContent : doc ?  "space-between": 'space-evenly' }}>
           <TouchableOpacity style={styles.BtnContainer} onPress={onPressCamera}>
-            <Image
+            {/* <Image
               style={styles.Icon}
-              source={require('../../assets/icons/camera.png')}></Image>
+              source={require('../../assets/fonts/annual.png')}
+            /> */}
+
+              {/* source={require('../../assets/fonts/edit1.png')}/> */}
+
             <Rtext style={styles.txt}>Edit</Rtext>
           </TouchableOpacity>
 
@@ -31,7 +35,7 @@ const EditPopup = ({
             onPress={onPressGallery}>
             <Image
               style={styles.Icon}
-              source={require('../../assets/icons/gallery.png')}></Image>
+              source={require('../../assets/icons/trash.png')}></Image>
             <Rtext style={styles.txt}>Delete</Rtext>
           </TouchableOpacity>
         </View>
@@ -68,6 +72,7 @@ const styles = StyleSheet.create({
   Icon: {
     height: 70,
     width: 70,
+  
     resizeMode: 'contain',
     tintColor: Colors.primaryColor,
   },

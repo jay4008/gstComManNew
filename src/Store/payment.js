@@ -23,7 +23,7 @@ const payment = createAsyncThunk(
     'subscription1',
     async (data, thunkAPI) => {
         console.log("datadatadatadatadatadatadata",data)
-      const response = await request('post', "/api/subscription", data);
+      const response = await request('post', "/api/subscription/adduser", data);
       return response.data;
     },
   );

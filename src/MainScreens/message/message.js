@@ -37,12 +37,12 @@ const DATA = [
     time: '3.15pm',
     //img: require('../../assets/icons/camera.png'),
   },
-  // {
-  //   name: 'Ranjan',
-  //   mess: 'how are you?',
-  //   time: 'Yestarday',
-  //   img: require('../../assets/icons/clock.png'),
-  // },
+  {
+    name: 'Ranjan',
+    mess: 'how are you?',
+    time: 'Yestarday',
+    //img: require('../../assets/icons/clock.png'),
+  },
   // {
   //   name: 'jay',
   //   mess: 'Whare r u from?',

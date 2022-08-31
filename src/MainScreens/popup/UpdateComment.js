@@ -62,7 +62,7 @@ const UpdateComment = ({setReply,reply, messageData,  index, setUpdateReply,upda
               borderBottomColor: Colors.mainblue,
               marginBottom: 10,
             }}>
-            {'Reach out to your Associate'}
+            {'Update message'}
           </Rtext>
           <Ainput
             multiline={true}
@@ -129,7 +129,7 @@ const UpdateComment = ({setReply,reply, messageData,  index, setUpdateReply,upda
                 marginBottom: 2,
                 marginHorizontal: 2,
               }}
-              text={'Send Msg to Your Associate'}></CusButtom>
+              text={'Submit'}></CusButtom>
           </View>
         </View>
       </View>
