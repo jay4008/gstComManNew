@@ -24,7 +24,7 @@ export const request = async (method, url, data = {}) => {
   }
 
   const token = await AsyncStorage.getItem('token');
-  console.log("new ===============token ", token);
+  //console.log("new ===============token ", token);
   if (token) {
     headerObj['Authorization'] =  token;
     console.log('Authorization', headerObj['Authorization']);

@@ -97,7 +97,7 @@ const InputMsg = ({ setShowModal, showModal, userId }) => {
                     message: messge,
                     userName: userTokenInfo.username,
                     userid: userTokenInfo.userId,
-                    assid: null,
+                    assid: "6310767727ddca168192be1d",
                     tlid: null,
                     date: moment().format('DD/MM/YYYY'),
                     userSeen: true,
@@ -105,22 +105,22 @@ const InputMsg = ({ setShowModal, showModal, userId }) => {
                     tlSeen: false,
                     imgulr: null,
                     profilePic: null,
-                    reply :[{
+                    // reply :[{
                      
-                      message : "ok please chcek ",
-                      userName :"jayshah",
-                      userid:"675131652176",
-                      assid:"kdshfjhdsf",
-                      tlid: "sdhfkjdshfds",
-                      date: moment().format("DD/MM/YYYY"),
-                      userSeen: true,
-                      assSeen: false,
-                      tlSeen:false,
-                      imgulr:null,
-                      profilePic:null,
-                      userType:"user",
-                      edit:false
-                      }],
+                    //   message : "ok please chcek ",
+                    //   userName :"jayshah",
+                    //   userid:"675131652176",
+                    //   assid:"kdshfjhdsf",
+                    //   tlid: "sdhfkjdshfds",
+                    //   date: moment().format("DD/MM/YYYY"),
+                    //   userSeen: true,
+                    //   assSeen: false,
+                    //   tlSeen:false,
+                    //   imgulr:null,
+                    //   profilePic:null,
+                    //   userType:"user",
+                    //   edit:false
+                    //   }],
                   },
 
 

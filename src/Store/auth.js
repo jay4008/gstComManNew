@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { GStHelper } from '../utility/APIHelper';
 import { request } from '../utility/common';
 
 
@@ -28,16 +29,80 @@ const login = createAsyncThunk(
 
 
 // <===================sendotp==================>>>
+//https://gstcomman.herokuapp.com/api/users/email-send
+// const sendotp = createAsyncThunk(
+//   'sendotp',
+//   async (data, thunkAPI) => {
+//       //console.log('guestUserLogin', data);
+//     const response = await request('post', "/api/users/email-send", data);
+//     return response.data;
+//   },
+// );
 
+
+// <===================sendotp==================>>>
 const sendotp = createAsyncThunk(
   'sendotp',
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log('datdsfsdfa', data);
+      let response = await GStHelper.post(
+        "/api/users/email-send",
+        data,
+      );
+
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e.response.data);
+    }
+  },
+);
+
+// https://gstcomman.herokuapp.com/api/users/check-otp
+// <===================verifyOtp==================>>>
+
+const verifyOtp = createAsyncThunk(
+  'verifyOtp',
   async (data, thunkAPI) => {
       //console.log('guestUserLogin', data);
-    const response = await request('post', "/api/users/email-send", data);
+    const response = await request('post', "/api/users/check-otp", data);
     return response.data;
   },
 );
 
+// <===================getdatabyuserid==================>>>
+//https://gstcomman.herokuapp.com/api/users/show-user
+// const getdatabyuserid = createAsyncThunk(
+//   'getdatabyuserid',
+//   async (data, { rejectWithValue }) => {
+//     try {
+//       console.log('datdsfsdfa', data);
+//       let response = await GStHelper.get(
+//         "/api/users/show-user/"+data.userId,
+//         data.data,
+//       );
+
+//       return response.data;
+//       console.log('allll user data#########',response.data);
+//     } catch (e) {
+//       return rejectWithValue(e.response.data);
+//     }
+//   },
+// );
+
+
+
+// <===================resetpassword==================>>>
+//https://gstcomman.herokuapp.com/api/users/password-reset
+
+const resetpassword = createAsyncThunk(
+  'resetpassword',
+  async (data, thunkAPI) => {
+      //console.log('guestUserLogin', data);
+    const response = await request('post', "/api/users/password-reset", data);
+    return response.data;
+  },
+);
 
 
 
@@ -118,6 +183,23 @@ const loginSlice = createSlice({
   extraReducers: {
 
 
+// <===================register==================>>>
+
+
+
+[registration.fulfilled]: (state, action) => {
+  //state.productList=action.payload;
+  console.log('registrationf ullfilldata',action.payload)
+},
+[registration.pending]: (state, action) => {
+},
+[registration.rejected]: (state, action) => {
+  console.log('registration Rejected data',action)
+},
+
+// <===================product==================>>>
+
+
     [product.fulfilled]: (state, action) => {
       state.productList=action.payload;
       console.log('fullfilldata',state.productList)
@@ -128,6 +210,9 @@ const loginSlice = createSlice({
       console.log('Rejected data',action)
     },
 
+// <===================login==================>>>
+
+
     [login.fulfilled]: (state, action) => {
       state.userData=action.payload;
       console.log('fullfilldata',state.userData)
@@ -137,6 +222,10 @@ const loginSlice = createSlice({
     [login.rejected]: (state, action) => {
       console.log('Rejected data',action)
     },
+
+// <=================== Address==================>>>
+
+
     [address.fulfilled]: (state, action) => {
       //state.productList=action.payload;
       console.log('Address fullfield',action)
@@ -147,6 +236,7 @@ const loginSlice = createSlice({
       console.log(' Address Rejected',action)
     },
 
+// <===================contact us==================>>>
 
     [contactus.fulfilled]: (state, action) => {
       //state.productList=action.payload;
@@ -164,10 +254,34 @@ const loginSlice = createSlice({
       //state.productList=action.payload;
       console.log('sendotp fullfield',action)
     },
-    [sendotp.pending]: (state, action) => {
-    },
     [sendotp.rejected]: (state, action) => {
       sendotp.log(' sendotp Rejected',action)
+    },
+
+
+     
+    
+     [verifyOtp.fulfilled]: (state, action) => {
+      //state.productList=action.payload;
+      console.log('verifyOtp fullfield',action)
+    },
+    [verifyOtp.pending]: (state, action) => {
+    },
+    [verifyOtp.rejected]: (state, action) => {
+      console.log(' verifyOtp Rejected',action)
+    },
+
+
+// <===================verifyOtp for sendotp==================>>>
+
+    [resetpassword.fulfilled]: (state, action) => {
+      //state.productList=action.payload;
+      console.log('verifyOtp fullfield',action)
+    },
+    [resetpassword.pending]: (state, action) => {
+    },
+    [resetpassword.rejected]: (state, action) => {
+      console.log(' verifyOtp Rejected',action)
     },
 
   //  // <===================upload Image==================>>>
@@ -187,5 +301,5 @@ const loginSlice = createSlice({
 
 
 export const { userLoginSuccess, userLogoutSuccess , setUserTokenInfo } = loginSlice.actions;
-export { product , registration , login , contactus , address,sendotp,};
+export { product , registration , login , contactus , address,sendotp,verifyOtp,resetpassword};
 export default loginSlice.reducer;
