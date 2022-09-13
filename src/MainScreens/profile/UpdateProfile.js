@@ -32,7 +32,7 @@ const UpdateProfile = () => {
       cropping: true,
     }).then(image => {
       setDocPicker(false);
-      console.log(image);
+      console.log("image@@@@@@@@@@@@@@@",image);
     });
   };
 
@@ -43,7 +43,7 @@ const UpdateProfile = () => {
       cropping: true,
     }).then(image => {
       setDocPicker(false);
-      console.log(image);
+      console.log("image@@@@@@@@@@@@@@@",image);
     });
   };
 
@@ -286,3 +286,46 @@ const CommonButton = ({ onPress, text = '', image = true }) => {
     </TouchableOpacity>
   );
 };
+
+
+
+
+// const uploadImage = async () => {
+//   setLoader(true);
+//   let submitData = []
+//   submitData.push({
+//     name: 'userImage',
+//     data: RNFetchBlob.wrap(
+//       Platform.OS === 'android'
+//         ? itemImage?.uri
+//         : itemImage?.uri.replace('file://', ''),
+//     ),
+//     filename: itemImage?.name,
+//     type: itemImage?.type,
+//     size: itemImage?.size,
+//   });
+
+//   console.log('submitData', submitData);
+
+//   try {
+//     let response = await request('upload', REGISTER_A_USER, submitData);
+//     console.log('response.data', response.data);
+//     showFlashMessage(response.data.message, '', 'success');
+//     Alert.alert(
+//       'Success',
+//       'User added successfully',
+//       [
+//         {
+//           text: 'OK',
+//           onPress: () => props.navigation.goBack(),
+//         },
+//       ],
+//       {cancelable: false},
+//     );
+//   } catch (error) {
+//     showFlashMessage(error, '', 'danger');
+//     console.log('error', error);
+//   } finally {
+//     setLoader(false);
+//   }
+// };

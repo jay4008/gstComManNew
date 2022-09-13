@@ -15,6 +15,7 @@ import jwt_decode from 'jwt-decode';
 const LogIn = props => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
+  const [phno,setPhno] = useState('')
   useEffect(() => {
     AsyncStorage.setItem('token', '');
   }, []);
@@ -34,10 +35,12 @@ const LogIn = props => {
         <Ainput
           value={Email}
           onChangeText={setEmail}
-          placeholder={'Email'}></Ainput>
+          value = {phno}
+          on onChangeText={setPhno}
+          placeholder={'Email or Mobile'}/>
+          
         <Ainput
           secureTextEntry={true}
-          
           value={Password}
           onChangeText={setPassword}
           eye={true}
@@ -45,18 +48,19 @@ const LogIn = props => {
 
         <CusButtom
           onpress={async () => {
-            let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-            if (reg.test(Email) === false) {
-              dispatch(setToastMsg('Please enter a valid Email address'));
-              return;
-            } else if (Password.length < 3) {
-              dispatch(setToastMsg('Please enter Correct password'));
-              return;
-            }
+            // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+            // if (reg.test(Email) === false) {
+            //   dispatch(setToastMsg('Please enter a valid Email address'));
+            //   return;
+            // } else if (Password.length < 3) {
+            //   dispatch(setToastMsg('Please enter Correct password'));
+            //   return;
+            // }
 
             dispatch(LoaderOn());
             dispatch(
               login({
+                ph:phno,
                 email: Email,
                 password: Password.toString(),
               }),
