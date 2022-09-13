@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, SafeAreaView, StyleSheet, Pressable, Modal, FlatList, Image } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Pressable, Modal, FlatList, Image, Dimensions } from 'react-native'
 import { Colors, Fonts } from '../../assets/common/common'
 import { CusButtom } from '../../CommonComponents/common/CusButtom'
 import { Rtext } from '../../CommonComponents/common/Rtext'
@@ -13,6 +13,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { subscription } from '../../Store/subscription'
 import moment from 'moment'
 import { useIsFocused } from '@react-navigation/native'
+import DocSelection from '../popup/DocModal';
+import ImagePicker from 'react-native-image-crop-picker';
+import DocumentPicker from 'react-native-document-picker';
+import {
+    Menu,
+    MenuOptions,
+    MenuOption,
+    MenuTrigger,
+} from 'react-native-popup-menu';
+const { width, height } = Dimensions.get('window');
 
 
 const DATA = [
@@ -37,13 +47,14 @@ const DATA = [
 
 
 const MySubscription = (props) => {
-const isfocus = useIsFocused()
+    const isfocus = useIsFocused()
+    const [docPicker, setDocPicker] = useState(false);
     // const [modalVisible, setModalVisible] = useState(!paid);
     const userTokenInfo = useSelector(state => state.auth.userTokenInfo);
-    const userId = userTokenInfo.userId
+   const userId = userTokenInfo.userId
 
     console.log('userTokenInfo data============', userTokenInfo);
-    console.log('userTokenInfo id============', userId);
+   console.log('userTokenInfo id============', userId);
 
 
     const SuscriptionData = useSelector(state => state.subscription.subscription);
@@ -56,12 +67,57 @@ const isfocus = useIsFocused()
     // console.log('iddddddddd======',SuscriptionData.purchaseMonth)
     const dispatch = useDispatch();
     useEffect(() => {
-        if(isfocus){
-            dispatch(subscription({ userId }))
+        if (isfocus) {
+            dispatch(subscription({
+                user: userId
+            }))
         }
-    
+
 
     }, [isfocus])
+
+    const openCamera = () => {
+        ImagePicker.openCamera({
+            width: 300,
+            height: 400,
+            cropping: true,
+        }).then(image => {
+            setDocPicker(false);
+            console.log(image);
+        });
+    };
+
+    const openGallery = () => {
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true,
+        }).then(image => {
+            setDocPicker(false);
+            console.log(image);
+        });
+    };
+
+
+    const uploadDoc = async () => {
+
+
+        try {
+            const results = await DocumentPicker.pickMultiple({
+                type: [DocumentPicker.types.allFiles],
+            });
+            setDocPicker(false);
+        } catch (err) {
+
+            console.log("err", err);
+        }
+    };
+
+
+
+
+
+
     return (
         <SafeAreaView>
             <KeyboardAwareScrollView>
@@ -69,31 +125,31 @@ const isfocus = useIsFocused()
 
 
                     {
-                        !SuscriptionData?.isPaid &&
+                        SuscriptionData?.isPaid &&
 
                         <>
 
-                            <View style={{ paddingHorizontal: 10, marginTop : 20}}>
-                                <Rtext style={{ color: Colors.black, fontFamily: Fonts.latoBold, fontsize: 20, }}>{"Subscription for Month  " +   moment().format('MMMM')}</Rtext>
+                            <View style={{ paddingHorizontal: 10, marginTop: 20 }}>
+                                <Rtext style={{ color: Colors.black, fontFamily: Fonts.latoBold, fontsize: 20, }}>{"Subscription for Month  " + moment().format('MMMM')}</Rtext>
                                 <View style={{ height: 1, borderColor: Colors.black, borderWidth: 1, justifyContent: 'center', marginTop: 4, width: 220 }} />
                             </View>
-                            <View style = {{paddingVertical : 60 ,backgroundColor : Colors.white , borderRadius : 20, marginTop : 10 , alignItems :'center', justifyContent :'center' }}>
-                              <Image style = {{tintColor : Colors.mainblue , height : 60 , width : 60 , resizeMode :'contain'}} source = {require('../../assets/icons/suscription.png')} />
-                            <Rtext style={{ fontFamily : Fonts.latoBold ,  paddingHorizontal: 40, marginTop: 10 }}> {"You dont have any active Plan"}</Rtext>
+                            <View style={{ paddingVertical: 60, backgroundColor: Colors.white, borderRadius: 20, marginTop: 10, alignItems: 'center', justifyContent: 'center' }}>
+                                <Image style={{ tintColor: Colors.mainblue, height: 60, width: 60, resizeMode: 'contain' }} source={require('../../assets/icons/suscription.png')} />
+                                <Rtext style={{ fontFamily: Fonts.latoBold, paddingHorizontal: 40, marginTop: 10 }}> {"You dont have any active Plan"}</Rtext>
                             </View>
                             <View style={{}} >
                             </View>
 
-                            <View style = {{width : "70%" ,alignSelf :'center'}}>
-                    <CusButtom onpress = {() => props.navigation.navigate('Home')} textStyle = {{fontFamily : Fonts.latoBlack}} source = {require('../../assets/icons/cal.png')}  image = {true} ImgStyle = {{height : 30 , width : 30 ,tintColor : Colors.white, resizeMode : "contain" , marginRight : 10}} text={'Suscribe now'} />
-                </View>
+                            <View style={{ width: "70%", alignSelf: 'center' }}>
+                                <CusButtom onpress={() => props.navigation.navigate('Home')} textStyle={{ fontFamily: Fonts.latoBlack }} source={require('../../assets/icons/cal.png')} image={true} ImgStyle={{ height: 30, width: 30, tintColor: Colors.white, resizeMode: "contain", marginRight: 10 }} text={'Suscribe now'} />
+                            </View>
                         </>
                     }
 
 
 
-                    {SuscriptionData?.isPaid && <>
-                        <View style={{ width: '100%', paddingHorizontal: 10 }}>
+                    {!SuscriptionData?.isPaid && <>
+                        <View style={{ width: '100%', paddingHorizontal: 10, borderRadius: 5, borderWidth: 1, borderColor: Colors.primaryColor }}>
                             <View style={{ paddingHorizontal: 10, }}>
                                 <Rtext style={{ color: Colors.black, fontFamily: Fonts.latoBold, fontsize: 20, }}>Monthely Subscription:</Rtext>
                                 <View style={{ height: 1, borderColor: Colors.black, borderWidth: 1, justifyContent: 'center', marginTop: 4, width: 150 }} />
@@ -102,9 +158,10 @@ const isfocus = useIsFocused()
                                 <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 7 }}>Category Name:<Rtext> SGST</Rtext> </Rtext>
                                 <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }}>DESC: <Rtext> is simply dummy text of the printing</Rtext></Rtext>
                             </View>
-                            <View style={{ paddingHorizontal: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }} >Start Date:<Rtext>12-Aug-2022</Rtext></Rtext>
-                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }}>End Date:<Rtext>12-sep-2022</Rtext></Rtext>
+                            <View style={{ paddingHorizontal: 10, flexDirection: 'row', justifyContent: 'space-between' ,width:'100%'}}>
+                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }} >Start Date:<Rtext style={{fontSize:15}}>12-Aug-22</Rtext></Rtext>
+                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }}>End Date:<Rtext>12-sep-
+                                    </Rtext></Rtext>
                             </View>
 
 
@@ -114,21 +171,24 @@ const isfocus = useIsFocused()
                     }
 
                     {
-                        SuscriptionData?.isPaid &&
+                        !SuscriptionData?.isPaid &&
                         <FlatList
                             ListHeaderComponent={() => (
                                 <Rtext style={{ marginVertical: 20, color: Colors.black, fontFamily: Fonts.latoBold, fontsize: 20, }}>Document:</Rtext>
                             )}
                             ListFooterComponent={() => (
                                 <View style={{ paddingVertical: 20, }}>
-                                    <CusButtom BTNstyle={{ marginHorizontal: "10%" }} text={'Upload'}
-                                    // onpress={() => setModalVisible(true)}
+                                    <CusButtom BTNstyle={{ marginHorizontal: "10%" }} text={'Upload Document'}
+                                        // onpress={() => setModalVisible(true)}
+                                        onpress={() => {
+                                            setDocPicker(true);
+                                        }}
                                     />
                                 </View>
                             )}
                             data={DATA}
                             // renderItem={renderItem} 
-                            renderItem={({ item, index }) => <RenderItem item={item} index={index} />}
+                            renderItem={({ item, index }) => <RenderItem item={item} index={index} props={props} />}
                             keyExtractor={item => item.id}
                         />
                     }
@@ -137,35 +197,101 @@ const isfocus = useIsFocused()
 
                 </View>
 
+                {docPicker && (
+                    <DocSelection
+                        onPressDoc={() => uploadDoc()}
+                        onPressCamera={() => openCamera()}
+                        onPressGallery={() => openGallery()}
+                        setIsVisible={setDocPicker}
+                        isVisible={true}
+                    />
+                )}
 
 
-              
             </KeyboardAwareScrollView>
         </SafeAreaView>
     )
 }
 
+const CustomMenu = ({ }) => {
+    const dispatch = useDispatch()
+    return (
+        <View style={{ position: 'absolute', top: 10, right: 0 }}>
+            <Menu>
+                <MenuTrigger>
+                    <Image
+                        source={require('../../assets/icons/dot.png')}
+                        style={{
+                            height: 30,
+                            width: 30,
+                            resizeMode: 'contain',
+                            tintColor: Colors.primaryColor,
+                        }}></Image>
+                </MenuTrigger>
+                <MenuOptions>
+                    {/* <MenuOption onSelect={() => alert(`Save`)}>
+              <Text style={styles.menuOptionTxt}>Export to pdf</Text>
+            </MenuOption> */}
+                    <MenuOption onSelect={() => dispatch(deleteCollection(index))}>
+                        <Text style={styles.menuOptionTxt}>Delete Collection</Text>
+                    </MenuOption>
+                </MenuOptions>
+            </Menu>
+        </View>
+    );
+};
 
-const RenderItem = ({ item, index }) => {
+
+const RenderItem = ({ item, index, props }) => {
     return (
 
         <View style={{}}>
-            {<>
-                < TouchableOpacity style={styles.flatlistMainView}>
-                    <View style={styles.rowWiseChild}>
 
+            {/* < TouchableOpacity style={styles.flatlistMainView}
+                onPress={() => props.navigation.navigate('DocList')}>
+                
+                    <View style={styles.rowWiseChild}>
+                    <CustomMenu index = {index} />
 
                         <Image source={require('../../assets/icons/image.png')} style={styles.flatListIconStyle} />
                         <View style={{ flexDirection: 'column', width: '60%' }}>
                             <Rtext >{item.name}</Rtext>
                             <Rtext>{item.desc}</Rtext>
                         </View>
-                        <Image style={{ position: 'absolute', top: 10, right: 10 }} source={require('../../assets/icons/threedots.png')} />
+    
                     </View>
+                </TouchableOpacity> */}
 
-                </TouchableOpacity>
-            </>
-            }
+
+            <View
+                style={styles.flatlistMainView}
+                >
+                
+                <CustomMenu  />
+                <View style={styles.rowWiseChild}>
+                    <Image
+                        source={
+
+                            require('../../assets/icons/image.png')
+
+                        }
+                        style={styles.flatListIconStyle}
+                    />
+                    <View>
+                        <Rtext>{item?.name}</Rtext>
+                        <Rtext
+                            style={{
+                                width: width - 140,
+                                fontSize: 12,
+                                color: 'silver',
+                                marginTop: 5,
+                            }}>
+                            {item?.desc}
+                        </Rtext>
+                    </View>
+                </View>
+            </View>
+
         </View>
     )
 }
@@ -179,7 +305,7 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         backgroundColor: Colors.white,
         marginBottom: 5,
-        // marginHorizontal: 15,
+        marginHorizontal: 15,
         borderRadius: 10,
     },
     rowWiseChild: {
@@ -193,5 +319,12 @@ const styles = StyleSheet.create({
         borderColor: Colors.mainblue,
         borderRadius: 4,
         marginHorizontal: 15,
+    },
+    menuOptionTxt: {
+        color: Colors.black,
+        fontFamily: Fonts.latoRegular,
+        fontSize: 14,
+        paddingVertical: 15,
+        marginLeft: 10,
     },
 });

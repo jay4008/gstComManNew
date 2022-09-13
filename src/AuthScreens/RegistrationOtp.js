@@ -15,7 +15,7 @@ import { userLoginSuccess } from '../Store/auth';
 import { LoaderOff, LoaderOn, setToastMsg } from '../Store/popup';
 import { verifyOtp } from '../Store/auth';
 
-const Verification = prop => {
+const RegistrationOtp = prop => {
   const [timeLeft, setTimeLeft] = React.useState(30);
   const [resendHide, setResendHide] = React.useState(false);
   const CELL_COUNT = 5;
@@ -157,16 +157,16 @@ const Verification = prop => {
           })).then((res) => {
             dispatch(LoaderOff())
             console.log("resresresresresres========>", res);
-            prop.navigation.navigate('ResetPassword', {
-              email: newemail,
-              otp: value
-            })
+            prop.navigation.navigate('Registrationpassword', {
+            email: newemail,
+             otp: value
+             })
           })
             
-          //prop.navigation.navigate('ResetPassword');
+         //prop.navigation.navigate('Registrationpassword');
           //dispatch(userLoginSuccess());
         }}></CusButtom>
     </AuthFrame>
   );
 };
-export default Verification;
+export default RegistrationOtp;

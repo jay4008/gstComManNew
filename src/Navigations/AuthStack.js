@@ -12,7 +12,8 @@ import ResetPassword from '../AuthScreens/ResetPassword';
 import Registration from '../AuthScreens/Registration';
 import LoginOptions from '../AuthScreens/LoginOptions';
 import ForgotEmail from '../AuthScreens/ForgotEmail';
-
+import RegistrationOtp from '../AuthScreens/RegistrationOtp';
+import Registrationpassword from '../AuthScreens/Registrationpassword'
 const headerOptionForStackPage = {
     headerStyle: {
       backgroundColor: '#fff',
@@ -35,6 +36,9 @@ function AuthStack() {
       <Stack.Screen name="Registration" component={Registration} />
       <Stack.Screen name="LoginOptions" component={LoginOptions} />
       <Stack.Screen name="ForgotEmail" component={ForgotEmail} />
+      <Stack.Screen name="RegistrationOtp" component={RegistrationOtp} />
+      <Stack.Screen name="Registrationpassword" component={Registrationpassword} />
+
     </Stack.Navigator>
   );
 }
