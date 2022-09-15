@@ -191,12 +191,12 @@ setDocPicker(true)
                   marginBottom: 40,
                 }}>
                 <Rtext style={{ textAlign: 'center', color: 'white' }}>
-                  Edit Profile
+                  Upload Profile Picture
                 </Rtext>
               </View>
             </TouchableOpacity>
           </View>
-          <CommonButton text={'My Order'}
+          <CommonButton text={'Update Profile'}
             onPress={() =>
               // navigation.navigate('MyOrder')
               setDocPicker(true)
@@ -207,8 +207,8 @@ setDocPicker(true)
               navigation.navigate('Address')
             }
           />
-          <CommonButton onPress={() => navigation.navigate('CouponCode')} text={'Payment Method'} />
-          <CommonButton onPress={() => navigation.navigate('Purchase')} text={'Purchase History'} />
+          <CommonButton onPress={() => navigation.navigate('CouponCode')} text={'Payment '} />
+          <CommonButton onPress={() => navigation.navigate('Purchase')} text={'Purchase'} />
           <CommonButton text={'Setting'} />
           <CommonButton onPress={() => navigation.navigate('Product')} text={'Share'} />
           <CommonButton onPress={() => dispatch(userLogoutSuccess())} text={'Log Out'} />

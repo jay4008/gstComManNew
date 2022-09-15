@@ -8,7 +8,7 @@ import { CusButtom } from '../../CommonComponents/common/CusButtom'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useState } from 'react'
 // import { setToastMsg } from "../Store/popup";
-import { setToastMsg } from '../../Store/popup'
+import { LoaderOff, LoaderOn, setSucessFailerMsg, setToastMsg } from '../../Store/popup'
 import { useDispatch } from 'react-redux'
 import { address } from '../../Store/auth'
 
@@ -92,6 +92,8 @@ const Address = () => {
                             dispatch(setToastMsg("Please enter Correct ph no"));
                             return  
                          }
+                         dispatch(LoaderOn())
+                      
                          dispatch(address({
 
                             "name": name,
@@ -101,13 +103,31 @@ const Address = () => {
                             "city": city,
                             "state": state,
                             "phno": phno  
+                            
 
-                         })).then(()=>{
-                             dispatch(setToastMsg("Addrss Save Successfully"));
-                             return
+                         }))
+                         
+                         .then(()=>{
+                            //  dispatch(setToastMsg("Addrss Save Successfully"));
+                            //  return
+                            dispatch(LoaderOff())
+                            dispatch(
+                                setSucessFailerMsg({
+                                  successFailureheaderTxt: "Thank you",
+                                  successFailureContent:'Adress Updated Sucessfully',
+                                  successFailureType: true,
+                                }),
+                              );
+                             
                          })
                     
-                    
+                         setAddress1("")
+                         setName("")
+                         setEmail("")
+                         setAddress2("")
+                         setPhno("")
+                         setCity("")
+                         seState("")
                     }}
                  />
                 </View>

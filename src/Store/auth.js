@@ -28,6 +28,40 @@ const login = createAsyncThunk(
 );
 
 
+//<===================get user data by id==================>>>
+const getUserDatabyid = createAsyncThunk(
+  'getUserDatabyid',
+  async (data, thunkAPI) => {
+    console.log('resetpasswordresetpassword', data);
+    const response = await request('get', '/api/users/all/' + data.id);
+    return response.data;
+  },
+);
+
+//<===================get user all data by id==================>>>
+const getalldata = createAsyncThunk(
+  'getalldata',
+  async (data, thunkAPI) => {
+    //console.log('resetpasswordresetpassword', data);
+    const response = await request('post', '/api/subscription/showsub',data);
+    return response.data;
+  },
+);
+
+
+//<===================get user all data by id in query params==================>>>
+//https://gstcomman.herokuapp.com/api/subscription/showsub/:id
+const getalldatabyid= createAsyncThunk(
+  'getalldatabyid',
+  async (data, thunkAPI) => {
+    //console.log('resetpasswordresetpassword', data);
+    const response = await request('get', '/api/subscription/showsub/' + data.id);
+    return response.data;
+  },
+); 
+
+
+
 // <===================sendotp==================>>>
 //https://gstcomman.herokuapp.com/api/users/email-send
 // const sendotp = createAsyncThunk(
@@ -159,7 +193,10 @@ const loginSlice = createSlice({
     token: null,
     isUserLoggedIn: false,
     productList:{},
-    userTokenInfo: {}
+    userTokenInfo: {},
+    getUserDatabyid:{},
+    getuseralldata:{},
+    getalldatabyid:{}
   },
 
   reducers: {
@@ -209,6 +246,23 @@ const loginSlice = createSlice({
     [product.rejected]: (state, action) => {
       console.log('Rejected data',action)
     },
+
+   // <===================get user data by id==================>>>
+    [getUserDatabyid.fulfilled]: (state, action) => {
+      state.getUserDatabyid=action.payload;
+      console.log('state.getUserDatabyid fullfilldata',state.getUserDatabyid)
+    },
+    
+    [getUserDatabyid.rejected]: (state, action) => {
+      console.log('state.getUserDatabyid',action)
+    },
+
+
+
+
+
+
+
 
 // <===================login==================>>>
 
@@ -284,6 +338,32 @@ const loginSlice = createSlice({
       console.log(' verifyOtp Rejected',action)
     },
 
+
+
+    //<=================== Extarareducer get user all data by id==================>>>
+    [getalldata.fulfilled]: (state, action) => {
+      state.getuseralldata=action.payload;
+      console.log('getalldata fullfield',state.getuseralldata)
+
+    },
+    [getalldata.pending]: (state, action) => {
+    },
+    [getalldata.rejected]: (state, action) => {
+      console.log(' getalldata Rejected',action)
+    },
+
+    //<=================== Extarareducer get user all data by id in query prams==================>>>
+
+    [getalldatabyid.fulfilled]: (state, action) => {
+      state.getalldatabyid=action.payload;
+      console.log('getalldatabyidgetalldatabyidgetalldatabyidgetalldatabyid',state.getalldatabyid)
+    },
+    [getalldatabyid.rejected]: (state, action) => {
+      console.log(' getalldatabyidgetalldatabyidgetalldatabyidgetalldatabyid',action)
+    },
+
+
+
   //  // <===================upload Image==================>>>
   //  [uploadimage.fulfilled]: (state, action) => {
   //   //state.productList=action.payload;
@@ -301,5 +381,5 @@ const loginSlice = createSlice({
 
 
 export const { userLoginSuccess, userLogoutSuccess , setUserTokenInfo } = loginSlice.actions;
-export { product , registration , login , contactus , address,sendotp,verifyOtp,resetpassword};
+export { product , registration ,getalldatabyid, login , contactus , address,sendotp,verifyOtp,resetpassword,getUserDatabyid,getalldata,};
 export default loginSlice.reducer;

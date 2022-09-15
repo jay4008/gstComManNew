@@ -39,7 +39,6 @@ const userSlice = createSlice({
 
     [getMsg.fulfilled]: (state, action) => {
       state.messagesAll = action.payload;
-      // console.log('data',state.userList)
       console.log(' ====Message======', action.payload);
     },
 
