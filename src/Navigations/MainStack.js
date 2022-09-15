@@ -213,7 +213,7 @@ function MyStack(props) {
         name="Purchase"
         component={Purchase}
         options={({ navigation }) => ({
-          title: 'Address',
+          title: 'purchase Details',
           headerTintColor: '#224585',
           headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {

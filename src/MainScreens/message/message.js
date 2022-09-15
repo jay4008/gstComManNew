@@ -24,105 +24,9 @@ import UpdateComment from '../popup/UpdateComment';
 
 const {height, width} = Dimensions.get('window');
 
-const DATA = [
-  {
-    name: 'Koushik',
-    mess: 'hlw Koushik',
-    time: '2:45pm',
-    // img: require('../../assets/icons/profile.png'),
-  },
-  {
-    name: 'souvik',
-    mess: 'hlw ',
-    time: '3.15pm',
-    //img: require('../../assets/icons/camera.png'),
-  },
-  {
-    name: 'Ranjan',
-    mess: 'how are you?',
-    time: 'Yestarday',
-    //img: require('../../assets/icons/clock.png'),
-  },
-  // {
-  //   name: 'jay',
-  //   mess: 'Whare r u from?',
-  //   time: '3.15pm',
-  //   img: require('../../assets/icons/delete.png'),
-  // },
-  // {
-  //   name: 'Koushik',
-  //   mess: 'hlw Koushik',
-  //   time: '2:45pm',
-  //   img: require('../../assets/icons/fail.png'),
-  // },
-  // {
-  //   name: 'souvik',
-  //   mess: 'hlw ',
-  //   time: '3.15pm',
-  //   img: require('../../assets/icons/filter.png'),
-  // },
-  // {
-  //   name: 'Ranjan',
-  //   mess: 'how are you?',
-  //   time: 'Yestarday',
-  //   img: require('../../assets/icons/grater.png'),
-  // },
-  // {
-  //   name: 'jay',
-  //   mess: 'Whare r u from?',
-  //   time: 'Yestarday',
-  //   img: require('../../assets/icons/less.png'),
-  // },
-  // {
-  //   name: 'Koushik',
-  //   mess: 'hlw Koushik',
-  //   time: '3.15pm',
-  //   img: require('../../assets/icons/gst.png'),
-  // },
-  // {
-  //   name: 'souvik',
-  //   mess: 'hlw ',
-  //   time: '2:45pm',
-  //   img: require('../../assets/icons/help.png'),
-  // },
-  // {
-  //   name: 'Ranjan',
-  //   mess: 'how are you?',
-  //   time: '2:45pm',
-  //   img: require('../../assets/icons/fail.png'),
-  // },
-  // {
-  //   name: 'jay',
-  //   mess: 'Whare r u from?',
-  //   time: 'Yestarday',
-  //   img: require('../../assets/icons/image.png'),
-  // },
-  // {
-  //   name: 'Koushik',
-  //   mess: 'hlw Koushik',
-  //   time: '3.15pm',
-  //   img: require('../../assets/icons/profile.png'),
-  // },
-  // {
-  //   name: 'souvik',
-  //   mess: 'hlw ',
-  //   time: '2:45pm',
-  //   img: require('../../assets/icons/grater.png'),
-  // },
-  // {
-  //   name: 'Ranjan',
-  //   mess: 'how are you?',
-  //   time: 'Yestarday',
-  //   img: require('../../assets/icons/phone.png'),
-  // },
 
-  // {
-  //   name: 'jay',
-  //   mess: 'Whare r u from?',
-  //   time: '3.15pm',
-  //   img: require('../../assets/icons/tick.png'),
-  // },
-];
+  
+
 
 const message = props => {
   const [updateReply, setUpdateReply] = useState('');
@@ -258,6 +162,7 @@ const message = props => {
           backgroundColor: '#fff',
           bottom: 5,
           flexDirection: 'row',
+          alignItems :'center',
           width: Dimensions.get('window').width,
           justifyContent: 'space-evenly',
         }}>
@@ -268,7 +173,7 @@ const message = props => {
           onChangeText={setSendmsg}
           style={{
             width: '80%',
-            borderWidth: 1,
+            borderWidth: 2,
             borderColor: Colors.mainblue,
             borderRadius: 10,
           }}></TextInput>
@@ -327,17 +232,21 @@ const message = props => {
               });
             });
           }}>
-          <Image
+            <View style = {{height : 40 , width : 40 , alignItems :'center', justifyContent :'center' , borderRadius : 25 ,borderWidth : 2 , borderColor : Colors.mainblue}}>
+            <Image
             style={{
-              width: 40,
-              height: 40,
-              borderRadius: 100,
-              borderWidth: 2,
+              width: 20,
+              height: 20,
+               // borderRadius: 100,
+              // borderWidth: 2,
+              marginLeft : 2,
               borderColor: Colors.mainblue,
               tintColor: Colors.mainblue,
             }}
-            source={require('../../assets/icons/send.png')}
+            source={require('../../assets/icons/sendmsg.png')}
           />
+            </View>
+        
         </TouchableOpacity>
       </View>
 

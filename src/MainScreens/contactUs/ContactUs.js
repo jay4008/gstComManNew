@@ -6,7 +6,7 @@ import { Colors, Fonts } from '../../assets/common/common'
 import { Ainput } from '../../CommonComponents/common/Ainput'
 import { CusButtom } from '../../CommonComponents/common/CusButtom'
 import { Rtext } from '../../CommonComponents/common/Rtext'
-import { setToastMsg } from '../../Store/popup'
+import { LoaderOff, LoaderOn, setToastMsg } from '../../Store/popup'
 import { contactus } from '../../Store/auth'
 
 const ContactUs = () => {
@@ -61,6 +61,7 @@ const ContactUs = () => {
                         dispatch(setToastMsg("Please enter Correct Information"));
                         return  
                      }
+                     dispatch(LoaderOn())
                      dispatch(contactus({
                         "name":name,
                         "email":email,
@@ -68,9 +69,16 @@ const ContactUs = () => {
                         "message":message,
                         "informationType":it 
                      })).then(()=>{
-
-                            dispatch(setToastMsg('Thank you !! for your information'));
-                            return
+                        dispatch(
+                            setSucessFailerMsg({
+                              successFailureheaderTxt: "Thank you",
+                              successFailureContent:'Adress Updated Sucessfully',
+                              successFailureType: true,
+                            }),
+                          );
+                          dispatch(LoaderOff())
+                            // dispatch(setToastMsg('Thank you !! for your information'));
+                            // return
 
                      })
 

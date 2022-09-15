@@ -129,7 +129,7 @@ const Home = (props) => {
 
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={[...Data , {help : true}]}
+        data={[]}
         renderItem={renderItem}
         keyExtractor={(item) => item._id}
       />

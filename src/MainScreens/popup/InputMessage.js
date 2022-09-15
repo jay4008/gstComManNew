@@ -10,7 +10,7 @@ import {
   Dimensions,
   Alert,
 } from 'react-native';
-
+// import { useState } from 'react';
 import { Colors } from '../../assets/common/common';
 import { Rtext } from '../../CommonComponents/common/Rtext';
 import Modal from 'react-native-modal';
@@ -21,15 +21,31 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postMsg } from '../../Store/message';
 import moment from 'moment';
 import { setToastMsg } from '../../Store/popup';
+import { getUserDatabyid } from '../../Store/auth';
 const { width } = Dimensions.get('window');
 const InputMsg = ({ setShowModal, showModal, userId }) => {
   const userTokenInfo = useSelector(state => state.auth.userTokenInfo);
+
+  const higherauth = useSelector(state => state.auth.getUserDatabyid);
+
+console.log('higherauthhigherauthhigherauth');
+  const auth = useSelector(state => state.auth);
   const [reply , setReply] = useState([]);
   console.log('============usertoken========', userTokenInfo);
+  console.log('============auth========', auth);
   const dispatch = useDispatch()
   const [messge, stMessage] = useState("")
 
+useEffect(()=>{
+  dispatch(getUserDatabyid({
+    id:userTokenInfo.userId
+  }))
+},[])
 
+
+useEffect(() =>{
+console.log("higherauth",higherauth);
+},[higherauth])
 
 
 
@@ -97,7 +113,8 @@ const InputMsg = ({ setShowModal, showModal, userId }) => {
                     message: messge,
                     userName: userTokenInfo.username,
                     userid: userTokenInfo.userId,
-                    assid: "6310767727ddca168192be1d",
+                    assid: higherauth.showHigherAuth
+                    ,
                     tlid: null,
                     date: moment().format('DD/MM/YYYY'),
                     userSeen: true,

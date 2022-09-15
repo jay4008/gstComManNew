@@ -27,114 +27,8 @@ import Loader from '../popup/Loader';
 // import {getSuperAdmin} from '../../Store/auth';
 // import PushNotification from 'react-native-push-notification';
 // import CommonHeader from '../../CommonComponents/common/CommonHeader/Header';
-
-const DATA = [
-  {
-    name: 'Koushik',
-    mess: 'hlw Koushik',
-    time: '2:45pm',
-    img: require('../../assets/icons/profile.png')
-  },
-  {
-    name: 'souvik',
-    mess: 'hlw ',
-    time: '3.15pm',
-    img: require('../../assets/icons/camera.png')
-  },
-  {
-    name: 'Ranjan',
-    mess: 'how are you?',
-    time: 'Yestarday',
-    img: require('../../assets/icons/clock.png')
-  },
-  {
-    name: 'jay',
-    mess: 'Whare r u from?',
-    time: '3.15pm',
-    img: require('../../assets/icons/delete.png')
-  },
-  {
-    name: 'Koushik',
-    mess: 'hlw Koushik',
-    time: '2:45pm',
-    img: require('../../assets/icons/fail.png')
-  },
-  {
-    name: 'souvik',
-    mess: 'hlw ',
-    time: '3.15pm',
-    img: require('../../assets/icons/filter.png')
-  },
-  {
-    name: 'Ranjan',
-    mess: 'how are you?',
-    time: 'Yestarday',
-    img: require('../../assets/icons/grater.png')
-  },
-  {
-    name: 'jay',
-    mess: 'Whare r u from?',
-    time: 'Yestarday',
-    img: require('../../assets/icons/less.png')
-  },
-  {
-    name: 'Koushik',
-    mess: 'hlw Koushik',
-    time: '3.15pm',
-    img: require('../../assets/icons/gst.png')
-  },
-  {
-    name: 'souvik',
-    mess: 'hlw ',
-    time: '2:45pm',
-    img: require('../../assets/icons/help.png')
-  },
-  {
-    name: 'Ranjan',
-    mess: 'how are you?',
-    time: '2:45pm',
-    img: require('../../assets/icons/fail.png')
-  },
-  {
-    name: 'jay',
-    mess: 'Whare r u from?',
-    time: 'Yestarday',
-    img: require('../../assets/icons/image.png')
-  },
-  {
-    name: 'Koushik',
-    mess: 'hlw Koushik',
-    time: '3.15pm',
-    img: require('../../assets/icons/profile.png')
-  },
-  {
-    name: 'souvik',
-    mess: 'hlw ',
-    time: '2:45pm',
-    img: require('../../assets/icons/grater.png')
-  },
-  {
-    name: 'Ranjan',
-    mess: 'how are you?',
-    time: 'Yestarday',
-    img: require('../../assets/icons/phone.png')
-  },
-
-  {
-    name: 'jay',
-    mess: 'Whare r u from?',
-    time: '3.15pm',
-    img: require('../../assets/icons/tick.png')
-  },
-];
-
-
 const { height, width } = Dimensions.get('window');
-
-
-
 const Chat = props => {
-
   const userTokenInfo = useSelector(state => state.auth.userTokenInfo)
   const messagesAll = useSelector(state => state.message.messagesAll)
   const dispatch = useDispatch()
@@ -146,10 +40,12 @@ const Chat = props => {
     setLoader(true)
     dispatch(getMsg({
       userid: userTokenInfo.userId
-    })).then(() =>{
+    })).then((res) =>{
+      console.log("resresresresresresresresresres",res);
       setLoader(false)
-    }).catch(() =>{
+    }).catch((error) =>{
       setLoader(false)
+      console.log("error",error);
     })
   }, [isFocus, showModal])
 
