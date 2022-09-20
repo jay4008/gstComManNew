@@ -4,13 +4,13 @@ import { request } from '../utility/common';
 
 
 
-
+//https://gstcomman.herokuapp.com/api/coupon/coupon/:id
 
 const getCoupon = createAsyncThunk(
     'getCoupon',
     async (data, thunkAPI) => {
         console.log('guestUserLogin', data);
-        const response = await request('get','/api/coupon/coupon' );
+        const response = await request('get','/api/coupon/coupon/' + data.id );
         return response.data;
     },
 );

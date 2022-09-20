@@ -207,7 +207,7 @@ setDocPicker(true)
               navigation.navigate('Address')
             }
           />
-          <CommonButton onPress={() => navigation.navigate('CouponCode')} text={'Payment '} />
+          <CommonButton onPress={() => navigation.navigate('CouponCode')} text={'Coupon '} />
           <CommonButton onPress={() => navigation.navigate('Purchase')} text={'Purchase'} />
           <CommonButton text={'Setting'} />
           <CommonButton onPress={() => navigation.navigate('Product')} text={'Share'} />

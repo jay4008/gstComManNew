@@ -12,62 +12,69 @@ import { useEffect } from 'react';
 
 const CouponCode = (props) => {
     const dispatch = useDispatch();
-    const data = useSelector(state => state.coupon.getCoupon);
-    
-   // const value =data.couponValue;
+    const userTokenInfo = useSelector(state => state.auth.userTokenInfo);
+    const data = useSelector(state => state.coupon.getCoupon[0].coupon
+    );
+
+    // const value =data.couponValue;
 
     console.log('==================', data)
 
-   // console.log('valueeeeeee==================', value)
+    console.log('userTokenInfo=====================', userTokenInfo)
     useEffect(() => {
-        dispatch(getCoupon())
+        dispatch(getCoupon({
+            id: userTokenInfo.userId
+        }))
     }, [])
 
-    
-        const RenderItem = ({ item, props }) => {
-    
-            return (
-                <TouchableOpacity onPress={() => {
-                    // props.navigation.goBack();
-                }}>
-                    <View style={{ flex: 1, alignItems: "center", width: "100%", borderRadius: 15 }}>
-                        <View style={styles.card}>
-                            <View style={styles.offer}>
-                                <Rtext style={styles.offerText}>15% OFF</Rtext>
-                            </View>
-                            <View>
-                                <View style={styles.upView}>
-                                    <Image source={require('../../assets/icons/coupon.png')} style={styles.logo}></Image>
-                                    <Rtext style={styles.couponCode} >{item.couponCode}</Rtext>
-                                    <TouchableOpacity
-                                    onPress={()=>{
+
+    const RenderItem = ({ item, props }) => {
+        console.log('itemitemitemitemitemitemitemcccitemitem', item);
+        return (
+            <TouchableOpacity onPress={() => {
+                // props.navigation.goBack();
+            }}>
+                <View style={{ flex: 1, alignItems: "center", width: "100%", borderRadius: 15 }}>
+                    <View style={styles.card}>
+                        <View style={styles.offer}>
+                            <Rtext style={styles.offerText}>15% OFF</Rtext>
+                        </View>
+                        <View>
+                            <View style={styles.upView}>
+                                <Image source={require('../../assets/icons/coupon.png')} style={styles.logo}></Image>
+                                <Rtext style={styles.couponCode} >{item?.couponCode}</Rtext>
+                               
+                                {/* <Rtext style={styles.couponCode} >{item?.couponValue}</Rtext> */}
+                                <TouchableOpacity
+                                    onPress={() => {
                                         props.route.params.getdata(item.couponValue)
-                                       // props.route.params.getCode(item.couponCode)
+                                        // props.route.params.getCode(item.couponCode)
                                         // console.log('data',couponData)
                                         // props.navigation.navigate('CouponCode')
                                         props.navigation.goBack()
                                     }}
-                                    >
-                                        <Rtext style={{ color: Colors.mainblue, fontFamily: Fonts.latoBold, marginLeft: 50 , borderBottomColor : Colors.mainblue , borderBottomWidth : 1 }}>APPLY</Rtext>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={{ marginLeft: 5 }}>
-                                    <Text style={{ color: "#00C269", width: "60%", marginBottom: 5 }}>{item.couponValue}</Text>
-                                </View>
-                                <View style={{ height: 1, width: "85%", borderColor: Colors.mainblue, borderWidth: .5 }}></View>
-                                <Text style={{ marginLeft: 5, width: "85%" }}>{item.descriPtion}</Text>
-                                <TouchableOpacity>
-                                    <Text style={{ marginLeft: 5, fontWeight: "600" }}>+More</Text>
+                                >
+                                     <Rtext style={styles.couponCode} >{item?.couponValue}</Rtext>
+                                    <Rtext style={{ color: Colors.mainblue, fontFamily: Fonts.latoBold, marginLeft: 50, borderBottomColor: Colors.mainblue, borderBottomWidth: 1 }}>APPLY</Rtext>
                                 </TouchableOpacity>
                             </View>
+                            <View style={{ marginLeft: 5 }}>
+                                <Text style={{ color: "#00C269", width: "60%", marginBottom: 5 }}>{item?.couponCode}</Text>
+                            </View>
+                            <View style={{ height: 1, width: "85%", borderColor: Colors.mainblue, borderWidth: .5 }}></View>
+                            <Text style={{ marginLeft: 5, width: "85%" }}>{item.descriPtion}</Text>
+                            <TouchableOpacity>
+                                <Text style={{ marginLeft: 5, fontWeight: "600" }}>+More</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
-                    
-                </TouchableOpacity>
-            );
-        
-        
-        }
+                </View>
+
+            </TouchableOpacity>
+        );
+
+
+    }
 
 
     return (
