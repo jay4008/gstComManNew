@@ -118,18 +118,13 @@ const Home = (props) => {
   return (
     <SafeAreaView style={{ flex: 1, paddingHorizontal: 15 }}>
 
-      {/* <CusButtom text={'submit'}
-        
-        onpress={()=>
-          
-           dispatch(product())
-        }/> */}
+      
 
 
 
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={[]}
+        data={[...Data , {help : true}]}
         renderItem={renderItem}
         keyExtractor={(item) => item._id}
       />

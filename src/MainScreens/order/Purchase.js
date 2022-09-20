@@ -20,7 +20,7 @@ const Purchase = () => {
     const userTokenInfo = useSelector(state => state.auth.userTokenInfo);
     const showinfo = useSelector(state => state.auth.getuseralldata);
     const getalldata = useSelector(state => state.auth.getalldatabyid);
-    const leng = showinfo.usersMsg.length
+    //const leng = showinfo.usersMsg.length
 
     // const newdata = useSelector(state => state.auth.userTokenInfo.userId);
     //  console.log("++++++++++++++++++++++++++++++++", userTokenInfo);

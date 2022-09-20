@@ -136,7 +136,7 @@ const Subscription = ({ setShowModal, selectedData, price, index }) => {
                     <Rtext style={{ marginLeft: 30, color: Colors.mainblue, fontFamily: Fonts.latoBold, marginBottom: 20, fontSize: 18, width: 180 }}>{selectedData.name}</Rtext>
                     <View style={{ marginLeft: 30, justifyContent: 'space-evenly', marginBottom: 30, }}>
                         <View style={{ flexDirection: 'row' }}>
-                            <Image source={require('../../assets/icons/cart.png')} style={{ height: 50, width: 50, resizeMode: 'contain', }} />
+                            <Image source={require('../../assets/icons/cart.png')} style={{ height: 50, width: 50, resizeMode: 'contain',tintColor:Colors.mainblue }} />
                             {
                                 index !== "" && <Rtext style={{ width: '70%', paddingHorizontal: 10 }}> you choose  {index === 1 ? " Monthly " : index === 2 ? "quaterly " : "Yearly"} <Rtext> complaiance</Rtext></Rtext>
                             }
