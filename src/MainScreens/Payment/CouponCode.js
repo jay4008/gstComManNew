@@ -13,10 +13,10 @@ import { useEffect } from 'react';
 const CouponCode = (props) => {
     const dispatch = useDispatch();
     const userTokenInfo = useSelector(state => state.auth.userTokenInfo);
-    const data = useSelector(state => state.coupon.getCoupon[0].coupon
-    );
+    const data = useSelector(state => state.coupon.getCoupon);
+    const newdata=data[0]?.coupon
 
-    // const value =data.couponValue;
+    // const value =data.couponValue;[0].coupon
 
     console.log('==================', data)
 
@@ -80,7 +80,7 @@ const CouponCode = (props) => {
     return (
         <SafeAreaView style={styles.container}>
             <FlatList
-                data={data}
+                data={newdata}
 
                 renderItem={({ item, index }) => <RenderItem item={item} props={props} />}
             // keyExtractor={item => item.id}

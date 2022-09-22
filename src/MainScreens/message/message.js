@@ -34,7 +34,7 @@ const message = props => {
   const userTokenInfo = useSelector(state => state.auth.userTokenInfo);
   const [messageData, setMessageData] = useState(props.route.params.item);
   // console.log('props.route.params', props.route.params);
-  const [savedata, setSavedata] = useState(DATA);
+  //const [savedata, setSavedata] = useState(DATA);
   const [allreply, setAllReply] = useState(false);
   const [reply, setReply] = useState(props.route.params.item.reply);
   const [sendmsg, setSendmsg] = useState('');

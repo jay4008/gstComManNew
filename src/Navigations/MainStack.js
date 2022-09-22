@@ -377,7 +377,8 @@ const styles = StyleSheet.create({
     tintColor: '#9370DB',
     height: 25,
     width: 25,
+
     resizeMode: 'stretch',
-    marginRight: 5
+    marginLeft: 15
   },
 });
