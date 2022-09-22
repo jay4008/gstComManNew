@@ -51,10 +51,10 @@ const MySubscription = (props) => {
     const [docPicker, setDocPicker] = useState(false);
     // const [modalVisible, setModalVisible] = useState(!paid);
     const userTokenInfo = useSelector(state => state.auth.userTokenInfo);
-   const userId = userTokenInfo.userId
+    const userId = userTokenInfo.userId
 
     console.log('userTokenInfo data============', userTokenInfo);
-   console.log('userTokenInfo id============', userId);
+    console.log('userTokenInfo id============', userId);
 
 
     const SuscriptionData = useSelector(state => state.subscription.subscription);
@@ -119,8 +119,32 @@ const MySubscription = (props) => {
 
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{backgroundColor:Colors.white}}>
             <KeyboardAwareScrollView>
+
+
+                {!SuscriptionData?.isPaid && <>
+                    <View style={{ width: '100%', backgroundColor: Colors.primaryColor, paddingHorizontal: 10, paddingTop: 30, paddingBottom: 60, borderBottomRightRadius: 40, borderBottomLeftRadius: 40 }}>
+                        <View style={{ paddingHorizontal: 10, }}>
+                            <Rtext style={{ color: Colors.white, fontFamily: Fonts.latoBlackItalic, fontSize: 26, }}>Monthely Subscription</Rtext>
+                            <View style={{ height: 1, borderColor: Colors.white, borderWidth: 0.5, justifyContent: 'center', marginTop: 4, width: 258 }} />
+                        </View>
+                        <View style={{ paddingHorizontal: 10 }}>
+                            <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 7, color: Colors.white, }}><Rtext style={{ color: Colors.white }}> SGST</Rtext> </Rtext>
+                            <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4, color: Colors.white }}> <Rtext style={{ color: Colors.white }}>is simply dummy text of the printing</Rtext></Rtext>
+                        </View>
+                        <View style={{ paddingHorizontal: 10, flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                            {/* <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4  ,color: Colors.white}} ><Rtext style={{fontSize:15 ,color: Colors.white}}>12-Aug-22</Rtext></Rtext>
+                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 ,color: Colors.white}}><Rtext style = {{color: Colors.white}}>12-sep-
+                                    </Rtext></Rtext> */}
+
+                            <Rtext style={{ color: Colors.white }} >
+                                {"Suscribed the gst-Comman for  Augest 2022"}
+                            </Rtext>
+                        </View>
+                    </View>
+                </>
+                }
                 <View style={{ paddingHorizontal: 10 }}>
 
 
@@ -148,27 +172,6 @@ const MySubscription = (props) => {
 
 
 
-                    {!SuscriptionData?.isPaid && <>
-                        <View style={{ width: '100%', paddingHorizontal: 10, borderRadius: 5, borderWidth: 1, borderColor: Colors.primaryColor }}>
-                            <View style={{ paddingHorizontal: 10, }}>
-                                <Rtext style={{ color: Colors.black, fontFamily: Fonts.latoBold, fontsize: 20, }}>Monthely Subscription:</Rtext>
-                                <View style={{ height: 1, borderColor: Colors.black, borderWidth: 1, justifyContent: 'center', marginTop: 4, width: 150 }} />
-                            </View>
-                            <View style={{ paddingHorizontal: 10 }}>
-                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 7 }}>Category Name:<Rtext> SGST</Rtext> </Rtext>
-                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }}>DESC: <Rtext> is simply dummy text of the printing</Rtext></Rtext>
-                            </View>
-                            <View style={{ paddingHorizontal: 10, flexDirection: 'row', justifyContent: 'space-between' ,width:'100%'}}>
-                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }} >Start Date:<Rtext style={{fontSize:15}}>12-Aug-22</Rtext></Rtext>
-                                <Rtext style={{ fontFamily: Fonts.latoBlack, paddingVertical: 4 }}>End Date:<Rtext>12-sep-
-                                    </Rtext></Rtext>
-                            </View>
-
-
-
-                        </View>
-                    </>
-                    }
 
                     {
                         !SuscriptionData?.isPaid &&
@@ -245,7 +248,7 @@ const CustomMenu = ({ }) => {
 const RenderItem = ({ item, index, props }) => {
     return (
 
-        <View style={{}}>
+        <View style={{backgroundColor:Colors.white}}>
 
             {/* < TouchableOpacity style={styles.flatlistMainView}
                 onPress={() => props.navigation.navigate('DocList')}>
@@ -265,9 +268,9 @@ const RenderItem = ({ item, index, props }) => {
 
             <View
                 style={styles.flatlistMainView}
-                >
-                
-                <CustomMenu  />
+            >
+
+                <CustomMenu />
                 <View style={styles.rowWiseChild}>
                     <Image
                         source={
@@ -307,6 +310,8 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         marginHorizontal: 15,
         borderRadius: 10,
+        borderWidth : 1,
+        borderColor : Colors.silver
     },
     rowWiseChild: {
         flexDirection: 'row',

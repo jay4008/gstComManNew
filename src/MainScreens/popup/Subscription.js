@@ -13,12 +13,13 @@ import { request } from "../../utility/common";
 import { useDispatch, useSelector } from "react-redux";
 import { commentsApi, emptyAllData, HomeTodosApi, HomeTodosApi1, Api2 } from "../../Store/home";
 import { userLogoutSuccess } from "../../Store/auth";
-import { messagePopUpActions, messagePopUpClose } from "../../Store/popup";
+import { messagePopUpActions, messagePopUpClose, setSucessFailerMsg } from "../../Store/popup";
 import RazorpayCheckout from 'react-native-razorpay';
 import { payment } from "../../Store/payment";
 import { subscription1 } from "../../Store/payment";
 import moment from "moment";
 import MessgePopUp from "./MessagePopUp";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get('window');
 const Subscription = ({ setShowModal, selectedData, price, index }) => {
@@ -27,7 +28,7 @@ const Subscription = ({ setShowModal, selectedData, price, index }) => {
     const userData = useSelector(state => state.auth.userData);
     console.log('userdata==========', userData)
 
-
+const navigation = useNavigation()
     const makepayment = () => {
         setShowModal(false);
         let money = price
@@ -46,7 +47,7 @@ const Subscription = ({ setShowModal, selectedData, price, index }) => {
             theme: { color: '#F37254' }
         }
         RazorpayCheckout.open(options).then((data) => {
-
+            console.log('payment data',data);
 
             dispatch(payment({
                 orderId: "123",
@@ -63,38 +64,40 @@ const Subscription = ({ setShowModal, selectedData, price, index }) => {
                     headerColor: Colors.primaryColor,
                     desc: "Payment Sucess",
                     butnTxt: "OK"
-
                 }))
-                setTimeout(() => {
-                    dispatch(messagePopUpClose())
-                }, 3000);
-
-
-
-
                 dispatch(subscription1({
 
                     userId: "62e8cc3624b291ebd8cff858",
                     isPaid: "true",
                     purchaseMonth: "true",
 
-                    subcribednMonth: "augest",
+                    subcribednMonth: moment().format("MMM"),
                     amount: price,
                     subscriptionDate: moment().format("DD/MM/YYYY"),
                     Doc: "wifwuwbiuw"
 
                 })).then(() => {
 
-                    dispatch(messagePopUpActions({
-                        headerText: "Congrates",
-                        headerColor: Colors.primaryColor,
-                        desc: "you are now a Suscriber",
-                        butnTxt: "OK"
-    
-                    }))
                     setTimeout(() => {
-                        dispatch(messagePopUpClose())
+                        navigation.pop(2)
+                        setTimeout(() => {
+                            dispatch(messagePopUpClose()) 
+                        }, 400);
+                                       
+
+                        setTimeout(() => {
+                            dispatch(
+                                setSucessFailerMsg({
+                                  successFailureheaderTxt: "congratulations",
+                                  successFailureContent:'You Are a Active Suscriber',
+                                  successFailureType: true,
+                                }),
+                              );
+                        }, 300);
+                     
                     }, 3000);
+                  
+                
 
                 })
 

@@ -30,7 +30,7 @@ const ProductDetailsGst = (props) => {
   const [showModal, setShowModal] = useState(false);
   console.log("props", props.route.params);
 
-  console.log("**********", props.route.params.item.desc);
+  console.log("##########", props.route.params.item[0].desc);
 
   const [gstAmt, setGstAmt] = useState("");
 
@@ -64,14 +64,14 @@ const ProductDetailsGst = (props) => {
               fontSize: 18,
               fontFamily: Fonts.latoBold,
             }}>
-            {props.route.params.item.name}
+            {props.route.params.item[0].name}
           </Rtext>
           <Rtext
             style={{
               fontSize: 12,
               marginVertical: 10,
               color: Colors.black,
-            }}>{props.route.params.item.description} </Rtext>
+            }}>{props.route.params.item[0].description} </Rtext>
         </View>
 
 
@@ -105,17 +105,17 @@ const ProductDetailsGst = (props) => {
               setPrice("")
             }
 
-            if (parseInt(val) > 0 && parseInt(val) < parseInt(props.route.params.item.midvaluerange)) {
-              setPrice(parseInt(props.route.params.item.minamount));
+            if (parseInt(val) > 0 && parseInt(val) < parseInt(props.route.params.item[0].midvaluerange)) {
+              setPrice(parseInt(props.route.params.item[0].minamount));
             }
 
 
-            if (parseInt(val) > parseInt(props.route.params.item.midvaluerange) && parseInt(val) < parseInt(props.route.params.item.maxvaluerange)) {
-              setPrice(props.route.params.item.midamount);
+            if (parseInt(val) > parseInt(props.route.params.item[0].midvaluerange) && parseInt(val) < parseInt(props.route.params.item[0].maxvaluerange)) {
+              setPrice(props.route.params.item[0].midamount);
             }
 
-            if (parseInt(val) > parseInt(props.route.params.item.maxvaluerange)) {
-              setPrice(props.route.params.item.maxamount);
+            if (parseInt(val) > parseInt(props.route.params.item[0].maxvaluerange)) {
+              setPrice(props.route.params.item[0].maxamount);
             }
 
 
@@ -207,7 +207,7 @@ const ProductDetailsGst = (props) => {
 
       <View>
         {
-          gstAmt !== "" && showModal && <Subscription setShowModal={setShowModal} selectedData={props.route.params.item} price={price === "" ? "" : parseInt(price) * (index === 1 ? 1 : (index === 2 ? 4 : 12)) - couponData} index={index} coupon={couponData} />
+          gstAmt !== "" && showModal && <Subscription setShowModal={setShowModal} selectedData={props.route.params.item[0]} price={price === "" ? "" : parseInt(price) * (index === 1 ? 1 : (index === 2 ? 4 : 12)) - couponData} index={index} coupon={couponData} />
         }
       </View>
     </ImageBackground>
