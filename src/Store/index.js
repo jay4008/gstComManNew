@@ -13,6 +13,7 @@ import couponReducer from './coupon';
 import message from './message';
 import subscriptionReducer from './subscription';
 import paymentReducer from './payment'
+import notificationReducer from './notification'
 
 
 const middlewareState = [
@@ -29,7 +30,9 @@ const rootReducer = combineReducers({
   coupon:couponReducer,
   message :message,
   subscription:subscriptionReducer,
-  payment:paymentReducer
+  payment:paymentReducer,
+  notification:notificationReducer
+  
 });
 
 const persistConfig = {
