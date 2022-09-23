@@ -24,8 +24,8 @@ import Product from '../MainScreens/message/Product'
 import PdfView from '../MainScreens/pdf/PdfView';
 import CouponCode from '../MainScreens/Payment/CouponCode'
 import message from '../MainScreens/message/message'
-
-
+import Details from '../MainScreens/notification/Details'
+import Document1 from '../MainScreens/notification/Document'
 
 enableScreens();
 function MyStack(props) {
@@ -343,6 +343,36 @@ function MyStack(props) {
         component={Home}
         options={({ navigation }) => ({
           title: 'Message',
+          headerTintColor: '#224585',
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerRight: () => <HeaderShown />,
+        })}
+      />
+
+
+<Stack.Screen
+        name="Details"
+        component={Details}
+        options={({ navigation }) => ({
+          title: 'Details',
+          headerTintColor: '#224585',
+          headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerRight: () => <HeaderShown />,
+        })}
+      />
+
+
+<Stack.Screen
+        name="Document1"
+        component={Document1}
+        options={({ navigation }) => ({
+          title: 'Document',
           headerTintColor: '#224585',
           headerTitleStyle: { color: Colors.primaryColor, fontSize: 14 },
           headerStyle: {

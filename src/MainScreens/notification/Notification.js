@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     View, SafeAreaView, FlatList, StyleSheet, TouchableOpacity, Image, Dimensions
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { Colors, Fonts } from "../../assets/common/common";
 import { Rtext } from "../../CommonComponents/common/Rtext";
+import { getNotification } from "../../Store/notification";
 
 
 
 const { width, height } = Dimensions.get('window')
 
-const Notifications = () => {
+const Notifications = (props) => {
+    const dispatch = useDispatch()
+    const DatA = useSelector(state => state.notification.getNotification);
+    console.log('data=>>>>>>>>',DatA);
+    useEffect(() => {
+        dispatch(getNotification())
+    }, [])
     const Data = [
 
         {
@@ -129,8 +137,8 @@ const Notifications = () => {
             <FlatList
                 keyExtractor={(item, index) => index.toString()}
                 showsVerticalScrollIndicator={false}
-                data={Data}
-                renderItem={({ item, index }) => <RenderItem item={item} index={index} />}
+                data={DatA}
+                renderItem={({ item, index }) => <RenderItem item={item} index={index} props={props} />}
 
             />
         </SafeAreaView>
@@ -140,27 +148,33 @@ export default Notifications;
 
 
 
-const RenderItem = ({ item, index }) => {
+const RenderItem = ({ item, index, props }) => {
 
     const [read, setRead] = useState(false)
     return (
         <View>
             <TouchableOpacity style={{ ...styles.flatlistMainView, backgroundColor: read ? Colors.white : Colors.lightSilver }} onPress={() => {
                 setRead(true);
+                if(item?.path === "details"){
+                props.navigation.navigate('Details')
+                }else{
+                    props.navigation.navigate('Document1')
+                }
+                
             }}>
                 <View style={{ ...styles.rowWiseChild, justifyContent: 'space-between' }}>
                     <View style={styles.rowWiseChild}>
                         <Image source={require('../../assets/icons/query.png')} style={styles.flatListIconStyle} />
                         <View>
-                            <Rtext style={{ width: width - 130, fontSize: 14 , fontFamily : Fonts.latoBold }} >{item?.name}</Rtext>
+                            <Rtext style={{ width: width - 130, fontSize: 14, fontFamily: Fonts.latoBold }} >{item?.userName}</Rtext>
 
                         </View>
 
                     </View>
 
                 </View>
-                <Rtext style={{ width: width - 90, marginLeft: 50,marginTop : 10, fontSize: 12, color: !read ? Colors.white : Colors.silver, marginBottom: 15 }}>{item?.description.substr(0, 119)}</Rtext>
-
+                <Rtext style={{ width: width - 90, marginLeft: 50, marginTop: 10, fontSize: 12, color: !read ? Colors.white : Colors.silver, marginBottom: 15 }}>{item?.desc.substr(0, 119)}</Rtext>
+                <Rtext style={{ width: width - 130, fontSize: 14,marginLeft: 50}}>show <Rtext style={{ width: width - 130, fontSize: 14,}}>{item.path}</Rtext></Rtext>
             </TouchableOpacity>
 
         </View>
