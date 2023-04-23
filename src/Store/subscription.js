@@ -21,14 +21,10 @@ const subscription = createAsyncThunk(
 const subSlice = createSlice({
     name: 'subscription',
     initialState: {
-       subscription:{} ,
-        
+       subscription:{} ,  
     },
-
     reducers: {
-      
     },
-
     extraReducers: {
 
         [subscription.fulfilled]: (state, action) => {

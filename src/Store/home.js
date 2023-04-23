@@ -87,70 +87,12 @@ const homeSlice = createSlice({
             state.todos = action.payload;
         },
 
-        [Koushik.pending]: (state, action) => {
-
-        },
+       
 
         [Koushik.rejected]: (state, action) => {
             // Alert.alert("rejected")
         },
-
-
-
-
-
-        [HomeTodosApi.fulfilled]: (state, action) => {
-
-
-            state.todos = action.payload;
-        },
-
-        [HomeTodosApi.pending]: (state, action) => {
-
-        },
-
-        [HomeTodosApi.rejected]: (state, action) => {
-            // Alert.alert("rejected")
-        },
-
-        [HomeTodosApi1.fulfilled]: (state, action) => {
-            state.newData = action.payload;
-        },
-
-        [HomeTodosApi1.pending]: (state, action) => {
-
-        },
-
-        [HomeTodosApi1.rejected]: (state, action) => {
-            // Alert.alert("rejected")
-        },
-        [commentsApi.fulfilled]: (state, action) => {
-
-
-            state.comments = action.payload;
-        },
-
-        [commentsApi.pending]: (state, action) => {
-
-        },
-
-        [commentsApi.rejected]: (state, action) => {
-            // Alert.alert("rejected")
-        },
-        [Api2.fulfilled]: (state, action) => {
-
-
-            state.techno = action.payload;
-        },
-
-        [Api2.pending]: (state, action) => {
-
-        },
-
-        [Api2.rejected]: (state, action) => {
-            // Alert.alert("rejected")
-        },
-    },
+    }
 });
 
 export const { emptyAllData } = homeSlice.actions;
